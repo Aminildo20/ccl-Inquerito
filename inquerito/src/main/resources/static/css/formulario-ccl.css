@@ -1,0 +1,319 @@
+.w-layout-grid {
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+
+.w-form-formradioinput--inputType-custom {
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+}
+
+.w-form-formradioinput--inputType-custom.w--redirected-focus {
+  box-shadow: 0 0 3px 1px #3898ec;
+}
+
+.w-form-formradioinput--inputType-custom.w--redirected-checked {
+  border-width: 4px;
+  border-color: #3898ec;
+}
+
+body {
+  color: #333;
+  font-family: Ubuntu, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.contain {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.header {
+  background-color: #ddf1f78c;
+}
+
+.wrapper_gn {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  display: flex;
+}
+
+.logo_ccl {
+  background-image: url('../images/ccl-logo.png');
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 320px;
+  height: 250px;
+}
+
+.wrapper_text {
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  display: flex;
+}
+
+.text-h1 {
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.paragraph {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.section_questions {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.field_label_wrapper {
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.field_label_wrapper._1 {
+  font-weight: 500;
+}
+
+.field_label_wrapper._2 {
+  margin-bottom: 0;
+}
+
+.text_inpunt {
+  background-color: #f6f6f6cc;
+  border: 1px solid #ced6d9;
+  border-radius: 5px;
+  height: 50px;
+}
+
+.submit-button {
+  color: #fff;
+  background-color: #36a9e1;
+  border-radius: 5px;
+  width: 50%;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.submit-button:hover {
+  background-color: #36a9e1cc;
+}
+
+.grid {
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid._1 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid._2 {
+  grid-template-columns: 1fr;
+}
+
+.wrapper_select_check {
+  padding-left: 25px;
+}
+
+.checkbox {
+  border: 1.5px solid #a0b6ec;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 2px 5px #0003;
+}
+
+.checkbox-label {
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.section_query {
+  border-bottom: 1px solid #e3e3e3;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.checkbox-field {
+  margin-bottom: 15px;
+}
+
+.textarea {
+  background-color: #f6f6f6cc;
+  border: 1px solid #ced6d9;
+  border-radius: 4px;
+  min-height: 220px;
+}
+
+.wrapper_submit_button {
+  justify-content: center;
+  align-items: center;
+  padding-top: 35px;
+  display: flex;
+}
+
+.nav-hearder {
+  z-index: 2147483647;
+  background-color: #ddf1f7;
+  position: fixed;
+  inset: 0% 0% auto;
+  transform: translate(0, -100%);
+}
+
+.navbar {
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+}
+
+.link-block {
+  background-image: url('../images/ccl-logo.png');
+  background-position: 0%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100px;
+  height: 80px;
+}
+
+.div-block {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  flex-flow: column;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.radio-button {
+  cursor: pointer;
+  border: 1px solid #a0b6ec;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 2px 5px #0003;
+}
+
+.radio-button-label {
+  padding-left: 15px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.radio-button-field {
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 991px) {
+  .wrapper_gn {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .logo_ccl {
+    height: 200px;
+  }
+
+  .wrapper_text {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .section_questions {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .field_label_wrapper._2 {
+    margin-bottom: 0;
+  }
+
+  .grid._1 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .contain {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .text-h1 {
+    text-align: center;
+    font-size: 26px;
+  }
+
+  .paragraph {
+    font-size: 16px;
+  }
+
+  .field_label_wrapper {
+    font-size: 21px;
+  }
+
+  .field_label_wrapper._2 {
+    text-align: right;
+    margin-bottom: 0;
+    font-size: 20px;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .grid._1 {
+    grid-template-columns: 1fr;
+  }
+
+  .wrapper_select_check, .section_query {
+    padding-left: 0;
+  }
+
+  .link-block {
+    width: 100px;
+    height: 70px;
+  }
+}
+
+
