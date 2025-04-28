@@ -797,7 +797,7 @@
 		document.querySelector('input[name="' + radio2 + '"]').required = !radio.checked;
 	  }
 	//####### FIM 
-	  // Função para desabilitar/habilitar inputs dependedo do radio
+	  // Função para desabilitar/habilitar todos inputs dependedo do radio
 	    function desabilitaTodosInputs(radio, input1, input2) {
 	  	
 	  	const field1 = document.querySelector('input[name="' + input1 + '"]');
@@ -827,7 +827,6 @@
   		  function atualizarCampos() {
   		    inputProvincia.disabled = !radioProvincia.checked;
   		    inputPais.disabled = !radioPais.checked;
-
 			
 			inputProvincia.required = radioProvincia.checked;
 			inputPais.required = radioPais.checked;
@@ -843,7 +842,6 @@
 
 		
 		
-		
 		  document.getElementById("submit_enviar").addEventListener("click", function (e) {
 			e.preventDefault(); // Evita o envio tradicional do formulário
 			
@@ -851,10 +849,6 @@
 			  const selecionado = document.querySelector(`input[name="${name}"]:checked`);
 			  return selecionado ? selecionado.value : '0';
 			}
-			
-			
-			
-			
 			
 
 			let form = document.getElementById("email-form");
@@ -946,8 +940,7 @@
 							      title: "Inquérito enviado!",
 							      text: "Obrigado pela sua opinião sobre a sua experiência connosco",
 							      icon: "success",
-							      showConfirmButton: true,
-							      timer: 1500
+							      showConfirmButton: true
 							    }).then(() => {
 							      window.location.href = "/ccl/fomulario-inquerito";
 							    });
