@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ccl.inquerito.model.InqueritoModel;
 import ccl.inquerito.serviceImpl.InqueritoServiceImpl;
+import ccl.inquerito.serviceImpl.VisitaServiceImpl;
 
 
 @Controller
@@ -25,6 +26,9 @@ public class InqueritoController {
 	
 	@Autowired
 	private InqueritoServiceImpl inqueritoImpl;
+
+	@Autowired
+	private VisitaServiceImpl visitaImpl;
 
 	@GetMapping("/fomulario-inquerito")
 	public String formulario(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {

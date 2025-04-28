@@ -18,33 +18,34 @@ public class InqueritoModel {
     private String actividadeRemunerada;
     private String acupacao;
     private String percepcao;
-    private String origem_info;
+    private String origemInfo;
     private String proposito;
     private String experiencia;
-    private String grau_satisfacao_de_qualidade;
-    private String grau_satisfacao_de_atendimento;
-    private String grau_satisfacao_interacao;
-    private String satisfacao_preco_do_bilhete;
-    private String servico_adicional;
-    private String grau_satisfacao_cafetaria;
-    private String grau_satisfacao_menu_cafetaria;
-    private String grau_satisfacao_atendimento_loja;
-    private String grau_satisfacao_produto_loja;
-    private String grau_satisfacao_limpeza;
-    private String recomenda_ccl;
+    private int grauSatisfacaoDeQualidade;
+    private int grauSatisfacaoDeAtendimento;
+    private int grauSatisfacaoInteracao;
+    private int satisfacaoPrecoDoBilhete;
+    private String servicoAdicional;
+    private int grauSatisfacaoCafetaria;
+    private int grauSatisfacaoMenuCafetaria;
+    private int grauSatisfacaoAtendimentoLoja;
+    private int grauSatisfacaoProdutoLoja;
+    private int grauSatisfacaoLimpeza;
+    private String recomendaCcl;
     private String comentario;
     private String email;
+    
+    private long totalVisitas;
 
     public InqueritoModel() {}
 
 	public InqueritoModel(Long idIquerito, String idade, String nivelAcademico, String genero,
 			String portadorDeDeficiencia, String areaDeResidencia, String actividadeRemunerada, String acupacao,
-			String percepcao, String origem_info, String proposito, String experiencia,
-			String grau_satisfacao_de_qualidade, String grau_satisfacao_de_atendimento,
-			String grau_satisfacao_interacao, String satisfacao_preco_do_bilhete, String servico_adicional,
-			String grau_satisfacao_cafetaria, String grau_satisfacao_menu_cafetaria,
-			String grau_satisfacao_atendimento_loja, String grau_satisfacao_produto_loja,
-			String grau_satisfacao_limpeza, String recomenda_ccl, String comentario, String email) {
+			String percepcao, String origemInfo, String proposito, String experiencia, int grauSatisfacaoDeQualidade,
+			int grauSatisfacaoDeAtendimento, int grauSatisfacaoInteracao, int satisfacaoPrecoDoBilhete,
+			String servicoAdicional, int grauSatisfacaoCafetaria, int grauSatisfacaoMenuCafetaria,
+			int grauSatisfacaoAtendimentoLoja, int grauSatisfacaoProdutoLoja, int grauSatisfacaoLimpeza,
+			String recomendaCcl, String comentario, String email) {
 		super();
 		this.idIquerito = idIquerito;
 		this.idade = idade;
@@ -55,20 +56,20 @@ public class InqueritoModel {
 		this.actividadeRemunerada = actividadeRemunerada;
 		this.acupacao = acupacao;
 		this.percepcao = percepcao;
-		this.origem_info = origem_info;
+		this.origemInfo = origemInfo;
 		this.proposito = proposito;
 		this.experiencia = experiencia;
-		this.grau_satisfacao_de_qualidade = grau_satisfacao_de_qualidade;
-		this.grau_satisfacao_de_atendimento = grau_satisfacao_de_atendimento;
-		this.grau_satisfacao_interacao = grau_satisfacao_interacao;
-		this.satisfacao_preco_do_bilhete = satisfacao_preco_do_bilhete;
-		this.servico_adicional = servico_adicional;
-		this.grau_satisfacao_cafetaria = grau_satisfacao_cafetaria;
-		this.grau_satisfacao_menu_cafetaria = grau_satisfacao_menu_cafetaria;
-		this.grau_satisfacao_atendimento_loja = grau_satisfacao_atendimento_loja;
-		this.grau_satisfacao_produto_loja = grau_satisfacao_produto_loja;
-		this.grau_satisfacao_limpeza = grau_satisfacao_limpeza;
-		this.recomenda_ccl = recomenda_ccl;
+		this.grauSatisfacaoDeQualidade = grauSatisfacaoDeQualidade;
+		this.grauSatisfacaoDeAtendimento = grauSatisfacaoDeAtendimento;
+		this.grauSatisfacaoInteracao = grauSatisfacaoInteracao;
+		this.satisfacaoPrecoDoBilhete = satisfacaoPrecoDoBilhete;
+		this.servicoAdicional = servicoAdicional;
+		this.grauSatisfacaoCafetaria = grauSatisfacaoCafetaria;
+		this.grauSatisfacaoMenuCafetaria = grauSatisfacaoMenuCafetaria;
+		this.grauSatisfacaoAtendimentoLoja = grauSatisfacaoAtendimentoLoja;
+		this.grauSatisfacaoProdutoLoja = grauSatisfacaoProdutoLoja;
+		this.grauSatisfacaoLimpeza = grauSatisfacaoLimpeza;
+		this.recomendaCcl = recomendaCcl;
 		this.comentario = comentario;
 		this.email = email;
 	}
@@ -79,6 +80,106 @@ public class InqueritoModel {
 
 	public void setIdIquerito(Long idIquerito) {
 		this.idIquerito = idIquerito;
+	}
+
+	public String getOrigemInfo() {
+		return origemInfo;
+	}
+
+	public void setOrigemInfo(String origemInfo) {
+		this.origemInfo = origemInfo;
+	}
+
+	public int getGrauSatisfacaoDeQualidade() {
+		return grauSatisfacaoDeQualidade;
+	}
+
+	public void setGrauSatisfacaoDeQualidade(int grauSatisfacaoDeQualidade) {
+		this.grauSatisfacaoDeQualidade = grauSatisfacaoDeQualidade;
+	}
+
+	public int getGrauSatisfacaoDeAtendimento() {
+		return grauSatisfacaoDeAtendimento;
+	}
+
+	public void setGrauSatisfacaoDeAtendimento(int grauSatisfacaoDeAtendimento) {
+		this.grauSatisfacaoDeAtendimento = grauSatisfacaoDeAtendimento;
+	}
+
+	public int getGrauSatisfacaoInteracao() {
+		return grauSatisfacaoInteracao;
+	}
+
+	public void setGrauSatisfacaoInteracao(int grauSatisfacaoInteracao) {
+		this.grauSatisfacaoInteracao = grauSatisfacaoInteracao;
+	}
+
+	public int getSatisfacaoPrecoDoBilhete() {
+		return satisfacaoPrecoDoBilhete;
+	}
+
+	public void setSatisfacaoPrecoDoBilhete(int satisfacaoPrecoDoBilhete) {
+		this.satisfacaoPrecoDoBilhete = satisfacaoPrecoDoBilhete;
+	}
+
+	public String getServicoAdicional() {
+		return servicoAdicional;
+	}
+
+	public void setServicoAdicional(String servicoAdicional) {
+		this.servicoAdicional = servicoAdicional;
+	}
+
+	public int getGrauSatisfacaoCafetaria() {
+		return grauSatisfacaoCafetaria;
+	}
+
+	public void setGrauSatisfacaoCafetaria(int grauSatisfacaoCafetaria) {
+		this.grauSatisfacaoCafetaria = grauSatisfacaoCafetaria;
+	}
+
+	public int getGrauSatisfacaoMenuCafetaria() {
+		return grauSatisfacaoMenuCafetaria;
+	}
+
+	public void setGrauSatisfacaoMenuCafetaria(int grauSatisfacaoMenuCafetaria) {
+		this.grauSatisfacaoMenuCafetaria = grauSatisfacaoMenuCafetaria;
+	}
+
+	public int getGrauSatisfacaoAtendimentoLoja() {
+		return grauSatisfacaoAtendimentoLoja;
+	}
+
+	public void setGrauSatisfacaoAtendimentoLoja(int grauSatisfacaoAtendimentoLoja) {
+		this.grauSatisfacaoAtendimentoLoja = grauSatisfacaoAtendimentoLoja;
+	}
+
+	public int getGrauSatisfacaoProdutoLoja() {
+		return grauSatisfacaoProdutoLoja;
+	}
+
+	public void setGrauSatisfacaoProdutoLoja(int grauSatisfacaoProdutoLoja) {
+		this.grauSatisfacaoProdutoLoja = grauSatisfacaoProdutoLoja;
+	}
+
+	public int getGrauSatisfacaoLimpeza() {
+		return grauSatisfacaoLimpeza;
+	}
+
+	public void setGrauSatisfacaoLimpeza(int grauSatisfacaoLimpeza) {
+		this.grauSatisfacaoLimpeza = grauSatisfacaoLimpeza;
+	}
+
+	public String getRecomendaCcl() {
+		return recomendaCcl;
+	}
+
+	public void setRecomendaCcl(String recomendaCcl) {
+		this.recomendaCcl = recomendaCcl;
+	}
+
+	public String getProposito() {
+		return proposito;
 	}
 
 	public String getIdade() {
@@ -145,18 +246,6 @@ public class InqueritoModel {
 		this.percepcao = percepcao;
 	}
 
-	public String getOrigem_info() {
-		return origem_info;
-	}
-
-	public void setOrigem_info(String origem_info) {
-		this.origem_info = origem_info;
-	}
-
-	public String getProposito() {
-		return proposito;
-	}
-
 	public void setProposito(String proposito) {
 		this.proposito = proposito;
 	}
@@ -167,94 +256,6 @@ public class InqueritoModel {
 
 	public void setExperiencia(String experiencia) {
 		this.experiencia = experiencia;
-	}
-
-	public String getGrau_satisfacao_de_qualidade() {
-		return grau_satisfacao_de_qualidade;
-	}
-
-	public void setGrau_satisfacao_de_qualidade(String grau_satisfacao_de_qualidade) {
-		this.grau_satisfacao_de_qualidade = grau_satisfacao_de_qualidade;
-	}
-
-	public String getGrau_satisfacao_de_atendimento() {
-		return grau_satisfacao_de_atendimento;
-	}
-
-	public void setGrau_satisfacao_de_atendimento(String grau_satisfacao_de_atendimento) {
-		this.grau_satisfacao_de_atendimento = grau_satisfacao_de_atendimento;
-	}
-
-	public String getGrau_satisfacao_interacao() {
-		return grau_satisfacao_interacao;
-	}
-
-	public void setGrau_satisfacao_interacao(String grau_satisfacao_interacao) {
-		this.grau_satisfacao_interacao = grau_satisfacao_interacao;
-	}
-
-	public String getSatisfacao_preco_do_bilhete() {
-		return satisfacao_preco_do_bilhete;
-	}
-
-	public void setSatisfacao_preco_do_bilhete(String satisfacao_preco_do_bilhete) {
-		this.satisfacao_preco_do_bilhete = satisfacao_preco_do_bilhete;
-	}
-
-	public String getServico_adicional() {
-		return servico_adicional;
-	}
-
-	public void setServico_adicional(String servico_adicional) {
-		this.servico_adicional = servico_adicional;
-	}
-
-	public String getGrau_satisfacao_cafetaria() {
-		return grau_satisfacao_cafetaria;
-	}
-
-	public void setGrau_satisfacao_cafetaria(String grau_satisfacao_cafetaria) {
-		this.grau_satisfacao_cafetaria = grau_satisfacao_cafetaria;
-	}
-
-	public String getGrau_satisfacao_menu_cafetaria() {
-		return grau_satisfacao_menu_cafetaria;
-	}
-
-	public void setGrau_satisfacao_menu_cafetaria(String grau_satisfacao_menu_cafetaria) {
-		this.grau_satisfacao_menu_cafetaria = grau_satisfacao_menu_cafetaria;
-	}
-
-	public String getGrau_satisfacao_atendimento_loja() {
-		return grau_satisfacao_atendimento_loja;
-	}
-
-	public void setGrau_satisfacao_atendimento_loja(String grau_satisfacao_atendimento_loja) {
-		this.grau_satisfacao_atendimento_loja = grau_satisfacao_atendimento_loja;
-	}
-
-	public String getGrau_satisfacao_produto_loja() {
-		return grau_satisfacao_produto_loja;
-	}
-
-	public void setGrau_satisfacao_produto_loja(String grau_satisfacao_produto_loja) {
-		this.grau_satisfacao_produto_loja = grau_satisfacao_produto_loja;
-	}
-
-	public String getGrau_satisfacao_limpeza() {
-		return grau_satisfacao_limpeza;
-	}
-
-	public void setGrau_satisfacao_limpeza(String grau_satisfacao_limpeza) {
-		this.grau_satisfacao_limpeza = grau_satisfacao_limpeza;
-	}
-
-	public String getRecomenda_ccl() {
-		return recomenda_ccl;
-	}
-
-	public void setRecomenda_ccl(String recomenda_ccl) {
-		this.recomenda_ccl = recomenda_ccl;
 	}
 
 	public String getComentario() {
@@ -271,6 +272,14 @@ public class InqueritoModel {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public long getTotalVisitas() {
+		return totalVisitas;
+	}
+
+	public void setTotalVisitas(long totalVisitas) {
+		this.totalVisitas = totalVisitas;
 	}
     
 }

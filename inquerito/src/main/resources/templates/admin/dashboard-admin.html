@@ -24,7 +24,7 @@
                         <h2 class="kpi-header-3">Total de questionários enviados</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">300</div>
+                        <div class="kpi-valor-3" th:text="${totalEnviados}"></div>
                       </div>
                       <div class="kpi-bottom-section">
                         <div class="kpi-dropdown-wrap">
@@ -126,7 +126,8 @@
                         <h2 class="kpi-header-4">Taxa de satisfação média geral</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">55</div>
+                        <div class="kpi-valor-3" th:text="${TaxaSatisfacaoMedia != null ? #numbers.formatDecimal(TaxaSatisfacaoMedia, 2, 2) : 0}">
+55</div>
                         <div class="kpi-valor-3 currency">%</div>
                       </div>
                       <div class="kpi-bottom-section">
@@ -205,42 +206,42 @@
                       <body>
                         <h2 style="margin-bottom: 50px; font-weight: 400;">Grau de Satisfação por Área</h2>
                         <canvas id="satisfacaoChart"></canvas>
-                        <script>
+                        <script th:inline="javascript">
     const ctx = document.getElementById('satisfacaoChart').getContext('2d');
     const data = {
       labels: ['Exposições', 'Guias', 'Bilheteira', 'Loja', 'Cafetaria', 'Limpeza'],
       datasets: [
         {
           label: 'Muito Satisfeito',
-          data: [45, 50, 40, 30, 35, 60],
+          data: /*[[${muitoSatisfeito}]]*/ [],
           backgroundColor: '#4CAF50',
           categoryPercentage: 0.8,
           barPercentage: 0.9
         },
         {
           label: 'Satisfeito',
-          data: [35, 30, 40, 35, 30, 25],
+          data: /*[[${satisfeito}]]*/ [],
           backgroundColor: '#8BC34A',
           categoryPercentage: 0.8,
           barPercentage: 0.9
         },
         {
           label: 'Indiferente',
-          data: [10, 10, 10, 20, 15, 10],
+          data: /*[[${indiferente}]]*/ [],
           backgroundColor: '#FFC107',
           categoryPercentage: 0.8,
           barPercentage: 0.9
         },
         {
           label: 'Insatisfeito',
-          data: [5, 5, 5, 10, 10, 3],
+          data: /*[[${insatisfeito}]]*/ [],
           backgroundColor: '#FF9800',
           categoryPercentage: 0.8,
           barPercentage: 0.9
         },
         {
           label: 'Muito Insatisfeito',
-          data: [5, 5, 5, 5, 10, 2],
+          data: /*[[${muitoInsatisfeito}]]*/ [],
           backgroundColor: '#F44336',
           categoryPercentage: 0.8,
           barPercentage: 0.9
@@ -301,21 +302,21 @@
                     <div class="div-block-409">
                       <div class="list-item">
                         <div class="list-item-lable">Nº de visitantes satisfeito</div>
-                        <div class="list-item">800.343</div>
+                        <div class="list-item" th:text="${numVisitante}">800.343</div>
                       </div>
                       <div class="list-item">
                         <div class="list-item-lable">Nº de visitantes insatisfeito</div>
-                        <div class="list-item">302.045</div>
+                        <div class="list-item" th:text="${numVisitanteInsatisfeito}">302.045</div>
                       </div>
                       <div class="list-item">
                         <div class="list-item-lable">Percentual de satisfação</div>
                         <div class="kpi-mind">
-                          <div class="list-item">100</div>
+                          <div class="list-item" th:text="${#numbers.formatDecimal(percentual, 2, 2, 'POINT')}">100</div>
                           <div class="kpi-valor-3 currency">%</div>
                         </div>
                       </div>
                       <div class="div-block-411">
-                        <a href="../../ccl-centro-de-ciencia-de-luanda/admin/relatorio-dos-visitantes.html" class="link-9">ver relatório</a>
+                        <a href="admin/relatorio/visitante" class="link-9">ver relatório</a>
                       </div>
                     </div>
                   </div>
