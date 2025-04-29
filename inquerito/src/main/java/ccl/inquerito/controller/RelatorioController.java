@@ -86,6 +86,43 @@ public class RelatorioController {
 	@GetMapping("/relatorio/visitante")
 	public String relatorioVisitantes(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
+		
+		Double percentualDeficiencia = inqueritoImpl.pessoasComDeficiencia();
+		String FaixaEtariaPredominante = inqueritoImpl.FaixaEtariaPredominante();
+		String FaixaEtariaMenor = inqueritoImpl.FaixaEtariaMenor();
+		int homens = inqueritoImpl.ContaGenero("Homem");
+		int mulheres = inqueritoImpl.ContaGenero("Mulher");
+		int outro = inqueritoImpl.ContaGenero("Outro");
+		int prefiroNaoFalar = inqueritoImpl.ContaGenero("Nao");
+		
+		String generoMaiorParticipacao = "Homens";
+		if(mulheres > homens )
+			generoMaiorParticipacao = "Mulheres";
+
+		List<Integer> graficoGeneros = List.of(mulheres, homens, outro, prefiroNaoFalar);
+		List<Integer> graficoFaixaEtaria = inqueritoImpl.totalDeCadaFaixaEtaria();
+		
+		int contaRecomendaSim = inqueritoImpl.contaRecomendacao("Sim");
+		int contaRecomendaNao = inqueritoImpl.contaRecomendacao("Nao");
+		int contaRecomendaTalvez = inqueritoImpl.contaRecomendacao("Talvez");
+		List<Integer> graficoRecomendacao = List.of(contaRecomendaSim, contaRecomendaNao, contaRecomendaTalvez);
+		
+		
+		model.addAttribute("percentualDeficiencia", percentualDeficiencia);
+		model.addAttribute("FaixaEtariaPredominante", FaixaEtariaPredominante);
+		model.addAttribute("FaixaEtariaMenor", FaixaEtariaMenor);
+		model.addAttribute("generoPredominante", generoMaiorParticipacao);
+		model.addAttribute("totalGenero", homens+mulheres);
+		model.addAttribute("homens", homens);
+		model.addAttribute("mulheres", mulheres);
+		model.addAttribute("grafGeneros", graficoGeneros);
+		model.addAttribute("graficoFaixaEtaria", graficoFaixaEtaria);
+		model.addAttribute("contaRecomendaSim", (contaRecomendaSim * 100) / inqueritoImpl.TotalQuestionariosEnviados());
+		model.addAttribute("contaRecomendaNao", (contaRecomendaNao * 100) / inqueritoImpl.TotalQuestionariosEnviados());
+		model.addAttribute("graficoRecomendacao", graficoRecomendacao);
+		
+		
+		
 		return "admin/relatorio-dos-visitantes";
 	}
 	

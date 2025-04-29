@@ -1,5 +1,7 @@
 package ccl.inquerito.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -34,45 +36,11 @@ public class InqueritoModel {
     private String recomendaCcl;
     private String comentario;
     private String email;
+    private LocalDate dataCriacao;
     
     private long totalVisitas;
 
     public InqueritoModel() {}
-
-	public InqueritoModel(Long idIquerito, String idade, String nivelAcademico, String genero,
-			String portadorDeDeficiencia, String areaDeResidencia, String actividadeRemunerada, String acupacao,
-			String percepcao, String origemInfo, String proposito, String experiencia, int grauSatisfacaoDeQualidade,
-			int grauSatisfacaoDeAtendimento, int grauSatisfacaoInteracao, int satisfacaoPrecoDoBilhete,
-			String servicoAdicional, int grauSatisfacaoCafetaria, int grauSatisfacaoMenuCafetaria,
-			int grauSatisfacaoAtendimentoLoja, int grauSatisfacaoProdutoLoja, int grauSatisfacaoLimpeza,
-			String recomendaCcl, String comentario, String email) {
-		super();
-		this.idIquerito = idIquerito;
-		this.idade = idade;
-		this.nivelAcademico = nivelAcademico;
-		this.genero = genero;
-		this.portadorDeDeficiencia = portadorDeDeficiencia;
-		this.areaDeResidencia = areaDeResidencia;
-		this.actividadeRemunerada = actividadeRemunerada;
-		this.acupacao = acupacao;
-		this.percepcao = percepcao;
-		this.origemInfo = origemInfo;
-		this.proposito = proposito;
-		this.experiencia = experiencia;
-		this.grauSatisfacaoDeQualidade = grauSatisfacaoDeQualidade;
-		this.grauSatisfacaoDeAtendimento = grauSatisfacaoDeAtendimento;
-		this.grauSatisfacaoInteracao = grauSatisfacaoInteracao;
-		this.satisfacaoPrecoDoBilhete = satisfacaoPrecoDoBilhete;
-		this.servicoAdicional = servicoAdicional;
-		this.grauSatisfacaoCafetaria = grauSatisfacaoCafetaria;
-		this.grauSatisfacaoMenuCafetaria = grauSatisfacaoMenuCafetaria;
-		this.grauSatisfacaoAtendimentoLoja = grauSatisfacaoAtendimentoLoja;
-		this.grauSatisfacaoProdutoLoja = grauSatisfacaoProdutoLoja;
-		this.grauSatisfacaoLimpeza = grauSatisfacaoLimpeza;
-		this.recomendaCcl = recomendaCcl;
-		this.comentario = comentario;
-		this.email = email;
-	}
 
 	public Long getIdIquerito() {
 		return idIquerito;
@@ -80,6 +48,14 @@ public class InqueritoModel {
 
 	public void setIdIquerito(Long idIquerito) {
 		this.idIquerito = idIquerito;
+	}
+
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(LocalDate dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 
 	public String getOrigemInfo() {

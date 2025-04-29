@@ -33,7 +33,7 @@
                         <h2 class="kpi-header-3">Percentual de pessoas com deficiência</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">50</div>
+                        <div class="kpi-valor-3" th:text="${#numbers.formatDecimal(percentualDeficiencia, 2, 2, 'POINT')}">50</div>
                         <div class="kpi-valor-3 currency">%</div>
                       </div>
                       <div class="kpi-bottom-section">
@@ -85,7 +85,7 @@
                         <h2 class="kpi-header-4">Faixa etária predominante</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">25-29</div>
+                        <div class="kpi-valor-3" th:text="${FaixaEtariaPredominante}">25-29</div>
                         <div class="kpi-valor-3 currency">Anos</div>
                       </div>
                       <div class="kpi-bottom-section">
@@ -107,7 +107,7 @@
                         <h2 class="kpi-header-4">Género com maior participação</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">Homem</div>
+                        <div class="kpi-valor-3" th:text="${generoPredominante}">Homem</div>
                       </div>
                       <div class="kpi-bottom-section">
                         <a href="#" class="table-action-button-3 w-inline-block">
@@ -136,7 +136,7 @@
                         <canvas id="generoDoughnutChart" style="width:600px; height:300px;"></canvas>
                       </div>
                       <!--  Chart.js  -->
-                      <script>
+                      <script th:inline="javascript">
   const ctxGenero = document.getElementById('generoDoughnutChart').getContext('2d');
   new Chart(ctxGenero, {
     type: 'doughnut',
@@ -144,7 +144,7 @@
       labels: ['Mulher', 'Homem', 'Outro', 'Prefiro não responder'],
       datasets: [{
         label: 'Distribuição por Gênero',
-        data: [120, 100, 10, 5],
+        data: /*[[${grafGeneros}]]*/ [],
         backgroundColor: [
           '#F472B6', // Mulher
           '#60A5FA', // Homem
@@ -178,15 +178,15 @@
                   <div class="div-block-406">
                     <div class="list-item">
                       <div class="list-item-lable">Total dos géneros</div>
-                      <div class="list-item">1300</div>
+                      <div class="list-item" th:text="${totalGenero}">1300</div>
                     </div>
                     <div class="list-item">
-                      <div class="list-item-lable">Homens</div>
-                      <div class="list-item">800</div>
+                      <div class="list-item-lable" >Homens</div>
+                      <div class="list-item" th:text="${homens}">800</div>
                     </div>
                     <div class="list-item">
                       <div class="list-item-lable">Mulheres</div>
-                      <div class="list-item">500</div>
+                      <div class="list-item"  th:text="${mulheres}">500</div>
                     </div>
                   </div>
                 </div>
@@ -197,7 +197,7 @@
                         <h3 style="font-weight:400">Faixa Etária</h3>
                       </div>
                       <canvas id="faixaEtariaChart"></canvas>
-                      <script>
+                      <script th:inline="javascript">
   const ctxFaixaEtaria = document.getElementById('faixaEtariaChart').getContext('2d');
   new Chart(ctxFaixaEtaria, {
     type: 'bar',
@@ -208,7 +208,7 @@
       ],
       datasets: [{
         label: 'Número de Respostas',
-        data: [20, 45, 60, 40, 35, 28, 18, 10, 5, 4, 2, 1],
+        data: /*[[${graficoFaixaEtaria}]]*/ [],
         backgroundColor: '#4F46E5',
       }]
     },
@@ -227,14 +227,69 @@
                   <div class="div-block-406">
                     <div class="list-item">
                       <div class="list-item-lable">Faixa etária com maior participação</div>
-                      <div class="list-item">25-29</div>
+                      <div class="list-item" th:text="${FaixaEtariaPredominante}">25-29</div>
                     </div>
                     <div class="list-item">
                       <div class="list-item-lable">Faixa etária com menor participação</div>
-                      <div class="list-item">+80</div>
+                      <div class="list-item" th:text="${FaixaEtariaMenor}">+80</div>
                     </div>
                   </div>
                 </div>
+				
+				
+				 <div class="div-block-404">
+				                  <div class="div-block-405">
+				                    <div class="w-embed w-script">
+				                      <div style="margin-bottom: 20px;"> <!--  Centered title with bottom margin  -->
+				                        <h3 style="font-weight: 400; margin: 0; padding: 0;">Níveis de Recomendações do CCL</h3>
+				                      </div>
+				                      <canvas id="recomendariaChart" style="width:400px; height:400px;"></canvas>
+				                      <script th:inline="javascript">
+				const ctxRecomendaria = document.getElementById('recomendariaChart').getContext('2d');
+				new Chart(ctxRecomendaria, {
+				  type: 'doughnut',
+				  data: {
+				    labels: ['Sim', 'Não', 'Talvez'],
+				    datasets: [{
+				      label: 'Recomendaria o CCL?',
+				      data: /*[[${graficoRecomendacao}]]*/ [], // dados de exemplo
+				      backgroundColor: ['#3B82F6', '#EF4444', '#F59E0B'],
+				      borderWidth: 1
+				    }]
+				  },
+				  options: {
+				    responsive: true,
+				    plugins: {
+				      legend: {
+				        position: 'bottom'
+				      },
+				      tooltip: {
+				        callbacks: {
+				          label: function (context) {
+				            const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
+				            const percentage = ((context.raw / total) * 100).toFixed(1);
+				            return `${context.label}: ${context.raw}% (${percentage}%)`;
+				          }
+				        }
+				      }
+				    }
+				  }
+				});
+				</script>
+                    </div>
+                  </div>
+                  <div class="div-block-406">
+                    <div class="list-item">
+                      <div class="list-item-lable">Percentual de recomendação positiva</div>
+                      <div class="list-item" th:text="${contaRecomendaSim} + ' %'">20%</div>
+                    </div>
+                    <div class="list-item">
+                      <div class="list-item-lable">Percentual de recomendação negativa</div>
+                      <div class="list-item" th:text="${contaRecomendaNao} + ' % '">50%</div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

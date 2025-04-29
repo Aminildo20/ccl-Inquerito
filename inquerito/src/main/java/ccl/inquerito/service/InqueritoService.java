@@ -1,5 +1,7 @@
 package ccl.inquerito.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import ccl.inquerito.model.InqueritoModel;
@@ -27,6 +29,17 @@ public interface InqueritoService {
 	public int satisfacaoLoja(int valor);
 	public int satisfacaoCafetaria(int valor);
 	public int satisfacaoLimpeza(int valor);
+	
+	//RELATORIO VISITANTES
+	public Double pessoasComDeficiencia();
+	public String FaixaEtariaPredominante();
+	public List<Integer> totalDeCadaFaixaEtaria();	
+	public String FaixaEtariaMenor();
+	public int ContaGenero(String valor);
+	public int FaixaEtariaFranca();
+	public int contaRecomendacao(String valor);
+	
+	
 	
 	
 }
