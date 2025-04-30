@@ -45,15 +45,15 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">8</div>
+                                <div class="main-font-icon smaller-icon">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon _1">8</div>
+                                <div class="main-font-icon smaller-icon _1">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                           </div>
                         </div>
@@ -75,7 +75,7 @@
                         <h2 class="kpi-header-4">Total de visitantes</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">288</div>
+                        <div class="kpi-valor-3">0</div>
                       </div>
                       <div class="kpi-bottom-section">
                         <div class="kpi-dropdown-wrap">
@@ -96,15 +96,15 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">8</div>
+                                <div class="main-font-icon smaller-icon">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon _1">8</div>
+                                <div class="main-font-icon smaller-icon _1">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                           </div>
                         </div>
@@ -149,15 +149,15 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">8</div>
+                                <div class="main-font-icon smaller-icon">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon _1">8</div>
+                                <div class="main-font-icon smaller-icon _1">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                           </div>
                         </div>
@@ -302,16 +302,16 @@
                     <div class="div-block-409">
                       <div class="list-item">
                         <div class="list-item-lable">Nº de visitantes satisfeito</div>
-                        <div class="list-item" th:text="${numVisitante}">800.343</div>
+                        <div class="list-item" th:text="${numVisitante ?: 0}">800.343</div>
                       </div>
                       <div class="list-item">
                         <div class="list-item-lable">Nº de visitantes insatisfeito</div>
-                        <div class="list-item" th:text="${numVisitanteInsatisfeito}">302.045</div>
+                        <div class="list-item" th:text="${numVisitanteInsatisfeito ?: 0}">302.045</div>
                       </div>
                       <div class="list-item">
                         <div class="list-item-lable">Percentual de satisfação</div>
                         <div class="kpi-mind">
-                          <div class="list-item" th:text="${#numbers.formatDecimal(percentual, 2, 2, 'POINT')}">100</div>
+                          <div class="list-item" th:text="${#numbers.formatDecimal(percentual, 2, 2, 'POINT') ?: 0}">100</div>
                           <div class="kpi-valor-3 currency">%</div>
                         </div>
                       </div>

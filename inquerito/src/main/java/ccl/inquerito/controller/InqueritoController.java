@@ -40,6 +40,16 @@ public class InqueritoController {
 	public ResponseEntity<String> formularioAcao(@ModelAttribute("inquerito") InqueritoModel inquerito) {
 		
 		try {
+			/*
+			System.out.println(inquerito.getGrauSatisfacaoAtendimentoLoja());
+			System.out.println(inquerito.getGrauSatisfacaoCafetaria());
+			System.out.println(inquerito.getGrauSatisfacaoDeAtendimento());
+			System.out.println(inquerito.getGrauSatisfacaoDeQualidade());
+			System.out.println(inquerito.getGrauSatisfacaoInteracao());
+			System.out.println(inquerito.getGrauSatisfacaoLimpeza());
+			System.out.println(inquerito.getGrauSatisfacaoMenuCafetaria());
+			System.out.println(inquerito.getGrauSatisfacaoProdutoLoja());*/			
+			
 	        inqueritoImpl.novoInquerito(inquerito);
 	        return ResponseEntity.ok("Inquérito salvo com sucesso!");
 	    } catch (IllegalArgumentException e) {

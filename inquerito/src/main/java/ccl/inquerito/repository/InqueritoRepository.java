@@ -16,12 +16,12 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	           "s.grauSatisfacaoLimpeza) / 9 FROM InqueritoModel s")
 	    double calcularTaxaSatisfacaoMediaGeral();	 
 	 
-	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade >= 4 AND i.grauSatisfacaoDeAtendimento >= 4 " +
-	           "AND i.grauSatisfacaoInteracao >= 4 AND i.satisfacaoPrecoDoBilhete >= 4 AND i.grauSatisfacaoCafetaria >= 4 AND i.grauSatisfacaoMenuCafetaria >= 4 " +
-	           "AND i.grauSatisfacaoAtendimentoLoja >= 4 AND i.grauSatisfacaoProdutoLoja >= 4 AND i.grauSatisfacaoLimpeza >= 4")
+	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade >= 3 AND i.grauSatisfacaoDeAtendimento >= 3 " +
+	           "AND i.grauSatisfacaoInteracao >= 3 AND i.satisfacaoPrecoDoBilhete >= 3 AND i.grauSatisfacaoCafetaria >= 3 AND i.grauSatisfacaoMenuCafetaria >= 3 " +
+	           "AND i.grauSatisfacaoAtendimentoLoja >= 3 AND i.grauSatisfacaoProdutoLoja >= 3 AND i.grauSatisfacaoLimpeza >= 3")
 	    int contarVisitantesSatisfeitos();
 	 
-	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade  <= 4 AND i.grauSatisfacaoDeAtendimento <= 2 " +
+	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade  <= 2 AND i.grauSatisfacaoDeAtendimento <= 2 " +
 	           "AND i.grauSatisfacaoInteracao <= 2 AND i.satisfacaoPrecoDoBilhete <= 2 AND i.grauSatisfacaoCafetaria <= 2 " +
 	           "AND i.grauSatisfacaoMenuCafetaria <= 2 AND i.grauSatisfacaoAtendimentoLoja <= 2 AND i.grauSatisfacaoProdutoLoja <= 2 " +
 	           "AND i.grauSatisfacaoLimpeza <= 2")
@@ -59,5 +59,12 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	// @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.idade = :valor")
 	 	//int contaFaixaEtaria(String valor);
 	 int countByRecomendaCcl(String valor);
+	 
+	 //RELATORIO PROFISSIONAL
+	 int countByActividadeRemunerada(String valor);
+	 int countByAcupacao(String valor);
+	 int countByGeneroAndActividadeRemunerada(String genero, String actividade);
+	 int countByGeneroAndAcupacao(String genero, String ocupacao);
+	 int countByActividadeRemuneradaAndNivelAcademico(String valor, String nivel);
 	 
 }

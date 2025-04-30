@@ -143,8 +143,12 @@ public class InqueritoServiceImpl implements InqueritoService{
 		return 0;
 	}
 	
-	
-	private int posicaoMaior(List<Integer> faixaEtaria) {
+	@Override
+	public int contaRecomendacao(String valor) {
+		return inqueritoRepository.countByRecomendaCcl(valor);
+	}
+
+private int posicaoMaior(List<Integer> faixaEtaria) {
 		
 		int maior = faixaEtaria.get(0);
         int indice = 0;
@@ -173,9 +177,28 @@ public class InqueritoServiceImpl implements InqueritoService{
 	}
 
 	@Override
-	public int contaRecomendacao(String valor) {
-		return inqueritoRepository.countByRecomendaCcl(valor);
+	public double PercentualRemuneradas(String valor) {
+		//(inqueritoRepository.pessoasComDeficiencia() * 100) / (double) inqueritoRepository.count()
+		return (inqueritoRepository.countByActividadeRemunerada(valor) * 100 ) / inqueritoRepository.count();
 	}
 
-	
+	@Override
+	public double PercentualOcupacao(String valor) {
+		return (inqueritoRepository.countByAcupacao(valor) * 100 ) / inqueritoRepository.count();
+	}
+
+	@Override
+	public int ContaDesempregoPorGenero(String genero, String actividade) {
+		return inqueritoRepository.countByGeneroAndActividadeRemunerada(genero, actividade);
+	}
+
+	@Override
+	public int ContaDesempregoPorGeneroEocupacao(String genero, String ocupacao) {
+		return inqueritoRepository.countByGeneroAndAcupacao(genero, ocupacao);
+	}
+
+	@Override
+	public int contaPorActividadeEnivelAcademico(String valorActividade, String nivelAcademico) {
+		return inqueritoRepository.countByActividadeRemuneradaAndNivelAcademico(valorActividade, nivelAcademico);
+	}
 }

@@ -1,8 +1,8 @@
 <head  th:fragment="header">
   <meta charset="utf-8">
   <title>[[${titulo}]]</title>
-  <meta content="Dashboard Admin" property="og:title">
-  <meta content="Dashboard Admin" property="twitter:title">
+  <meta th:content="${content}" property="og:title">
+  <meta th:content="${content}" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="/css/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/css/css/components.css" rel="stylesheet" type="text/css">

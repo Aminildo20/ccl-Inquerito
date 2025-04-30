@@ -33,6 +33,8 @@ public class RelatorioController {
 		//Totais
 		long total = inqueritoImpl.TotalQuestionariosEnviados();
 		
+		model.addAttribute("titulo","Dashboard Admin");
+		model.addAttribute("content","Dashboard Admin");
 		model.addAttribute("totalEnviados", total);
 		model.addAttribute("totalVisitas", "totalVisitas1");
 		model.addAttribute("TaxaSatisfacaoMedia", inqueritoImpl.SatisfacaoMediaGeral());
@@ -73,12 +75,59 @@ public class RelatorioController {
 	
 	@GetMapping("/relatorio/geral")
 	public String relatorioGeral(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		model.addAttribute("titulo","Relatório de Satisfação Geral");
+		model.addAttribute("content","Relatório de Satisfação Geral");
 		
 		return "admin/relatorio-de-satisfacao-geral";
 	}
 	
 	@GetMapping("/relatorio/situacao/profissional")
 	public String relatorioSituacaoProfissional(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		//
+		int homensDesempregados = inqueritoImpl.ContaDesempregoPorGenero("Homem", "Nao");
+		int homensEmpregados = inqueritoImpl.ContaDesempregoPorGenero("Homem", "sim");
+		int mulheresDesempregadas = inqueritoImpl.ContaDesempregoPorGenero("Mulher", "Nao");
+		int mulheresEmpregadas = inqueritoImpl.ContaDesempregoPorGenero("Mulher", "sim");
+		String generoMaisDesempregado = "Homens";
+		if(mulheresDesempregadas > homensDesempregados )
+			generoMaisDesempregado = "Mulheres";
+		
+		int homenTotalEstudante = inqueritoImpl.ContaDesempregoPorGeneroEocupacao("Homem", "Estudante");
+		int homenTotalAutonomo = inqueritoImpl.ContaDesempregoPorGeneroEocupacao("Homem", "Autonomo");
+		int homenTotalAposentado = inqueritoImpl.ContaDesempregoPorGeneroEocupacao("Homem", "Aposentado");
+		int mulherTotalEstudante = inqueritoImpl.ContaDesempregoPorGeneroEocupacao("Mulher", "Estudante");
+		int mulherTotalAutonomo = inqueritoImpl.ContaDesempregoPorGeneroEocupacao("Mulher", "Autonomo");
+		int mulherTotalAposentada = inqueritoImpl.ContaDesempregoPorGeneroEocupacao("Mulher", "Aposentado");
+		//labels: ['Empregado', 'Desempregado', 'Estudante', 'Autônomo', 'Aposentado'],
+		List<Integer> graficoDesempregoHomem = List.of(homensEmpregados, homensDesempregados, homenTotalEstudante, homenTotalAutonomo,homenTotalAposentado);
+		List<Integer> graficoDesempregoMulher = List.of(mulheresEmpregadas, mulheresDesempregadas, mulherTotalEstudante, mulherTotalAutonomo,mulherTotalAposentada);
+		
+		//
+		String FaixaEtariaPredominante = inqueritoImpl.FaixaEtariaPredominante();
+		String FaixaEtariaMenor = inqueritoImpl.FaixaEtariaMenor();
+
+		//'Sem Instrução', 'Fundamental', 'Médio', 'Superior', 'Pós-graduação'
+		int totalSemInstrucao = inqueritoImpl.ContaDesempregoPorGeneroEocupacao("Nao","");
+		
+		//List<Integer> graficoEmpregado = List.of(homensEmpregados, homensDesempregados, homenTotalEstudante, homenTotalAutonomo,homenTotalAposentado);
+		
+		
+		model.addAttribute("titulo","Relatório de Situação Profissional");
+		model.addAttribute("percentualRemunerados",inqueritoImpl.PercentualRemuneradas("sim"));
+		model.addAttribute("percentualEstudante",inqueritoImpl.PercentualOcupacao("Estudante"));
+		model.addAttribute("generoMaisDesempregado",generoMaisDesempregado);	
+		model.addAttribute("homensDesempregados",homensDesempregados);	
+		model.addAttribute("homensEmpregados",homensEmpregados);	
+		model.addAttribute("mulheresDesempregadas",mulheresDesempregadas);	
+		model.addAttribute("mulheresEmpregadas",mulheresEmpregadas);
+		model.addAttribute("graficoDesempregoHomem",graficoDesempregoHomem);	
+		model.addAttribute("graficoDesempregoMulher",graficoDesempregoMulher);
+		model.addAttribute("FaixaEtariaPredominante", FaixaEtariaPredominante);
+		model.addAttribute("FaixaEtariaMenor", FaixaEtariaMenor);			
+		model.addAttribute("percentualEmpregado", ((homensEmpregados+mulheresEmpregadas) * 100) / inqueritoImpl.TotalQuestionariosEnviados());	
+		model.addAttribute("percentualDesempregado", ((homensDesempregados+mulheresDesempregadas) * 100) / inqueritoImpl.TotalQuestionariosEnviados());					
 		
 		return "admin/relatorio-de-situacao-profissional";
 	}
@@ -107,7 +156,9 @@ public class RelatorioController {
 		int contaRecomendaTalvez = inqueritoImpl.contaRecomendacao("Talvez");
 		List<Integer> graficoRecomendacao = List.of(contaRecomendaSim, contaRecomendaNao, contaRecomendaTalvez);
 		
-		
+
+		model.addAttribute("titulo","Relatório dos Visitantes");
+		model.addAttribute("content","Relatório dos Visitantes");
 		model.addAttribute("percentualDeficiencia", percentualDeficiencia);
 		model.addAttribute("FaixaEtariaPredominante", FaixaEtariaPredominante);
 		model.addAttribute("FaixaEtariaMenor", FaixaEtariaMenor);
@@ -120,7 +171,6 @@ public class RelatorioController {
 		model.addAttribute("contaRecomendaSim", (contaRecomendaSim * 100) / inqueritoImpl.TotalQuestionariosEnviados());
 		model.addAttribute("contaRecomendaNao", (contaRecomendaNao * 100) / inqueritoImpl.TotalQuestionariosEnviados());
 		model.addAttribute("graficoRecomendacao", graficoRecomendacao);
-		
 		
 		
 		return "admin/relatorio-dos-visitantes";

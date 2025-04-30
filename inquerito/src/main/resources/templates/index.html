@@ -267,7 +267,7 @@
 					<span class="radio-button-label w-form-label" for="radio-29">Profissional Liberal</span>
                   </label><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
-					<input type="radio" data-name="Radio 29" onclick="desabilitarCampos('atividade_remunerada_field', 'Outra')" id="radio-29" name="atividade_remunerada" style="opacity:0;position:absolute;z-index:-1" value="Autónomo / por conta própria">
+					<input type="radio" data-name="Radio 29" onclick="desabilitarCampos('atividade_remunerada_field', 'Outra')" id="radio-29" name="atividade_remunerada" style="opacity:0;position:absolute;z-index:-1" value="Autonomo">
 					<span class="radio-button-label w-form-label" for="radio-29">Autónomo / por conta própria</span>
                   </label></div>
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
@@ -295,7 +295,7 @@
               <div class="w-layout-grid grid _2">
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
-					<input type="radio" data-name="Radio 30" onclick="desabilitarCampos('ocupacao_field', 'OutraOcupacao')" id="radio-30" name="ocupacao" style="opacity:0;position:absolute;z-index:-1" value="Desempregado / à procura de trabalho">
+					<input type="radio" data-name="Radio 30" onclick="desabilitarCampos('ocupacao_field', 'OutraOcupacao')" id="radio-30" name="ocupacao" style="opacity:0;position:absolute;z-index:-1" value="Desempregado">
 					<span class="radio-button-label w-form-label" for="radio-30">Desempregado / à procura de trabalho</span>
                   </label><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
@@ -307,7 +307,7 @@
 					<span class="radio-button-label w-form-label" for="radio-30">Estudante</span>
                   </label><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
-					<input type="radio" data-name="Radio 30" onclick="desabilitarCampos('ocupacao_field', 'OutraOcupacao')"id="radio-30" name="ocupacao" style="opacity:0;position:absolute;z-index:-1" value="Aposentado / pensionista">
+					<input type="radio" data-name="Radio 30" onclick="desabilitarCampos('ocupacao_field', 'OutraOcupacao')"id="radio-30" name="ocupacao" style="opacity:0;position:absolute;z-index:-1" value="Aposentado">
 					<span class="radio-button-label w-form-label" for="radio-30">Aposentado / pensionista</span>
                   </label>
                   <div class="check_input"><label class="radio-button-field w-radio">
@@ -683,20 +683,20 @@
 					<span class="radio-button-label w-form-label" for="radio-45">Satisfeito</span>
                   </label><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
-					<input type="radio" data-name="Radio 45" id="radio-45" name="grau_satisfacao_produto_loja" style="opacity:0;position:absolute;z-index:-1" value="4">
+					<input type="radio" data-name="Radio 45" id="radio-45" name="grau_satisfacao_produto_loja" style="opacity:0;position:absolute;z-index:-1" value="3">
 					<span class="radio-button-label w-form-label" for="radio-45">Indiferente</span>
                   </label></div>
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
-					<input type="radio" data-name="Radio 46" id="radio-46" name="grau_satisfacao_produto_loja" style="opacity:0;position:absolute;z-index:-1" value="3">
+					<input type="radio" data-name="Radio 46" id="radio-46" name="grau_satisfacao_produto_loja" style="opacity:0;position:absolute;z-index:-1" value="2">
 					<span class="radio-button-label w-form-label" for="radio-46">Insatisfeito</span>
                   </label><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
-					<input type="radio" data-name="Radio 46" id="radio-46" name="grau_satisfacao_produto_loja" style="opacity:0;position:absolute;z-index:-1" value="2">
+					<input type="radio" data-name="Radio 46" id="radio-46" name="grau_satisfacao_produto_loja" style="opacity:0;position:absolute;z-index:-1" value="1">
 					<span class="radio-button-label w-form-label" for="radio-46">Muito Insatisfeito</span>
                   </label><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
-					<input type="radio" data-name="Radio 46" id="radio-46" name="grau_satisfacao_produto_loja" style="opacity:0;position:absolute;z-index:-1" value="1">
+					<input type="radio" data-name="Radio 46" id="radio-46" name="grau_satisfacao_produto_loja" style="opacity:0;position:absolute;z-index:-1" value="0">
 					<span class="radio-button-label w-form-label" for="radio-46">Não se aplica</span>
                   </label></div>
               </div>
@@ -849,7 +849,6 @@
 			  return selecionado ? selecionado.value : '0';
 			}
 			
-
 			let form = document.getElementById("email-form");
 			if (form.checkValidity()) {
 			
@@ -889,20 +888,19 @@
 							formData.append("actividadeRemunerada", atividade_remunerada);
 							formData.append("acupacao", ocupacao);
 							formData.append("percepcao", percepcao);
-							formData.append("origem_info", origem_info);
+							formData.append("origemInfo", origem_info);
 							formData.append("proposito", proposito);
 							formData.append("experiencia", experiencia);
-							formData.append("grau_satisfacao_de_qualidade", grau_satisfacao_de_qualidade);
-							formData.append("grau_satisfacao_de_atendimento", grau_satisfacao_de_atendimento);
-							formData.append("grau_satisfacao_interacao", grau_satisfacao_interacao);
-							formData.append("satisfacao_preco_do_bilhete", satisfacao_preco_do_bilhete);
-							formData.append("servico_adicional", servico_adicional);
-							formData.append("grau_satisfacao_cafetaria", grau_satisfacao_cafetaria);
-							formData.append("grau_satisfacao_menu_cafetaria", grau_satisfacao_menu_cafetaria);
-							formData.append("grau_satisfacao_atendimento_loja", grau_satisfacao_atendimento_loja);
-							formData.append("grau_satisfacao_produto_loja", grau_satisfacao_produto_loja);
-							formData.append("grau_satisfacao_limpeza", grau_satisfacao_limpeza);
-							formData.append("recomenda_ccl", recomenda_ccl);
+							formData.append("grauSatisfacaoDeQualidade", grau_satisfacao_de_qualidade);
+							formData.append("grauSatisfacaoDeAtendimento", grau_satisfacao_de_atendimento);
+							formData.append("grauSatisfacaoInteracao", grau_satisfacao_interacao);
+							formData.append("satisfacaoPrecoDoBilhete", satisfacao_preco_do_bilhete);
+							formData.append("grauSatisfacaoCafetaria", grau_satisfacao_cafetaria);
+							formData.append("grauSatisfacaoMenuCafetaria", grau_satisfacao_menu_cafetaria);
+							formData.append("grauSatisfacaoAtendimentoLoja", grau_satisfacao_atendimento_loja);
+							formData.append("grauSatisfacaoProdutoLoja", grau_satisfacao_produto_loja);
+							formData.append("grauSatisfacaoLimpeza", grau_satisfacao_limpeza);
+							formData.append("recomendaCcl", recomenda_ccl);
 							formData.append("comentario", comentario);
 							formData.append("email", email);
 							
@@ -941,7 +939,7 @@
 							      icon: "success",
 							      showConfirmButton: true
 							    }).then(() => {
-							      window.location.href = "/ccl/fomulario-inquerito";
+							      window.location.href = "/";
 							    });
 							  })
 							  .catch(error => {

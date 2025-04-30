@@ -39,6 +39,13 @@ public interface InqueritoService {
 	public int FaixaEtariaFranca();
 	public int contaRecomendacao(String valor);
 	
+	//RELATORIO PROFISSIONAL
+	public double PercentualRemuneradas(String valor);
+	public double PercentualOcupacao(String valor);
+	public int ContaDesempregoPorGenero(String genero, String actividade);
+	public int ContaDesempregoPorGeneroEocupacao(String genero, String ocupacao);
+	public int contaPorActividadeEnivelAcademico(String valorActividade, String nivelAcademico);
+	
 	
 	
 	
