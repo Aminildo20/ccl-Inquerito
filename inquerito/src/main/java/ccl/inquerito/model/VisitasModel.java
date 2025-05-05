@@ -1,11 +1,15 @@
 package ccl.inquerito.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "visitas")
 public class VisitasModel {
 
 	@Id
@@ -13,7 +17,7 @@ public class VisitasModel {
     private Long idVisita;
 
     private int totalVisita = 0;
-    private LocalDateTime dateUltimaVisita;
+    private LocalDate dateUltimaVisita;
     
  // Método para incrementar
     public void incrementarContador() {
@@ -32,10 +36,10 @@ public class VisitasModel {
 	public void setTotalVisita(int totalVisita) {
 		this.totalVisita = totalVisita;
 	}
-	public LocalDateTime getDateUltimaVisita() {
+	public LocalDate getDateUltimaVisita() {
 		return dateUltimaVisita;
 	}
-	public void setDateUltimaVisita(LocalDateTime dateUltimaVisita) {
+	public void setDateUltimaVisita(LocalDate dateUltimaVisita) {
 		this.dateUltimaVisita = dateUltimaVisita;
 	}
 	

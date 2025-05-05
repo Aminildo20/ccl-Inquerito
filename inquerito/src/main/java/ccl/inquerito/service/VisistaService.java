@@ -5,5 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface VisistaService {
 
-	public void addVisita();
+	public void atualizaNumVisitas();
+	public Long contaVisita();
+	public int totalVisita();
 }

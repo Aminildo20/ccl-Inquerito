@@ -66,5 +66,6 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	 int countByGeneroAndActividadeRemunerada(String genero, String actividade);
 	 int countByGeneroAndAcupacao(String genero, String ocupacao);
 	 int countByActividadeRemuneradaAndNivelAcademico(String valor, String nivel);
+	 int countByNivelAcademico(String nivel);
 	 
 }

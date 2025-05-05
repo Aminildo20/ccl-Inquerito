@@ -201,4 +201,19 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	public int contaPorActividadeEnivelAcademico(String valorActividade, String nivelAcademico) {
 		return inqueritoRepository.countByActividadeRemuneradaAndNivelAcademico(valorActividade, nivelAcademico);
 	}
+
+	@Override
+	public int contaPorNivelAcademico(String nivelAcademico) {
+		return inqueritoRepository.countByNivelAcademico(nivelAcademico);
+	}
+
+	@Override
+	public int contaPorOcupacao(String valor) {
+		return inqueritoRepository.countByAcupacao(valor);
+	}
+
+	@Override
+	public int TotalActividadeRemunerada(String valor) {
+		return inqueritoRepository.countByActividadeRemunerada(valor);
+	}
 }

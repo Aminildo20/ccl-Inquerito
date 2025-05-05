@@ -45,8 +45,8 @@ public interface InqueritoService {
 	public int ContaDesempregoPorGenero(String genero, String actividade);
 	public int ContaDesempregoPorGeneroEocupacao(String genero, String ocupacao);
 	public int contaPorActividadeEnivelAcademico(String valorActividade, String nivelAcademico);
-	
-	
-	
+	public int contaPorNivelAcademico(String nivelAcademico);
+	public int contaPorOcupacao(String valor);
+	public int TotalActividadeRemunerada(String valor);
 	
 }

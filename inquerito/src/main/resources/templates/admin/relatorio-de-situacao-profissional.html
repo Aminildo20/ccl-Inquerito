@@ -138,7 +138,7 @@
                         <h2 class="kpi-header-4">Faixa etária mais ativa profissionalmente</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">25-29</div>
+                        <div class="kpi-valor-3" th:text="${FaixaEtariaPredominante ?: 0}">25-29</div>
                         <div class="kpi-valor-3 currency">Anos</div>
                       </div>
                       <div class="kpi-bottom-section">
@@ -259,7 +259,7 @@
                         <h3 style="font-weight:400">Relação entre Escolaridade e Situação Laboral</h3>
                       </div>
                       <canvas id="escolaridadeSituacaoChart" style="width: 100%; max-width: 800px; height: 400px;"></canvas>
-                      <script>
+                      <script th:inline="javascript">
   const ctx2 = document.getElementById('escolaridadeSituacaoChart').getContext('2d');
   new Chart(ctx2, {
     type: 'bar',
@@ -268,17 +268,17 @@
       datasets: [
         {
           label: 'Empregados',
-          data: [5, 20, 45, 60, 30],
+          data: /*[[${graficoEmpregados}]]*/ [],
           backgroundColor: '#34D399'
         },
         {
           label: 'Estudantes',
-          data: [2, 30, 50, 40, 10],
+          data: /*[[${graficoDesempregados}]]*/ [],
           backgroundColor: '#FBBF24'
         },
         {
           label: 'Desempregados',
-          data: [10, 15, 20, 25, 5],
+          data: /*[[${graficoEstudante}]]*/ [],
           backgroundColor: '#EF4444'
         }
       ]
@@ -320,11 +320,11 @@
                   <div class="div-block-406">
                     <div class="list-item">
                       <div class="list-item-lable">Faixa etária com maior participação</div>
-                      <div class="list-item" th:text="${FaixaEtariaPredominante}">25-29</div>
+                      <div class="list-item" th:text="${FaixaEtariaPredominante} ?: 0">25-29</div>
                     </div>
                     <div class="list-item">
                       <div class="list-item-lable" >Faixa etária com menor participação</div>
-                      <div class="list-item" th:text="${FaixaEtariaMenor}">+80</div>
+                      <div class="list-item" th:text="${FaixaEtariaMenor} ?: 0">+80</div>
                     </div>
                   </div>
                 </div>
@@ -337,7 +337,7 @@
                       <div style="display: flex; justify-content: center; margin-bottom: 20px;"> <!--  Centered chart container  -->
                         <canvas id="ocupacaoDoughnutChart" style="width: 100%; max-width: 700px; height: 300px;"></canvas>
                       </div>
-                      <script>
+                      <script th:inline="javascript">
   const ctx3 = document.getElementById('ocupacaoDoughnutChart').getContext('2d');
   new Chart(ctx3, {
     type: 'doughnut',
@@ -345,7 +345,7 @@
       labels: ['Empregado', 'Estudante', 'Desempregado', 'Autônomo', 'Aposentado'],
       datasets: [{
         label: 'Ocupação',
-        data: [110, 95, 30, 25, 15],
+        data: /*[[${graficoPorOcupacao}]]*/ [],
         backgroundColor: ['#3B82F6', '#FACC15', '#EF4444', '#10B981', '#9CA3AF'],
         borderWidth: 1
       }]
@@ -387,15 +387,15 @@
                   <div class="div-block-406">
                     <div class="list-item">
                       <div class="list-item-lable">Percentual dos empregados</div>
-                      <div class="list-item" th:text="${percentualEmpregado ?: 0 } + ' % '">100%</div>
+                      <div class="list-item" th:text="${percentualEmpregado ?: 0 } + '%'">100%</div>
                     </div>
                     <div class="list-item">
                       <div class="list-item-lable">Percentual dos estudantes</div>
-                      <div class="list-item">80%</div>
+                      <div class="list-item" th:text="${percentualEstudante ?: 0 } + '%'">80%</div>
                     </div>
                     <div class="list-item">
                       <div class="list-item-lable">Percentual dos aposentados</div>
-                      <div class="list-item">80%</div>
+                      <div class="list-item" th:text="${percentualAposentado ?: 0 } + '%'">80%</div>
                     </div>
                   </div>
                 </div>

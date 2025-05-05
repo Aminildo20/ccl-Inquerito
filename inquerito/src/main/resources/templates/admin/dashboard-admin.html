@@ -24,7 +24,7 @@
                         <h2 class="kpi-header-3">Total de questionários enviados</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3" th:text="${totalEnviados}"></div>
+                        <div class="kpi-valor-3" th:text="${totalEnviados} ?: 0"></div>
                       </div>
                       <div class="kpi-bottom-section">
                         <div class="kpi-dropdown-wrap">
@@ -75,7 +75,7 @@
                         <h2 class="kpi-header-4">Total de visitantes</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">0</div>
+                        <div class="kpi-valor-3" th:text="${totalVisitas} ?: 0">0</div>
                       </div>
                       <div class="kpi-bottom-section">
                         <div class="kpi-dropdown-wrap">

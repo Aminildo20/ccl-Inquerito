@@ -1,0 +1,76 @@
+package ccl.inquerito.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+import ccl.inquerito.serviceImpl.UsuarioDetailsServiceImpl;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig {
+	
+	@Autowired
+    private UsuarioDetailsServiceImpl usuarioDetailsService;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                		"/admin/login", 
+                		"/ccl/inquerito",
+                		"/css/**",
+                		"/index",
+						"/static/**",
+						"/templates/**",
+						"/images/**",
+						"/js/**",
+						"/css/**",
+						"/process-login"
+                		).permitAll()
+                .requestMatchers("/admin/**").authenticated()
+                .anyRequest().denyAll()
+            )
+            .formLogin(form -> form
+                .loginPage("/admin/login")
+                .loginProcessingUrl("/process-login")
+                .usernameParameter("telemovel") 
+                .passwordParameter("password")
+                .successHandler(new CustomAuthenticationSuccessHandler())
+                .failureHandler(new CustomAuthenticationFailureHandler())
+                .defaultSuccessUrl("/admin/dashboard", true)
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/admin/login")
+                .permitAll()
+            ).csrf(csrf -> csrf.disable());
+
+        return http.build();
+      }
+    
+    
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+            .userDetailsService(usuarioDetailsService)
+            .passwordEncoder(passwordEncoder())
+            .and()
+            .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    
+}

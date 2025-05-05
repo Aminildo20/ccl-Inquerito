@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ccl.inquerito.serviceImpl.InqueritoServiceImpl;
+import ccl.inquerito.serviceImpl.VisitaServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +20,9 @@ public class RelatorioController {
 
 	@Autowired
 	private InqueritoServiceImpl inqueritoImpl;	
+
+	@Autowired
+	private VisitaServiceImpl visitaImpl;
 	
 	@GetMapping("/login")
 	public String login(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -31,19 +35,20 @@ public class RelatorioController {
 	public String dashboard(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 		//Totais
-		long total = inqueritoImpl.TotalQuestionariosEnviados();
+		long totalEnviados = inqueritoImpl.TotalQuestionariosEnviados();
+		long totalVisitas = visitaImpl.totalVisita();
 		
 		model.addAttribute("titulo","Dashboard Admin");
 		model.addAttribute("content","Dashboard Admin");
-		model.addAttribute("totalEnviados", total);
-		model.addAttribute("totalVisitas", "totalVisitas1");
+		model.addAttribute("totalEnviados", totalEnviados);
+		model.addAttribute("totalVisitas", totalVisitas);
 		model.addAttribute("TaxaSatisfacaoMedia", inqueritoImpl.SatisfacaoMediaGeral());
 		
 		//System.out.println(" MEDIA GERAL >>"+inqueritoImpl.SatisfacaoMediaGeral());
 	
 		long satisfeitos = inqueritoImpl.NumVisitanteSatisfeito();
 		long insatisfeitos = inqueritoImpl.NumVisitanteInsatisfeito();
-		Double percentual = (satisfeitos * 100.0) / total;
+		Double percentual = (satisfeitos * 100.0) / totalEnviados;
 		
 		model.addAttribute("numVisitante", satisfeitos);
 		model.addAttribute("numVisitanteInsatisfeito", insatisfeitos);
@@ -109,9 +114,44 @@ public class RelatorioController {
 		String FaixaEtariaMenor = inqueritoImpl.FaixaEtariaMenor();
 
 		//'Sem Instrução', 'Fundamental', 'Médio', 'Superior', 'Pós-graduação'
-		int totalSemInstrucao = inqueritoImpl.ContaDesempregoPorGeneroEocupacao("Nao","");
+		int empregadoSemInstrucao = inqueritoImpl.contaPorActividadeEnivelAcademico("sim","sem_instrucao");
+		int empregadoFundamental = inqueritoImpl.contaPorActividadeEnivelAcademico("sim","ensino_fundamental_completo");
+		int empregadoFundamentalIncompleto = inqueritoImpl.contaPorActividadeEnivelAcademico("sim","ensino_fundamental_incompleto");
+		int empregadoMedio = inqueritoImpl.contaPorActividadeEnivelAcademico("sim","ensino_medio_completo");
+		int empregadoMedioIncompleto = inqueritoImpl.contaPorActividadeEnivelAcademico("sim","ensino_medio_incompleto");
+		int empregadoSuperior = inqueritoImpl.contaPorActividadeEnivelAcademico("sim","ensino_superior_completo");
+		int empregadoSuperiorIncompleto = inqueritoImpl.contaPorActividadeEnivelAcademico("sim","ensino_superior_incompleto");
+		int empregadoPosgraduacao = inqueritoImpl.contaPorActividadeEnivelAcademico("sim","pos_graduacao");
+		//GRAFICO
+		List<Integer> graficoEmpregados = List.of(empregadoSemInstrucao, empregadoFundamental+empregadoFundamentalIncompleto, empregadoMedio+empregadoMedioIncompleto, empregadoSuperior+empregadoSuperiorIncompleto, empregadoPosgraduacao);
 		
-		//List<Integer> graficoEmpregado = List.of(homensEmpregados, homensDesempregados, homenTotalEstudante, homenTotalAutonomo,homenTotalAposentado);
+		//'Sem Instrução', 'Fundamental', 'Médio', 'Superior', 'Pós-graduação'
+		int desempregadoSemInstrucao = inqueritoImpl.contaPorActividadeEnivelAcademico("Nao","sem_instrucao");
+		int desempregadoFundamental = inqueritoImpl.contaPorActividadeEnivelAcademico("Nao","ensino_fundamental_completo");
+		int desempregadoFundamentalIncompleto = inqueritoImpl.contaPorActividadeEnivelAcademico("Nao","ensino_fundamental_incompleto");
+		int desempregadoMedio = inqueritoImpl.contaPorActividadeEnivelAcademico("Nao","ensino_medio_completo");
+		int desempregadoMedioIncompleto = inqueritoImpl.contaPorActividadeEnivelAcademico("Nao","ensino_medio_incompleto");
+		int desempregadoSuperior = inqueritoImpl.contaPorActividadeEnivelAcademico("Nao","ensino_superior_completo");
+		int desempregadoSuperiorIncompleto = inqueritoImpl.contaPorActividadeEnivelAcademico("Nao","ensino_superior_incompleto");
+		int desempregadoPosgraduacao = inqueritoImpl.contaPorActividadeEnivelAcademico("Nao","pos_graduacao");
+		//GRAFICO
+		List<Integer> graficoDesempregados = List.of(desempregadoSemInstrucao, desempregadoFundamental+desempregadoFundamentalIncompleto, desempregadoMedio+desempregadoMedioIncompleto, desempregadoSuperior+desempregadoSuperiorIncompleto, desempregadoPosgraduacao);
+		
+		//'Sem Instrução', 'Fundamental', 'Médio', 'Superior', 'Pós-graduação'
+		int estudanteSemInstrucao = inqueritoImpl.contaPorNivelAcademico("sem_instrucao");
+		int estudanteFundamental = inqueritoImpl.contaPorNivelAcademico("ensino_fundamental_completo");
+		int estudanteFundamentalIncompleto = inqueritoImpl.contaPorNivelAcademico("ensino_fundamental_incompleto");
+		int estudanteMedio = inqueritoImpl.contaPorNivelAcademico("ensino_medio_completo");
+		int estudanteMedioIncompleto = inqueritoImpl.contaPorNivelAcademico("ensino_medio_incompleto");
+		int estudanteSuperior = inqueritoImpl.contaPorNivelAcademico("ensino_superior_completo");
+		int estudanteSuperiorIncompleto = inqueritoImpl.contaPorNivelAcademico("ensino_superior_incompleto");
+		int estudantePosgraduacao = inqueritoImpl.contaPorNivelAcademico("pos_graduacao");
+		//GRAFICO
+		List<Integer> graficoEstudante = List.of(estudanteSemInstrucao, estudanteFundamental+estudanteFundamentalIncompleto, estudanteMedio+estudanteMedioIncompleto, estudanteSuperior+estudanteSuperiorIncompleto, estudantePosgraduacao);
+		
+		
+		//'Empregado', 'Estudante', 'Desempregado', 'Autônomo', 'Aposentado'
+		List<Integer> graficoPorOcupacao = List.of(inqueritoImpl.TotalActividadeRemunerada("sim"), inqueritoImpl.contaPorOcupacao("Estudante"), inqueritoImpl.TotalActividadeRemunerada("Nao"), inqueritoImpl.contaPorOcupacao("Autonomo"), inqueritoImpl.contaPorOcupacao("Aposentado") );
 		
 		
 		model.addAttribute("titulo","Relatório de Situação Profissional");
@@ -126,8 +166,14 @@ public class RelatorioController {
 		model.addAttribute("graficoDesempregoMulher",graficoDesempregoMulher);
 		model.addAttribute("FaixaEtariaPredominante", FaixaEtariaPredominante);
 		model.addAttribute("FaixaEtariaMenor", FaixaEtariaMenor);			
-		model.addAttribute("percentualEmpregado", ((homensEmpregados+mulheresEmpregadas) * 100) / inqueritoImpl.TotalQuestionariosEnviados());	
-		model.addAttribute("percentualDesempregado", ((homensDesempregados+mulheresDesempregadas) * 100) / inqueritoImpl.TotalQuestionariosEnviados());					
+		model.addAttribute("percentualDesempregado", ((homensDesempregados+mulheresDesempregadas) * 100) / inqueritoImpl.TotalQuestionariosEnviados());	
+		model.addAttribute("graficoEmpregados", graficoEmpregados);	
+		model.addAttribute("graficoDesempregados", graficoDesempregados);	
+		model.addAttribute("graficoEstudante",graficoEstudante );
+		model.addAttribute("percentualEmpregado", ((homensEmpregados+mulheresEmpregadas) * 100) / inqueritoImpl.TotalQuestionariosEnviados());
+		model.addAttribute("percentualAposentado", inqueritoImpl.PercentualOcupacao("Aposentado"));
+		model.addAttribute("graficoPorOcupacao",graficoPorOcupacao );
+		
 		
 		return "admin/relatorio-de-situacao-profissional";
 	}

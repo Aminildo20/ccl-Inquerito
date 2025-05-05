@@ -30,8 +30,13 @@ public class InqueritoController {
 	@Autowired
 	private VisitaServiceImpl visitaImpl;
 
-	@GetMapping("/fomulario-inquerito")
+	@GetMapping("/inquerito")
 	public String formulario(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		if(visitaImpl.contaVisita() <= 0)
+			visitaImpl.inserirVisita();
+		else
+			visitaImpl.atualizaNumVisitas();
 		
 		return "index";
 	}

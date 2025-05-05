@@ -1,5 +1,7 @@
 package ccl.inquerito.serviceImpl;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +16,32 @@ public class VisitaServiceImpl implements VisistaService {
 	public VisitaRepository visitaRepository;
 
 	@Override
-	public void addVisita() {
-		/*
-		VisitasModel visita = visitaRepository.findById(1L).orElseThrow();
-		visita.incrementarContador();
-		visitaRepository.save(visita);*/
+	public void atualizaNumVisitas() {
 		
+		VisitasModel visita = visitaRepository.findByIdVisita(1L).orElseThrow();
+		visita.incrementarContador();
+		visitaRepository.save(visita);		
+	}
+
+	@Override
+	public Long contaVisita() {
+		return visitaRepository.count();
+	}
+	
+	@Override
+	public int totalVisita() {
+		VisitasModel visita = visitaRepository.findByIdVisita(1L).orElseThrow();		
+		return visita.getTotalVisita();
+	}
+	
+	public int inserirVisita(){
+		
+		VisitasModel visita = new VisitasModel();
+		visita.setDateUltimaVisita(LocalDate.now());
+		visita.setTotalVisita(1);
+		visitaRepository.save(visita);
+		
+		return 1;
 	}
 
 }
