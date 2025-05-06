@@ -1,5 +1,7 @@
 package ccl.inquerito.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,8 +15,8 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 
 	 @Query("SELECT AVG(s.grauSatisfacaoDeQualidade + s.grauSatisfacaoDeAtendimento + s.grauSatisfacaoInteracao + s.satisfacaoPrecoDoBilhete + " +
 	           "s.grauSatisfacaoCafetaria + s.grauSatisfacaoMenuCafetaria + s.grauSatisfacaoAtendimentoLoja + s.grauSatisfacaoProdutoLoja + " +
-	           "s.grauSatisfacaoLimpeza) / 9 FROM InqueritoModel s")
-	    double calcularTaxaSatisfacaoMediaGeral();	 
+	           "s.grauSatisfacaoLimpeza) FROM InqueritoModel s")
+	    Double calcularTaxaSatisfacaoMediaGeral();	 
 	 
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade >= 3 AND i.grauSatisfacaoDeAtendimento >= 3 " +
 	           "AND i.grauSatisfacaoInteracao >= 3 AND i.satisfacaoPrecoDoBilhete >= 3 AND i.grauSatisfacaoCafetaria >= 3 AND i.grauSatisfacaoMenuCafetaria >= 3 " +
@@ -67,5 +69,13 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	 int countByGeneroAndAcupacao(String genero, String ocupacao);
 	 int countByActividadeRemuneradaAndNivelAcademico(String valor, String nivel);
 	 int countByNivelAcademico(String nivel);
+	 
+	 //RELATORIO GERAL
+	 @Query("SELECT r FROM InqueritoModel r WHERE CAST(r.dataCriacao AS string) LIKE CONCAT(:mesAno, '%')")
+	 List<InqueritoModel> buscarPorMesAno(@Param("mesAno") String mesAno);
+	 
+	 @Query("SELECT COUNT(r) FROM InqueritoModel r WHERE CAST(r.dataCriacao AS string) LIKE CONCAT(:mesAno, '%')")
+	 int contarPorMesAno(@Param("mesAno") String mesAno);
+
 	 
 }

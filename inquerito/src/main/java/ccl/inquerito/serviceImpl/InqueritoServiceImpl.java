@@ -37,7 +37,9 @@ public class InqueritoServiceImpl implements InqueritoService{
 
 	@Override
 	public Double SatisfacaoMediaGeral() {
-		return inqueritoRepository.calcularTaxaSatisfacaoMediaGeral();
+		Double media = inqueritoRepository.calcularTaxaSatisfacaoMediaGeral();
+	    return media != null ? media : 0.0;
+		//return inqueritoRepository.calcularTaxaSatisfacaoMediaGeral();
 	}
 
 	@Override
@@ -215,5 +217,20 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	@Override
 	public int TotalActividadeRemunerada(String valor) {
 		return inqueritoRepository.countByActividadeRemunerada(valor);
+	}
+
+	@Override
+	public int qtdInqueritosDoMes(String mesAno) {
+		return inqueritoRepository.contarPorMesAno(mesAno);
+	}
+
+	@Override
+	public int mesMaiorDesempenho(List<Integer> listaMes) {
+		return posicaoMaior(listaMes);
+	}
+
+	@Override
+	public int mesMenorDesempenho(List<Integer> listaMes) {
+		return posicaoMenor(listaMes);
 	}
 }

@@ -49,4 +49,9 @@ public interface InqueritoService {
 	public int contaPorOcupacao(String valor);
 	public int TotalActividadeRemunerada(String valor);
 	
+	//GERAL
+	public int qtdInqueritosDoMes(String mesAno);
+	public int mesMaiorDesempenho(List<Integer> listaMes);
+	public int mesMenorDesempenho(List<Integer> listaMes);
+	
 }

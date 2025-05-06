@@ -32,7 +32,7 @@
                         <h2 class="kpi-header-3">Índice de satisfação geral</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">50</div>
+                        <div class="kpi-valor-3" th:text="${indiceSastifeitos != null ? #numbers.formatDecimal(indiceSastifeitos ?: 0, 2, 2) : 0}">50</div>											         
                         <div class="kpi-valor-3 currency">%</div>
                       </div>
                       <div class="kpi-bottom-section">
@@ -54,9 +54,9 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">8</div>
+                                <div class="main-font-icon smaller-icon">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
@@ -84,7 +84,7 @@
                         <h2 class="kpi-header-3">Percentual de visitantes satisfeito</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">30</div>
+                        <div class="kpi-valor-3" th:text="${percentualSatisfeitos != null ? #numbers.formatDecimal(percentualSatisfeitos ?: 0, 2, 2) : 0}">30</div>
                         <div class="kpi-valor-3 currency">%</div>
                       </div>
                       <div class="kpi-bottom-section">
@@ -106,9 +106,9 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">8</div>
+                                <div class="main-font-icon smaller-icon">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
@@ -136,7 +136,7 @@
                         <h2 class="kpi-header-3">Percentual de visitantes insatisfeito</h2>
                       </div>
                       <div class="kpi-mid-section">
-                        <div class="kpi-valor-3">30</div>
+                        <div class="kpi-valor-3" th:text="${percentualInsatisfeitos != null ? #numbers.formatDecimal(percentualInsatisfeitos ?: 0, 2, 2) : 0}">30</div>
                         <div class="kpi-valor-3 currency">%</div>
                       </div>
                       <div class="kpi-bottom-section">
@@ -158,9 +158,9 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">8</div>
+                                <div class="main-font-icon smaller-icon">0</div>
                               </div>
-                              <div class="stats">8.26%</div>
+                              <div class="stats">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
@@ -205,7 +205,7 @@
       font-size: 24;
     }
     canvas {
-      width: 800px;
+      width: 700px;
       height: 300px;
       margin: auto;
     }
@@ -213,42 +213,42 @@
                         </head>
                         <body>
                           <canvas id="satisfacaoChart"></canvas>
-                          <script>
+                          <script th:inline="javascript">
     const ctx = document.getElementById('satisfacaoChart').getContext('2d');
     const data = {
       labels: ['Exposições', 'Guias', 'Bilheteira', 'Loja', 'Cafetaria', 'Limpeza'],
       datasets: [
         {
           label: 'Muito Satisfeito',
-          data: [45, 50, 40, 30, 35, 60],
+          data: /*[[${muitoSatisfeito}]]*/ [],
           backgroundColor: '#4CAF50',
           categoryPercentage: 0.8,
           barPercentage: 0.9
         },
         {
           label: 'Satisfeito',
-          data: [35, 30, 40, 35, 30, 25],
+          data: /*[[${satisfeito}]]*/ [],
           backgroundColor: '#8BC34A',
           categoryPercentage: 0.8,
           barPercentage: 0.9
         },
         {
           label: 'Indiferente',
-          data: [10, 10, 10, 20, 15, 10],
+          data: /*[[${indiferente}]]*/ [],
           backgroundColor: '#FFC107',
           categoryPercentage: 0.8,
           barPercentage: 0.9
         },
         {
           label: 'Insatisfeito',
-          data: [5, 5, 5, 10, 10, 3],
+          data: /*[[${insatisfeito}]]*/ [],
           backgroundColor: '#FF9800',
           categoryPercentage: 0.8,
           barPercentage: 0.9
         },
         {
           label: 'Muito Insatisfeito',
-          data: [5, 5, 5, 5, 10, 2],
+          data: /*[[${muitoInsatisfeito}]]*/ [],
           backgroundColor: '#F44336',
           categoryPercentage: 0.8,
           barPercentage: 0.9
@@ -309,16 +309,16 @@
                       <div class="div-block-409">
                         <div class="list-item">
                           <div class="list-item-lable">Nº de visitantes satisfeito</div>
-                          <div class="list-item">800.343</div>
+                          <div class="list-item" th:text="${satisfeitos} ?: 0">800.343</div>
                         </div>
                         <div class="list-item">
                           <div class="list-item-lable">Nº de visitantes insatisfeito</div>
-                          <div class="list-item">302.045</div>
+                          <div class="list-item" th:text="${insatisfeitos} ?: 0">302.045</div>
                         </div>
                         <div class="list-item">
                           <div class="list-item-lable">Percentual de satisfação</div>
                           <div class="kpi-mind">
-                            <div class="list-item">100</div>
+                            <div class="list-item" th:text="${percentualSatisfacao != null ? #numbers.formatDecimal(percentualSatisfacao ?: 0, 2, 2) : 0}">100</div>
                             <div class="kpi-valor-3 currency">%</div>
                           </div>
                         </div>
@@ -333,7 +333,7 @@
                         <h3 style="font-weight: 400; margin: 0; padding: 0;">Evolução da Satisfação Geral - Ano Completo</h3>
                       </div>
                       <canvas id="satisfacaoTimelineChart"></canvas>
-                      <script>
+                      <script th:inline="javascript">
   const ctxLinha = document.getElementById('satisfacaoTimelineChart').getContext('2d');
   new Chart(ctxLinha, {
     type: 'line',
@@ -341,7 +341,7 @@
       labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
       datasets: [{
         label: 'Índice de Satisfação Geral',
-        data: [78, 82, 79, 85, 88, 86, 90, 89, 87, 91, 93, 95],
+        data: /*[[${graficoInqueritoMes}]]*/ [],
         fill: false,
         borderColor: '#34D399',
         tension: 0.3
@@ -372,16 +372,18 @@
                     <div class="list-item">
                       <div class="list-item-lable">Mês com maior desempenho</div>
                       <div class="kpi-mind">
-                        <div class="list-item">Dezembro</div>
-                        <div class="list-item">100</div>
+                        <div class="list-item" th:text="${mesMaiorDesempenho ?: 0}">Dezembro</div>
+                        <div class="list-item" th:text="${valorMesMaiorDesempenho != null ? #numbers.formatDecimal(valorMesMaiorDesempenho ?: 0, 2, 2) : 0}">100</div>
+						                                 
                         <div class="kpi-valor-3 currency">%</div>
                       </div>
                     </div>
                     <div class="list-item">
-                      <div class="list-item-lable">Mês com menor desempenho</div>
+                      <div class="list-item-lable" >Mês com menor desempenho</div>
                       <div class="kpi-mind">
-                        <div class="list-item">Janeiro</div>
-                        <div class="list-item">100</div>
+                        <div class="list-item" th:text="${mesMenorDesempenho ?: 0}">Janeiro</div>
+                        <div class="list-item" th:text="${valorMesMenorDesempenho != null ? #numbers.formatDecimal(valorMesMenorDesempenho ?: 0, 2, 2) : 0}">100</div>
+						
                         <div class="kpi-valor-3 currency">%</div>
                       </div>
                     </div>
