@@ -1,4 +1,4 @@
-package ccl.inquerito.security;
+	package ccl.inquerito.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import ccl.inquerito.serviceImpl.UsuarioDetailsServiceImpl;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +25,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
+            	.requestMatchers("/api-ccl/inquerito").permitAll()
                 .requestMatchers(
                 		"/admin/login", 
                 		"/ccl/inquerito",
@@ -47,13 +49,28 @@ public class WebSecurityConfig {
                 .successHandler(new CustomAuthenticationSuccessHandler())
                 .failureHandler(new CustomAuthenticationFailureHandler())
                 .defaultSuccessUrl("/admin/dashboard", true)
-                .permitAll()
+                .permitAll()                
             )
+            
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/admin/login")
                 .permitAll()
-            ).csrf(csrf -> csrf.disable());
+            )
+            .exceptionHandling(exception -> exception
+            	    .authenticationEntryPoint((request, response, authException) -> {
+            	        String accept = request.getHeader("Accept");
+            	        String xhr = request.getHeader("X-Requested-With");
+
+            	        if ("application/json".equalsIgnoreCase(accept) || "XMLHttpRequest".equalsIgnoreCase(xhr)) {
+            	            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Acesso não autorizado.");
+            	        } else {
+            	            response.sendRedirect("/admin/login");
+            	        }
+            	    })
+            	)
+
+            .csrf(csrf -> csrf.disable());
 
         return http.build();
       }

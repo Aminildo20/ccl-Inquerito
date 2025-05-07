@@ -45,9 +45,9 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">0</div>
+                                <div class="main-font-icon smaller-icon" th:text="${ultimosTrintaDias} ?: 0" >0</div>
                               </div>
-                              <div class="stats">0%</div>
+                              <div class="stats" th:text="${ultimosTrintaDiasPercentual + ' %'} ?: 0">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
@@ -81,24 +81,10 @@
                         <div class="kpi-dropdown-wrap">
                           <a href="#" class="table-action-button-3 w-inline-block"></a>
                           <div class="flyout-menu-wrapper-4 kpi-actions-flyout">
-                            <div class="flyout-menu-content-3 in-table"><label class="menu-item-5 with-radio-button w-radio">
-                                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button-4 w-radio-input"></div><input type="radio" name="radio" id="radio-3" data-name="Radio 3" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-3">Últimos 7 dias</span>
-                              </label><label class="menu-item-5 with-radio-button w-radio">
-                                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button-4 w-radio-input"></div><input type="radio" name="radio" id="radio-3" data-name="Radio 3" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-3">Últimos 15 dias</span>
-                              </label><label class="menu-item-5 with-radio-button w-radio">
-                                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button-4 w-radio-input"></div><input type="radio" name="radio" id="radio-3" data-name="Radio 3" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-3">Últimos 30 dias</span>
-                              </label><label class="menu-item-5 with-radio-button w-radio">
-                                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button-4 w-radio-input"></div><input type="radio" name="radio" id="radio-3" data-name="Radio 3" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-3">Últimos 6 meses</span>
-                              </label><label class="menu-item-5 with-radio-button w-radio">
-                                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button-4 w-radio-input"></div><input type="radio" name="radio" id="radio-3" data-name="Radio 3" style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="button-text radio-text w-form-label" for="radio-3">Últimos 12 meses</span>
-                              </label></div>
+                            
                           </div>
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
-                              <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">0</div>
-                              </div>
-                              <div class="stats">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
@@ -110,7 +96,7 @@
                         </div>
                         <a href="#" class="table-action-button-3 w-inline-block">
                           <div class="icon kpi-dropdown-icon">
-                            <div class="button-text quick-action-text _0-margin">Últimos 30 dias</div>
+                            <div class="button-text quick-action-text _0-margin"></div>
                             <div class="main-font-icon">arrow_drop_down</div>
                           </div>
                         </a>

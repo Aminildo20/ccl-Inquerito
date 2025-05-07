@@ -42,10 +42,13 @@ public class RelatorioController {
 		//Totais
 		long totalEnviados = inqueritoImpl.TotalQuestionariosEnviados();
 		long totalVisitas = visitaImpl.totalVisita();
+		int totalUltimosTrintaDias = inqueritoImpl.totalUltimosTrintasDias(LocalDate.now().minusDays(30));
 		
 		model.addAttribute("titulo","Dashboard Admin");
 		model.addAttribute("content","Dashboard Admin");
 		model.addAttribute("totalEnviados", totalEnviados);
+		model.addAttribute("ultimosTrintaDias", totalUltimosTrintaDias);
+		model.addAttribute("ultimosTrintaDiasPercentual", (totalUltimosTrintaDias * 100.0) / totalEnviados);
 		model.addAttribute("totalVisitas", totalVisitas);
 		model.addAttribute("TaxaSatisfacaoMedia", inqueritoImpl.SatisfacaoMediaGeral());
 		

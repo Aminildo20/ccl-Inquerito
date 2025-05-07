@@ -233,4 +233,9 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	public int mesMenorDesempenho(List<Integer> listaMes) {
 		return posicaoMenor(listaMes);
 	}
+
+	@Override
+	public int totalUltimosTrintasDias(LocalDate data) {
+		return inqueritoRepository.countByDataCriacaoAfter(data);
+	}
 }

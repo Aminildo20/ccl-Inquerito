@@ -1,5 +1,6 @@
 package ccl.inquerito.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -53,5 +54,6 @@ public interface InqueritoService {
 	public int qtdInqueritosDoMes(String mesAno);
 	public int mesMaiorDesempenho(List<Integer> listaMes);
 	public int mesMenorDesempenho(List<Integer> listaMes);
+	public int totalUltimosTrintasDias(LocalDate data);
 	
 }

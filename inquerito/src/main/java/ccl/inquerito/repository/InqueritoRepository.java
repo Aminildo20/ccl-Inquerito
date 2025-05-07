@@ -1,5 +1,6 @@
 package ccl.inquerito.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,9 @@ import ccl.inquerito.model.InqueritoModel;
 @Repository
 public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>{
 	
+	//ULTIMOS TRINTA DIAS
+	int countByDataCriacaoAfter(LocalDate data);
+
 
 	 @Query("SELECT AVG(s.grauSatisfacaoDeQualidade + s.grauSatisfacaoDeAtendimento + s.grauSatisfacaoInteracao + s.satisfacaoPrecoDoBilhete + " +
 	           "s.grauSatisfacaoCafetaria + s.grauSatisfacaoMenuCafetaria + s.grauSatisfacaoAtendimentoLoja + s.grauSatisfacaoProdutoLoja + " +
