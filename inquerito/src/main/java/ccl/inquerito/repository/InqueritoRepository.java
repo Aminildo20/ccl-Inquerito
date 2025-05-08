@@ -13,8 +13,17 @@ import ccl.inquerito.model.InqueritoModel;
 @Repository
 public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>{
 	
-	//ULTIMOS TRINTA DIAS
+	//ULTIMOS X DIAS
 	int countByDataCriacaoAfter(LocalDate data);
+	
+	//ULTIMOS X DIAS taxamediageral
+	@Query("SELECT AVG(s.grauSatisfacaoDeQualidade + s.grauSatisfacaoDeAtendimento + s.grauSatisfacaoInteracao + s.satisfacaoPrecoDoBilhete + " +
+		       "s.grauSatisfacaoCafetaria + s.grauSatisfacaoMenuCafetaria + s.grauSatisfacaoAtendimentoLoja + s.grauSatisfacaoProdutoLoja + " +
+		       "s.grauSatisfacaoLimpeza) " +
+		       "FROM InqueritoModel s " +
+		       "WHERE s.dataCriacao >= :data")
+		int taxaMediaGeralUltimoTrintaDias(LocalDate data);
+
 
 
 	 @Query("SELECT AVG(s.grauSatisfacaoDeQualidade + s.grauSatisfacaoDeAtendimento + s.grauSatisfacaoInteracao + s.satisfacaoPrecoDoBilhete + " +
@@ -55,6 +64,10 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	 //VISITANTES
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.portadorDeDeficiencia <> '0'")
 	 	int pessoasComDeficiencia();
+	 
+	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.portadorDeDeficiencia <> '0' AND i.dataCriacao >= :data")
+		int contarPessoasComDeficienciaDesde(@Param("data") LocalDate data);
+
 
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.genero = :valor")
 	 	int contaGenero(String valor);

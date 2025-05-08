@@ -20,8 +20,8 @@
 				<label for="Senha" class="field-lable">Senha</label>
 				<input class="text-field w-input" maxlength="256" name="password" data-name="Senha" placeholder="" type="password" id="Senha" required="">
             <div class="restore-password-cta-wrapper">
-              <div class="restore-password-cta-text">Esqueceu a senha? <a href="seguranca/esqueceu-a-senha.html" class="form-cta">Repor senha</a>
-              </div>
+              <!--<div class="restore-password-cta-text">Esqueceu a senha? <a href="/conta/esqueceu-senha" class="form-cta">Repor senha</a>
+              </div>-->
             </div>
           </div>
 		  <input type="submit" value="" id="entrar" style="display: none;">		            
@@ -47,7 +47,7 @@
 
   <div th:replace="fragmentos/scripts :: scripts"></div>  
   <script >
-	console.log("ajaxForm existe?", $.fn.ajaxForm);
+	//console.log("ajaxForm existe?", $.fn.ajaxForm);
 
 	function Submit() {
 	    $("#entrar").click();

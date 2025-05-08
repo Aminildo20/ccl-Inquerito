@@ -43,24 +43,6 @@ public class InqueritoServiceImpl implements InqueritoService{
 	}
 
 	@Override
-	public long Ultimos30diasEnviados() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public long Ultimos30diasVisitantes() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Double Ultimos30diasMediaGeral() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public long NumVisitanteSatisfeito() {
 		return inqueritoRepository.contarVisitantesSatisfeitos();
 	}
@@ -104,6 +86,11 @@ public class InqueritoServiceImpl implements InqueritoService{
 	@Override
 	public Double pessoasComDeficiencia() {
 		return  (inqueritoRepository.pessoasComDeficiencia() * 100) / (double) inqueritoRepository.count();
+	}
+	
+	@Override
+	public int pessoasComDeficienciaUltimosDias(LocalDate data) {
+		return inqueritoRepository.contarPessoasComDeficienciaDesde(data);
 	}
 
 	@Override
@@ -238,4 +225,10 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	public int totalUltimosTrintasDias(LocalDate data) {
 		return inqueritoRepository.countByDataCriacaoAfter(data);
 	}
+
+	@Override
+	public int Ultimos30diasMediaGeral(LocalDate data) {
+		return inqueritoRepository.taxaMediaGeralUltimoTrintaDias(data);
+	}
+
 }

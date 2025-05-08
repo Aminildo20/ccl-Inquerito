@@ -4,15 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ccl.inquerito.model.InqueritoModel;
-import ccl.inquerito.model.UsuarioModel;
-import ccl.inquerito.repository.UsuarioRepository;
 import ccl.inquerito.serviceImpl.InqueritoServiceImpl;
 import ccl.inquerito.serviceImpl.VisitaServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,7 +24,7 @@ public class RelatorioController {
 
 	@Autowired
 	private VisitaServiceImpl visitaImpl;
-
+	
 	@GetMapping("/login")
 	public String login(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
@@ -43,7 +39,8 @@ public class RelatorioController {
 		long totalEnviados = inqueritoImpl.TotalQuestionariosEnviados();
 		long totalVisitas = visitaImpl.totalVisita();
 		int totalUltimosTrintaDias = inqueritoImpl.totalUltimosTrintasDias(LocalDate.now().minusDays(30));
-		
+		int Ultimos30diasMediaGeral = inqueritoImpl.Ultimos30diasMediaGeral(LocalDate.now().minusDays(30));
+			
 		model.addAttribute("titulo","Dashboard Admin");
 		model.addAttribute("content","Dashboard Admin");
 		model.addAttribute("totalEnviados", totalEnviados);
@@ -51,6 +48,8 @@ public class RelatorioController {
 		model.addAttribute("ultimosTrintaDiasPercentual", (totalUltimosTrintaDias * 100.0) / totalEnviados);
 		model.addAttribute("totalVisitas", totalVisitas);
 		model.addAttribute("TaxaSatisfacaoMedia", inqueritoImpl.SatisfacaoMediaGeral());
+		model.addAttribute("Ultimos30diasMediaGeral", Ultimos30diasMediaGeral);
+		model.addAttribute("Ultimos30diasMediaGeralPercentual", (Ultimos30diasMediaGeral * 100.0) / totalEnviados);
 		
 		//System.out.println(" MEDIA GERAL >>"+inqueritoImpl.SatisfacaoMediaGeral());
 	
@@ -252,8 +251,10 @@ public class RelatorioController {
 	@GetMapping("/relatorio/visitante")
 	public String relatorioVisitantes(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
-		
+
+		long totalEnviados = inqueritoImpl.TotalQuestionariosEnviados();
 		Double percentualDeficiencia = inqueritoImpl.pessoasComDeficiencia();
+		int DeficienciaUltimosDias = inqueritoImpl.pessoasComDeficienciaUltimosDias(LocalDate.now().minusDays(30));
 		String FaixaEtariaPredominante = inqueritoImpl.FaixaEtariaPredominante();
 		String FaixaEtariaMenor = inqueritoImpl.FaixaEtariaMenor();
 		int homens = inqueritoImpl.ContaGenero("Homem");
@@ -277,6 +278,8 @@ public class RelatorioController {
 		model.addAttribute("titulo","Relatório dos Visitantes");
 		model.addAttribute("content","Relatório dos Visitantes");
 		model.addAttribute("percentualDeficiencia", percentualDeficiencia);
+		model.addAttribute("deficienciaUltimosDias", DeficienciaUltimosDias);
+		model.addAttribute("deficienciaUltimosDiasPercentual", DeficienciaUltimosDias * 100.0 / totalEnviados);
 		model.addAttribute("FaixaEtariaPredominante", FaixaEtariaPredominante);
 		model.addAttribute("FaixaEtariaMenor", FaixaEtariaMenor);
 		model.addAttribute("generoPredominante", generoMaiorParticipacao);

@@ -55,9 +55,9 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon">0</div>
+                                <div class="main-font-icon smaller-icon" th:text="${deficienciaUltimosDias ?: 0}">0</div>
                               </div>
-                              <div class="stats">0%</div>
+                              <div class="stats" th:text="${deficienciaUltimosDiasPercentual ?: 0 + ' %'}">0%</div>
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
@@ -91,7 +91,7 @@
                       <div class="kpi-bottom-section">
                         <a href="#" class="table-action-button-3 w-inline-block">
                           <div class="icon kpi-dropdown-icon">
-                            <div class="button-text quick-action-text _0-margin">Últimos 30 dias</div>
+                            <div class="button-text quick-action-text _0-margin"></div>
                             <div class="main-font-icon">arrow_drop_down</div>
                           </div>
                         </a>
@@ -112,7 +112,7 @@
                       <div class="kpi-bottom-section">
                         <a href="#" class="table-action-button-3 w-inline-block">
                           <div class="icon kpi-dropdown-icon">
-                            <div class="button-text quick-action-text _0-margin">Últimos 30 dias</div>
+                            <div class="button-text quick-action-text _0-margin"></div>
                             <div class="main-font-icon">arrow_drop_down</div>
                           </div>
                         </a>

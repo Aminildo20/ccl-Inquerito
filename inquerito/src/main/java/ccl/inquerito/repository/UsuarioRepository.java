@@ -12,4 +12,5 @@ import ccl.inquerito.model.UsuarioModel;
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long>{
 
 	Optional<UsuarioModel> findByTelemovel(String telemovel);
+	Optional<UsuarioModel> findByEmail(String email);
 }

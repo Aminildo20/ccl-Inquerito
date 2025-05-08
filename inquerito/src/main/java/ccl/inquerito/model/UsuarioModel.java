@@ -1,5 +1,7 @@
 package ccl.inquerito.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -20,8 +22,45 @@ public class UsuarioModel {
 
     private String telemovel;
     private String password;
+    private String email;
+    private String codigoRecuperacao;
+    private LocalDateTime expiracaoCodigoRecuperacao;
+    
+    public String getEmail() {
+		return email;
+	}
 
-    private String role; // ex: ROLE_USER ou ROLE_ADMIN
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+	public String getCodigoRecuperacao() {
+		return codigoRecuperacao;
+	}
+
+
+
+	public void setCodigoRecuperacao(String codigoRecuperacao) {
+		this.codigoRecuperacao = codigoRecuperacao;
+	}
+
+
+
+	public LocalDateTime getExpiracaoCodigoRecuperacao() {
+		return expiracaoCodigoRecuperacao;
+	}
+
+
+
+	public void setExpiracaoCodigoRecuperacao(LocalDateTime expiracaoCodigoRecuperacao) {
+		this.expiracaoCodigoRecuperacao = expiracaoCodigoRecuperacao;
+	}
+
+	private String role; // ex: ROLE_USER ou ROLE_ADMIN
 
 	public Long getUserId() {
 		return userId;

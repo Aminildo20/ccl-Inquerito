@@ -26,6 +26,7 @@ public class WebSecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
             	.requestMatchers("/api-ccl/inquerito").permitAll()
+            	.requestMatchers("/conta/**").permitAll()
                 .requestMatchers(
                 		"/admin/login", 
                 		"/ccl/inquerito",

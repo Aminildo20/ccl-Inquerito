@@ -15,10 +15,6 @@ public interface InqueritoService {
 	public long TotalQuestionariosEnviados();
 	public long TotalVisitantes();
 	public Double SatisfacaoMediaGeral();
-	
-	public long Ultimos30diasEnviados();
-	public long Ultimos30diasVisitantes();
-	public Double Ultimos30diasMediaGeral();
 		
 	public long NumVisitanteSatisfeito();
 	public long NumVisitanteInsatisfeito();
@@ -33,6 +29,7 @@ public interface InqueritoService {
 	
 	//RELATORIO VISITANTES
 	public Double pessoasComDeficiencia();
+	public int pessoasComDeficienciaUltimosDias(LocalDate data);
 	public String FaixaEtariaPredominante();
 	public List<Integer> totalDeCadaFaixaEtaria();	
 	public String FaixaEtariaMenor();
@@ -55,5 +52,7 @@ public interface InqueritoService {
 	public int mesMaiorDesempenho(List<Integer> listaMes);
 	public int mesMenorDesempenho(List<Integer> listaMes);
 	public int totalUltimosTrintasDias(LocalDate data);
+	public int Ultimos30diasMediaGeral(LocalDate data);
+	
 	
 }
