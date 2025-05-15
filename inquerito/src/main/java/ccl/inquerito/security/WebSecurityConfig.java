@@ -1,4 +1,4 @@
-	package ccl.inquerito.security;
+package ccl.inquerito.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +31,7 @@ public class WebSecurityConfig {
                 		"/admin/login", 
                 		"/ccl/inquerito",
                 		"/css/**",
+                		"/fonts/**",
                 		"/index",
 						"/static/**",
 						"/templates/**",
@@ -39,8 +40,9 @@ public class WebSecurityConfig {
 						"/css/**",
 						"/process-login"
                 		).permitAll()
+                .requestMatchers("/admin/relatorio/**").authenticated()
                 .requestMatchers("/admin/**").authenticated()
-                .anyRequest().denyAll()
+                .anyRequest().authenticated()	
             )
             .formLogin(form -> form
                 .loginPage("/admin/login")
@@ -60,14 +62,22 @@ public class WebSecurityConfig {
             )
             .exceptionHandling(exception -> exception
             	    .authenticationEntryPoint((request, response, authException) -> {
+            	        String uri = request.getRequestURI();
             	        String accept = request.getHeader("Accept");
             	        String xhr = request.getHeader("X-Requested-With");
 
-            	        if ("application/json".equalsIgnoreCase(accept) || "XMLHttpRequest".equalsIgnoreCase(xhr)) {
+            	        // 1. Requisições AJAX ou JSON recebem 401 Unauthorized
+            	        if ("XMLHttpRequest".equalsIgnoreCase(xhr) || "application/json".equalsIgnoreCase(accept)) {
             	            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Acesso não autorizado.");
-            	        } else {
-            	            response.sendRedirect("/admin/login");
+            	            return;
             	        }
+            	        // 2. Se a URI solicitada for /admin/login, deixa ir para lá
+            	        if (uri.equals("/admin/login")) {
+            	            response.sendRedirect("/admin/login");
+            	            return;
+            	        }
+            	        // 3. Qualquer outro caso redireciona para /ccl/inquerito
+            	        response.sendRedirect("/ccl/inquerito");
             	    })
             	)
 

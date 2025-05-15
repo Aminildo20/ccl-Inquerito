@@ -1,14 +1,20 @@
 package ccl.inquerito.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import ccl.inquerito.DTO.InqueritoDTO;
+import ccl.inquerito.model.InqueritoModel;
 import ccl.inquerito.serviceImpl.InqueritoServiceImpl;
 import ccl.inquerito.serviceImpl.VisitaServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,8 +44,9 @@ public class RelatorioController {
 		//Totais
 		long totalEnviados = inqueritoImpl.TotalQuestionariosEnviados();
 		long totalVisitas = visitaImpl.totalVisita();
-		int totalUltimosTrintaDias = inqueritoImpl.totalUltimosTrintasDias(LocalDate.now().minusDays(30));
-		int Ultimos30diasMediaGeral = inqueritoImpl.Ultimos30diasMediaGeral(LocalDate.now().minusDays(30));
+		int totalUltimosTrintaDias = inqueritoImpl.totalUltimosTrintasDias(LocalDateTime.now().minusDays(30));
+		Double Ultimos30diasMediaGeral = inqueritoImpl.Ultimos30diasMediaGeral(LocalDateTime.now().minusDays(30));
+//System.out.println("HA TRINTAIDS "+LocalDate.now().minusDays(30));
 			
 		model.addAttribute("titulo","Dashboard Admin");
 		model.addAttribute("content","Dashboard Admin");
@@ -49,7 +56,6 @@ public class RelatorioController {
 		model.addAttribute("totalVisitas", totalVisitas);
 		model.addAttribute("TaxaSatisfacaoMedia", inqueritoImpl.SatisfacaoMediaGeral());
 		model.addAttribute("Ultimos30diasMediaGeral", Ultimos30diasMediaGeral);
-		model.addAttribute("Ultimos30diasMediaGeralPercentual", (Ultimos30diasMediaGeral * 100.0) / totalEnviados);
 		
 		//System.out.println(" MEDIA GERAL >>"+inqueritoImpl.SatisfacaoMediaGeral());
 	
@@ -65,17 +71,18 @@ public class RelatorioController {
 		
 		//DADOS DO GRAFICO DE SATISFACAO POR CATEGORIA
 		//'Exposições', 'Guias', 'Bilheteira', 'Loja', 'Cafetaria', 'Limpeza'
-		int valor=5;
-		List<Integer> muitoSatisfeito = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor-1), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-		valor=4;
-		List<Integer> satisfeito = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-		valor=3;
-		List<Integer> indiferente = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-		valor=2;
-		List<Integer> insatisfeito = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-		valor=1;
-		List<Integer> muitoInsatisfeito = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-
+		//DADOS DO GRAFICO DE SATISFACAO POR CATEGORIA
+		List<Double> muitoSatisfeito = inqueritoImpl.calcularPercentuais(5, totalEnviados, true);
+		List<Double> satisfeito = inqueritoImpl.calcularPercentuais(4, totalEnviados, false);
+		List<Double> indiferente = inqueritoImpl.calcularPercentuais(3, totalEnviados, false);
+		List<Double> insatisfeito = inqueritoImpl.calcularPercentuais(2, totalEnviados, false);
+		List<Double> muitoInsatisfeito1 = inqueritoImpl.calcularPercentuais(1, totalEnviados, false);
+		List<Double> muitoInsatisfeito2 = inqueritoImpl.calcularPercentuais(0, totalEnviados, false);
+		
+		System.out.println(" >>> Insatisfeito - "+insatisfeito);
+		
+		List<Double> muitoInsatisfeito = inqueritoImpl.somarListas(muitoInsatisfeito1, muitoInsatisfeito2); 
+		
         model.addAttribute("muitoSatisfeito", muitoSatisfeito);
         model.addAttribute("satisfeito", satisfeito);
         model.addAttribute("indiferente", indiferente);
@@ -95,32 +102,37 @@ public class RelatorioController {
 		Double indiceSatisfeitos = inqueritoImpl.SatisfacaoMediaGeral();
 		long insatisfeitos = inqueritoImpl.NumVisitanteInsatisfeito();
 		
+		long ulitmosDiasSatisfeito = inqueritoImpl.NumVisitanteSatisfeitoUltimosDias(LocalDateTime.now().minusDays(20));
+		
 		//
 		//List<String> nivelSatisfacao = List.of("Muito Insatisfeito","Insatisfeito","Indiferente","Satisfeito","Muito Satisfeito");
-		
+		System.out.println("### ULTIMOS DIAS >>>> ");
 		model.addAttribute("titulo","Relatório de Satisfação Geral");
 		model.addAttribute("content","Relatório de Satisfação Geral");
-		model.addAttribute("indiceSastifeitos", indiceSatisfeitos/9);
+		model.addAttribute("indiceSastifeitos", indiceSatisfeitos);
+		model.addAttribute("indiceSastifeitosUltimosDias", inqueritoImpl.SatisfacaoMediaGeralUltimosDias(LocalDateTime.now().minusDays(30)));
 		model.addAttribute("percentualSatisfeitos", (satisfeitos * 100.0) / totalEnviados);
 		model.addAttribute("percentualInsatisfeitos", (insatisfeitos * 100.0) / totalEnviados);
+		model.addAttribute("SatisfeitosUltimosDias", ulitmosDiasSatisfeito);
+		model.addAttribute("percentualSatisfeitosUltimosDias", ulitmosDiasSatisfeito * 100.0 / totalEnviados);
+		//model.addAttribute("InsatisfeitosUltimosDias", inqueritoImpl.NumVisitanteInsatisfeitoUltimosDias(LocalDate.now().minusDays(30)));
 		model.addAttribute("satisfeitos", satisfeitos);
 		model.addAttribute("insatisfeitos", insatisfeitos);
 		model.addAttribute("percentualSatisfacao", satisfeitos * 100.0 / totalEnviados);
 		
 		
 		//DADOS DO GRAFICO DE SATISFACAO POR CATEGORIA
-		//'Exposições', 'Guias', 'Bilheteira', 'Loja', 'Cafetaria', 'Limpeza'
-		int valor=5;
-		List<Integer> muitoSatisfeito = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor-1), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-		valor=4;
-		List<Integer> satisfeito = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-		valor=3;
-		List<Integer> indiferente = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-		valor=2;
-		List<Integer> insatisfeito = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
-		valor=1;
-		List<Integer> muitoInsatisfeito = List.of(inqueritoImpl.satisfacaoExposicao(valor), inqueritoImpl.satisfacaoGuia(valor), inqueritoImpl.satisfacaoBilheteira(valor), inqueritoImpl.satisfacaoLoja(valor), inqueritoImpl.satisfacaoCafetaria(valor), inqueritoImpl.satisfacaoLimpeza(valor));
+		List<Double> muitoSatisfeito = inqueritoImpl.calcularPercentuais(5, totalEnviados, true);
+		List<Double> satisfeito = inqueritoImpl.calcularPercentuais(4, totalEnviados, false);
+		List<Double> indiferente = inqueritoImpl.calcularPercentuais(3, totalEnviados, false);
+		List<Double> insatisfeito = inqueritoImpl.calcularPercentuais(2, totalEnviados, false);
+		List<Double> muitoInsatisfeito1 = inqueritoImpl.calcularPercentuais(1, totalEnviados, false);
+		List<Double> muitoInsatisfeito2 = inqueritoImpl.calcularPercentuais(0, totalEnviados, false);
+		
+		
+		List<Double> muitoInsatisfeito = inqueritoImpl.somarListas(muitoInsatisfeito1, muitoInsatisfeito2); 
 
+		
         model.addAttribute("muitoSatisfeito", muitoSatisfeito);
         model.addAttribute("satisfeito", satisfeito);
         model.addAttribute("indiferente", indiferente);
@@ -128,38 +140,41 @@ public class RelatorioController {
         model.addAttribute("muitoInsatisfeito", muitoInsatisfeito);
 		
         //['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        int anoAtual = LocalDate.now().getYear();
+        int anoAtual = LocalDateTime.now().getYear();
         List<String> mes = List.of("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
+        
+        List<Double> graficoDoMes = inqueritoImpl.MesPercentuais(anoAtual, totalEnviados);
+     
         List<Integer> graficoInqueritoMes = List.of(inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-01"),inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-02"),
         									inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-03"), inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-04"),
         									inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-05"),inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-06"),
         									inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-07"),inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-08"),
         									inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-09"), inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-10"),
         									inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-11"), inqueritoImpl.qtdInqueritosDoMes(anoAtual+"-12"));
-        for (Integer registro : graficoInqueritoMes) {
-            System.out.println(">>> " + registro);
-            System.out.println("--------------------------------------");
-        }
+        
 
         int posicaoDoMesMaior = inqueritoImpl.mesMaiorDesempenho(graficoInqueritoMes);
         int posicaoDoMesMenor = inqueritoImpl.mesMenorDesempenho(graficoInqueritoMes);
         
-        model.addAttribute("graficoInqueritoMes", graficoInqueritoMes);
+        model.addAttribute("graficoInqueritoMes", graficoDoMes);
         model.addAttribute("mesMaiorDesempenho", mes.get(posicaoDoMesMaior));
         model.addAttribute("mesMenorDesempenho", mes.get(posicaoDoMesMenor));
         model.addAttribute("valorMesMaiorDesempenho", graficoInqueritoMes.get(posicaoDoMesMaior) * 100.0 / totalEnviados);
         model.addAttribute("valorMesMenorDesempenho", graficoInqueritoMes.get(posicaoDoMesMenor) * 100.0 / totalEnviados);
         
-        System.out.println(">>>MES MAIOR : " + mes.get(posicaoDoMesMaior)+" | Valor :"+graficoInqueritoMes.get(posicaoDoMesMaior));
-        System.out.println(">>>MES MENOR : " + mes.get(posicaoDoMesMenor)+" | valor :"+graficoInqueritoMes.get(posicaoDoMesMenor));
-        System.out.println("--------------------------------------");
-        
+       // System.out.println(">>>MES MAIOR : " + mes.get(posicaoDoMesMaior)+" | Valor :"+graficoInqueritoMes.get(posicaoDoMesMaior));
+       // System.out.println(">>>MES MENOR : " + mes.get(posicaoDoMesMenor)+" | valor :"+graficoInqueritoMes.get(posicaoDoMesMenor));
+       // System.out.println("--------------------------------------");
+       //System.out.println("Muito Satisfeito >>>> "+muitoSatisfeito);
+		
 		return "admin/relatorio-de-satisfacao-geral";
 	}
 	
 	@GetMapping("/relatorio/situacao/profissional")
 	public String relatorioSituacaoProfissional(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
+		int pessoasRemuneradas = inqueritoImpl.RemuneradasUltimosDias("sim",LocalDateTime.now().minusDays(30));
+		int EstudadesUltimosdias = inqueritoImpl.OcupacaoUltimosDias("Estudante", LocalDateTime.now().minusDays(30));
 		//
 		int homensDesempregados = inqueritoImpl.ContaDesempregoPorGenero("Homem", "Nao");
 		int homensEmpregados = inqueritoImpl.ContaDesempregoPorGenero("Homem", "sim");
@@ -226,7 +241,11 @@ public class RelatorioController {
 		
 		model.addAttribute("titulo","Relatório de Situação Profissional");
 		model.addAttribute("percentualRemunerados",inqueritoImpl.PercentualRemuneradas("sim"));
+		model.addAttribute("RemuneradosUltimosDias", pessoasRemuneradas);
+		model.addAttribute("PercentualRemuneradosUltimosDias", pessoasRemuneradas * 100.0 / inqueritoImpl.TotalQuestionariosEnviados());
 		model.addAttribute("percentualEstudante",inqueritoImpl.PercentualOcupacao("Estudante"));
+		model.addAttribute("estudantesUltimosDias",EstudadesUltimosdias);
+		model.addAttribute("percentualEstudantesUltimosDias",EstudadesUltimosdias * 100.0 / inqueritoImpl.TotalQuestionariosEnviados());
 		model.addAttribute("generoMaisDesempregado",generoMaisDesempregado);	
 		model.addAttribute("homensDesempregados",homensDesempregados);	
 		model.addAttribute("homensEmpregados",homensEmpregados);	
@@ -254,7 +273,7 @@ public class RelatorioController {
 
 		long totalEnviados = inqueritoImpl.TotalQuestionariosEnviados();
 		Double percentualDeficiencia = inqueritoImpl.pessoasComDeficiencia();
-		int DeficienciaUltimosDias = inqueritoImpl.pessoasComDeficienciaUltimosDias(LocalDate.now().minusDays(30));
+		int DeficienciaUltimosDias = inqueritoImpl.pessoasComDeficienciaUltimosDias(LocalDateTime.now().minusDays(30));
 		String FaixaEtariaPredominante = inqueritoImpl.FaixaEtariaPredominante();
 		String FaixaEtariaMenor = inqueritoImpl.FaixaEtariaMenor();
 		int homens = inqueritoImpl.ContaGenero("Homem");
@@ -296,6 +315,45 @@ public class RelatorioController {
 		return "admin/relatorio-dos-visitantes";
 	}
 	
+	@GetMapping("/relatorio/sessoes")
+	public String sessoes(Model model,
+            @RequestParam(value = "data", required = false) LocalDate data,
+			@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+		
+		Page<InqueritoModel> inqueritoPage;
+		
+		if(data != null) {
+	         inqueritoPage = inqueritoImpl.buscarPorData(page, size, data.atStartOfDay());//// data.atStartOfDay() Converte LocalDate para LocalDateTime
+	 		model.addAttribute("dataFiltro", data);
+	    }
+		else		
+			inqueritoPage = inqueritoImpl.listarAssociadoPaginacao(page, size);
+//        inqueritoPage = inqueritoImpl.converterParaDTO(inqueritoPage);
+       // Page<InqueritoDTO> dtoPage = inqueritoPage.map(inqueritoImpl::converterParaDTO);
+		
+		model.addAttribute("pagina", inqueritoPage.getNumber());
+		model.addAttribute("totalPaginas", inqueritoPage.getTotalPages());
+        model.addAttribute("page", page);
+        model.addAttribute("inqueritoPage", inqueritoPage);		
+
+		model.addAttribute("titulo","Sessões");
+		model.addAttribute("content","Sessão sessões");
 	
+		return "admin/sessoes";
+	}
+	
+	
+	@GetMapping("/relatorio/sessao-individual/{idInquerito}")
+	public String sessoesIndividual(@PathVariable Long idInquerito, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+	
+		InqueritoDTO inqueritoDto = inqueritoImpl.converterParaDTO(inqueritoImpl.buscaPorId(idInquerito).orElse(null));		
+		
+		model.addAttribute("titulo","Sessão individual");
+		model.addAttribute("content","Sessão Individual");
+		model.addAttribute("inquerito",inqueritoDto);
+		
+		return "admin/sessao-idividual";
+	}
 	
 }

@@ -1,8 +1,10 @@
 package ccl.inquerito.repository;
 
-import java.time.LocalDate;
+import org.springframework.data.domain.Pageable;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,7 +16,7 @@ import ccl.inquerito.model.InqueritoModel;
 public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>{
 	
 	//ULTIMOS X DIAS
-	int countByDataCriacaoAfter(LocalDate data);
+	int countByDataCriacaoAfter(LocalDateTime data);
 	
 	//ULTIMOS X DIAS taxamediageral
 	@Query("SELECT AVG(s.grauSatisfacaoDeQualidade + s.grauSatisfacaoDeAtendimento + s.grauSatisfacaoInteracao + s.satisfacaoPrecoDoBilhete + " +
@@ -22,7 +24,7 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 		       "s.grauSatisfacaoLimpeza) " +
 		       "FROM InqueritoModel s " +
 		       "WHERE s.dataCriacao >= :data")
-		int taxaMediaGeralUltimoTrintaDias(LocalDate data);
+		Double taxaMediaGeralUltimoTrintaDias(LocalDateTime data);
 
 
 
@@ -30,17 +32,33 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	           "s.grauSatisfacaoCafetaria + s.grauSatisfacaoMenuCafetaria + s.grauSatisfacaoAtendimentoLoja + s.grauSatisfacaoProdutoLoja + " +
 	           "s.grauSatisfacaoLimpeza) FROM InqueritoModel s")
 	    Double calcularTaxaSatisfacaoMediaGeral();	 
+
+	 @Query("SELECT AVG(s.grauSatisfacaoDeQualidade + s.grauSatisfacaoDeAtendimento + s.grauSatisfacaoInteracao + s.satisfacaoPrecoDoBilhete + " +
+	           "s.grauSatisfacaoCafetaria + s.grauSatisfacaoMenuCafetaria + s.grauSatisfacaoAtendimentoLoja + s.grauSatisfacaoProdutoLoja + " +
+	           "s.grauSatisfacaoLimpeza) FROM InqueritoModel s WHERE s.dataCriacao >= :data")
+	    Double calcularTaxaSatisfacaoMediaGeralUtimosDias(LocalDateTime data);
 	 
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade >= 3 AND i.grauSatisfacaoDeAtendimento >= 3 " +
 	           "AND i.grauSatisfacaoInteracao >= 3 AND i.satisfacaoPrecoDoBilhete >= 3 AND i.grauSatisfacaoCafetaria >= 3 AND i.grauSatisfacaoMenuCafetaria >= 3 " +
 	           "AND i.grauSatisfacaoAtendimentoLoja >= 3 AND i.grauSatisfacaoProdutoLoja >= 3 AND i.grauSatisfacaoLimpeza >= 3")
 	    int contarVisitantesSatisfeitos();
 	 
+	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade >= 3 AND i.grauSatisfacaoDeAtendimento >= 3 " +
+	           "AND i.grauSatisfacaoInteracao >= 3 AND i.satisfacaoPrecoDoBilhete >= 3 AND i.grauSatisfacaoCafetaria >= 3 AND i.grauSatisfacaoMenuCafetaria >= 3 " +
+	           "AND i.grauSatisfacaoAtendimentoLoja >= 3 AND i.grauSatisfacaoProdutoLoja >= 3 AND i.grauSatisfacaoLimpeza >= 3 AND i.dataCriacao >= :data")
+	    int contarVisitantesSatisfeitosUltimosDias(LocalDateTime data);
+	 
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade  <= 2 AND i.grauSatisfacaoDeAtendimento <= 2 " +
 	           "AND i.grauSatisfacaoInteracao <= 2 AND i.satisfacaoPrecoDoBilhete <= 2 AND i.grauSatisfacaoCafetaria <= 2 " +
 	           "AND i.grauSatisfacaoMenuCafetaria <= 2 AND i.grauSatisfacaoAtendimentoLoja <= 2 AND i.grauSatisfacaoProdutoLoja <= 2 " +
 	           "AND i.grauSatisfacaoLimpeza <= 2")
 	    int contarVisitantesInsatisfeitos();
+	 
+	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade  <= 2 AND i.grauSatisfacaoDeAtendimento <= 2 " +
+	           "AND i.grauSatisfacaoInteracao <= 2 AND i.satisfacaoPrecoDoBilhete <= 2 AND i.grauSatisfacaoCafetaria <= 2 " +
+	           "AND i.grauSatisfacaoMenuCafetaria <= 2 AND i.grauSatisfacaoAtendimentoLoja <= 2 AND i.grauSatisfacaoProdutoLoja <= 2 " +
+	           "AND i.grauSatisfacaoLimpeza <= 2 AND i.dataCriacao >= :data")
+	    int contarVisitantesInsatisfeitosUltimosDias(LocalDateTime data);
 	 
 	 //SATISFACAO POR CATEGORIA
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.grauSatisfacaoDeQualidade = :valor")
@@ -66,7 +84,7 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	 	int pessoasComDeficiencia();
 	 
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.portadorDeDeficiencia <> '0' AND i.dataCriacao >= :data")
-		int contarPessoasComDeficienciaDesde(@Param("data") LocalDate data);
+		int contarPessoasComDeficienciaDesde(@Param("data") LocalDateTime data);
 
 
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.genero = :valor")
@@ -81,7 +99,9 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	 
 	 //RELATORIO PROFISSIONAL
 	 int countByActividadeRemunerada(String valor);
+	 int countByActividadeRemuneradaAndDataCriacaoAfter(String valor, LocalDateTime data);
 	 int countByAcupacao(String valor);
+	 int countByAcupacaoAndDataCriacaoAfter(String valor, LocalDateTime data);
 	 int countByGeneroAndActividadeRemunerada(String genero, String actividade);
 	 int countByGeneroAndAcupacao(String genero, String ocupacao);
 	 int countByActividadeRemuneradaAndNivelAcademico(String valor, String nivel);
@@ -93,6 +113,12 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	 
 	 @Query("SELECT COUNT(r) FROM InqueritoModel r WHERE CAST(r.dataCriacao AS string) LIKE CONCAT(:mesAno, '%')")
 	 int contarPorMesAno(@Param("mesAno") String mesAno);
+	 
+	 //SESSÕES PAGINACAO
+	 //Page<InqueritoModel> findAll(Pageable pageable);
+	 Page<InqueritoModel> findAll(Pageable pageable);
+	 Page<InqueritoModel> findByDataCriacao(Pageable pageable, LocalDateTime dataCriacao);
+	 Page<InqueritoModel> findByDataCriacaoBetween(Pageable pageable, LocalDateTime inicio, LocalDateTime fim);
 
 	 
 }

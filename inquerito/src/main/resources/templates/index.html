@@ -793,6 +793,7 @@
 		
 		const radio = document.querySelector('input[value="' + radioMain + '"]');
 		
+		//alert(radio.checked+" - "+!radio.checked)
 		document.querySelector('input[name="' + radio1 + '"]').required = radio.checked;
 		document.querySelector('input[name="' + radio2 + '"]').required = !radio.checked;
 	  }
@@ -918,7 +919,7 @@
 					          didOpen: () => Swal.showLoading()
 					        });
 							
-							//######## Enviar via AJAX
+							//######## Enviar via AJAX 
 							fetch("/ccl/fomulario-inquerito-acao", {
 							  method: "POST",
 							  body: formData,

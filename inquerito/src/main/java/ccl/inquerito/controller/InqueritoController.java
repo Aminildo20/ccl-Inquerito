@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ccl.inquerito.model.InqueritoModel;
 import ccl.inquerito.serviceImpl.InqueritoServiceImpl;
@@ -53,7 +52,7 @@ public class InqueritoController {
 			System.out.println(inquerito.getGrauSatisfacaoInteracao());
 			System.out.println(inquerito.getGrauSatisfacaoLimpeza());
 			System.out.println(inquerito.getGrauSatisfacaoMenuCafetaria());
-			System.out.println(inquerito.getGrauSatisfacaoProdutoLoja());*/			
+			System.out.println(inquerito.getGrauSatisfacaoProdutoLoja());*/		
 			
 	        inqueritoImpl.novoInquerito(inquerito);
 	        return ResponseEntity.ok("Inquérito salvo com sucesso!");

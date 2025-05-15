@@ -47,7 +47,8 @@
                               <div class="icon kpi-stats-icon">
                                 <div class="main-font-icon smaller-icon" th:text="${ultimosTrintaDias} ?: 0" >0</div>
                               </div>
-                              <div class="stats" th:text="${ultimosTrintaDiasPercentual + ' %'} ?: 0">0%</div>
+                              <div class="stats" th:text="${ultimosTrintaDiasPercentual != null ? #numbers.formatDecimal(ultimosTrintaDiasPercentual, 2, 2) : 0} + ' %' ">0%</div>
+							  
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">
@@ -135,9 +136,10 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon" th:text="${Ultimos30diasMediaGeral ?: 0 }">0</div>
+                                <div class="main-font-icon smaller-icon" ></div>
                               </div>
-                              <div class="stats" th:text="${Ultimos30diasMediaGeralPercentual ?: 0 + ' %'}">0%</div>
+                              <div class="stats" th:text="${Ultimos30diasMediaGeral != null ? #numbers.formatDecimal(Ultimos30diasMediaGeral, 2, 2) : 0} + ' %'">0%</div>
+							  
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">

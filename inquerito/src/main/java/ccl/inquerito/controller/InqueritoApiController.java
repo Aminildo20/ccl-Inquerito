@@ -1,5 +1,6 @@
 package ccl.inquerito.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ccl.inquerito.DTO.InqueritoDTO;
 import ccl.inquerito.model.InqueritoModel;
 import ccl.inquerito.serviceImpl.InqueritoServiceImpl;
 import ccl.inquerito.serviceImpl.VisitaServiceImpl;
@@ -35,9 +37,18 @@ public class InqueritoApiController {
 	}
 	
 	@PostMapping("/inquerito")
-	public ResponseEntity<String> salvarInquerito(@RequestBody InqueritoModel inquerito) {
+	public ResponseEntity<String> salvarInquerito(@RequestBody InqueritoDTO inquerit) {
         try {
-        	System.out.println(" --- DENTRO ---");
+        	
+        	InqueritoModel inquerito = new InqueritoModel();
+        	inquerito = inqueritoImpl.converterParaEntidade(inquerit);
+        	
+        	//formatar snake_case
+        	inquerito.setNivelAcademico(formatarParaSnakeCase(inquerito.getNivelAcademico()));
+        	inquerito.setIdade(formatarFaixaEtaria(inquerito.getIdade()));
+        	
+        	System.out.println(" --- DADOS ---");
+        	//System.out.println(" PERCEPCAO >>> "+inquerito.getPercepcao());
         	System.out.println(inquerito.getActividadeRemunerada());
         	System.out.println(inquerito.getAcupacao());
         	System.out.println(inquerito.getAreaDeResidencia());
@@ -57,8 +68,10 @@ public class InqueritoApiController {
         	System.out.println(inquerito.getNivelAcademico());
         	System.out.println(inquerito.getOrigemInfo());
         	System.out.println(inquerito.getPercepcao());
+        	System.out.println(" ----------------");
         	
-        	inqueritoImpl.novoInquerito(inquerito);
+        
+        	//inqueritoImpl.novoInquerito(inquerito);
             return ResponseEntity.ok("Inquérito salvo com sucesso! - Obrigado pela sua opinião sobre a sua experiência connosco");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Erro nos dados: " + e.getMessage());
@@ -66,6 +79,24 @@ public class InqueritoApiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body("Erro interno: " + e.getMessage());
         }
+    }
+	
+	private String formatarParaSnakeCase(String texto) {
+        if (texto == null) return null;
+        return texto.toLowerCase().replace(" ", "_").trim().replaceAll("\\s+", "_");
+    }
+	
+	public String formatarFaixaEtaria(String idadeTexto) {
+		if (idadeTexto == null || idadeTexto.isBlank()) {
+	        return "";
+	    }
+
+	    // Remove "anos", espaços extras e substitui " a " por "-"
+	    return idadeTexto
+	        .replace("anos", "")
+	        .trim()
+	        .replaceAll("\\s*a\\s*", "-")
+	        .trim();
     }
 
 }

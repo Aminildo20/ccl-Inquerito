@@ -1,8 +1,10 @@
 package ccl.inquerito.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import ccl.inquerito.model.InqueritoModel;
@@ -15,9 +17,12 @@ public interface InqueritoService {
 	public long TotalQuestionariosEnviados();
 	public long TotalVisitantes();
 	public Double SatisfacaoMediaGeral();
+	public Double SatisfacaoMediaGeralUltimosDias( LocalDateTime data);
 		
 	public long NumVisitanteSatisfeito();
 	public long NumVisitanteInsatisfeito();
+	public long NumVisitanteSatisfeitoUltimosDias(LocalDateTime data);
+	public long NumVisitanteInsatisfeitoUltimosDias(LocalDateTime data);
 	
 	//SATISFACAO POR CATEGORIA
 	public int satisfacaoExposicao(int valor);
@@ -29,7 +34,7 @@ public interface InqueritoService {
 	
 	//RELATORIO VISITANTES
 	public Double pessoasComDeficiencia();
-	public int pessoasComDeficienciaUltimosDias(LocalDate data);
+	public int pessoasComDeficienciaUltimosDias(LocalDateTime data);
 	public String FaixaEtariaPredominante();
 	public List<Integer> totalDeCadaFaixaEtaria();	
 	public String FaixaEtariaMenor();
@@ -39,7 +44,9 @@ public interface InqueritoService {
 	
 	//RELATORIO PROFISSIONAL
 	public double PercentualRemuneradas(String valor);
+	public int RemuneradasUltimosDias(String valor, LocalDateTime data);
 	public double PercentualOcupacao(String valor);
+	public int OcupacaoUltimosDias(String valor, LocalDateTime data);
 	public int ContaDesempregoPorGenero(String genero, String actividade);
 	public int ContaDesempregoPorGeneroEocupacao(String genero, String ocupacao);
 	public int contaPorActividadeEnivelAcademico(String valorActividade, String nivelAcademico);
@@ -51,8 +58,13 @@ public interface InqueritoService {
 	public int qtdInqueritosDoMes(String mesAno);
 	public int mesMaiorDesempenho(List<Integer> listaMes);
 	public int mesMenorDesempenho(List<Integer> listaMes);
-	public int totalUltimosTrintasDias(LocalDate data);
-	public int Ultimos30diasMediaGeral(LocalDate data);
+	public int totalUltimosTrintasDias(LocalDateTime data);
+	public Double Ultimos30diasMediaGeral(LocalDateTime data);
+	
+	//SESSÕES
+	public Page<InqueritoModel> listarAssociadoPaginacao(int page, int size);
+	public Optional<InqueritoModel> buscaPorId(Long idInquerito);
+	public Page<InqueritoModel> buscarPorData(int page, int size, LocalDateTime data);
 	
 	
 }

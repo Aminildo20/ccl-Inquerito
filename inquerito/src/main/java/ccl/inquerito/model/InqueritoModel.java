@@ -1,6 +1,6 @@
 package ccl.inquerito.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
@@ -36,7 +36,7 @@ public class InqueritoModel {
     private String recomendaCcl;
     private String comentario;
     private String email;
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
     
     private long totalVisitas;
 
@@ -50,11 +50,11 @@ public class InqueritoModel {
 		this.idIquerito = idIquerito;
 	}
 
-	public LocalDate getDataCriacao() {
+	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
