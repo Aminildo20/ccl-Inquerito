@@ -47,15 +47,15 @@ public class InqueritoApiController {
         	inquerito.setNivelAcademico(formatarParaSnakeCase(inquerito.getNivelAcademico()));
         	inquerito.setIdade(formatarFaixaEtaria(inquerito.getIdade()));
         	
-        	System.out.println(" --- DADOS ---");
+        	System.out.println(" --- DADOS API ---");
         	//System.out.println(" PERCEPCAO >>> "+inquerito.getPercepcao());
-        	System.out.println(inquerito.getActividadeRemunerada());
-        	System.out.println(inquerito.getAcupacao());
-        	System.out.println(inquerito.getAreaDeResidencia());
-        	System.out.println(inquerito.getComentario());
-        	System.out.println(inquerito.getEmail());
-        	System.out.println(inquerito.getExperiencia());
-        	System.out.println(inquerito.getGenero());
+        	System.out.println("Actividade remunerada - "+inquerito.getActividadeRemunerada());
+        	System.out.println("Ocupacao - "+inquerito.getAcupacao());
+        	System.out.println("Residencia - "+inquerito.getAreaDeResidencia());
+        	System.out.println("Comentario - "+inquerito.getComentario());
+        	System.out.println("Email - "+inquerito.getEmail());
+        	System.out.println("Experiencia - "+inquerito.getExperiencia());
+        	System.out.println("Genero - "+inquerito.getGenero());
         	System.out.println(inquerito.getGrauSatisfacaoAtendimentoLoja());
 			System.out.println(inquerito.getGrauSatisfacaoCafetaria());
 			System.out.println(inquerito.getGrauSatisfacaoDeAtendimento());
@@ -64,15 +64,15 @@ public class InqueritoApiController {
 			System.out.println(inquerito.getGrauSatisfacaoLimpeza());
 			System.out.println(inquerito.getGrauSatisfacaoMenuCafetaria());
 			System.out.println(inquerito.getGrauSatisfacaoProdutoLoja());
-        	System.out.println(inquerito.getIdade());
-        	System.out.println(inquerito.getNivelAcademico());
-        	System.out.println(inquerito.getOrigemInfo());
-        	System.out.println(inquerito.getPercepcao());
+        	System.out.println("Idade - "+inquerito.getIdade());
+        	System.out.println("Nivel academico - "+inquerito.getNivelAcademico());
+        	System.out.println("De Onde ouviu CCL - "+inquerito.getOrigemInfo());
+        	System.out.println("descrever CCL (percepcao) - "+inquerito.getPercepcao());
         	System.out.println(" ----------------");
         	
         
         	//inqueritoImpl.novoInquerito(inquerito);
-            return ResponseEntity.ok("Inquérito salvo com sucesso! - Obrigado pela sua opinião sobre a sua experiência connosco");
+            return ResponseEntity.ok("Inquérito salvo com sucesso! - Obrigado pela sua opinião sobre a sua experiência connosco ");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Erro nos dados: " + e.getMessage());
         } catch (Exception e) {

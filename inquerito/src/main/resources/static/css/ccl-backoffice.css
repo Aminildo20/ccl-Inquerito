@@ -547,6 +547,7 @@ a {
   width: 70%;
   max-width: none;
   margin-right: 15px;
+  display: none;
 }
 
 .form-field-wrapper._1 {
@@ -3110,6 +3111,12 @@ a {
   padding-right: 10px;
 }
 
+.text-block-130._3 {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+}
+
 .botao {
   background-color: var(--main);
   border-radius: 5px;
@@ -3627,7 +3634,7 @@ a {
 }
 
 .form-3 {
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   display: flex;
@@ -8374,8 +8381,10 @@ a {
   border: 1px solid var(--light-steel-blue-3);
   color: var(--text);
   border-radius: 4px;
+  justify-content: space-between;
+  align-items: center;
   padding: 18px 10px;
-  display: block;
+  display: flex;
 }
 
 .seccao_item:hover {
@@ -8418,6 +8427,10 @@ a {
   height: 1px;
   margin-top: 24px;
   margin-bottom: 24px;
+}
+
+.div-block-453 {
+  border-right: 1px solid var(--slate-grey);
 }
 
 @media screen and (max-width: 991px) {
