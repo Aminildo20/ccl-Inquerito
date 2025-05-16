@@ -30,6 +30,7 @@ public class WebSecurityConfig {
                 .requestMatchers(
                 		"/admin/login", 
                 		"/ccl/inquerito",
+                		"/ccl/fomulario-inquerito-acao",
                 		"/css/**",
                 		"/fonts/**",
                 		"/index",

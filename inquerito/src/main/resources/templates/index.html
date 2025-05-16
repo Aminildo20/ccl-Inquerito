@@ -930,19 +930,19 @@
 				let ocupacao = ' ';
 				
 				if(atividade == 'sim'){
-						atividade_remunerada = getRadioValueOrDefault("atividade_remunerada");
-						atividade = atividade_remunerada;			
+					atividade_remunerada = atividade;
+					ocupacao = getRadioValueOrDefault("atividade_remunerada");
 					if(atividade_remunerada == 'outro'){
-						atividade = document.getElementById("atividade_remunerada_field").value;
+						ocupacao = document.getElementById("atividade_remunerada_field").value;
 					}
-				}
-				if(atividade == 'nao'){
-						ocupacao = getRadioValueOrDefault('ocupacao');
+					
+				}else if(atividade == 'nao'){
+					atividade_remunerada = atividade;
+					ocupacao = getRadioValueOrDefault("ocupacao");
 					if(ocupacao == 'outroOcupacao'){
 						ocupacao = document.getElementById("ocupacao_field").value;
 					}
-				}
-				
+				}				
 				//alert(" Remunerado? : "+atividade+" <|> Actividade remunerada: "+atividade_remunerada+" <|> ocupacao: +"+ocupacao)
 				
 				//PERCEPCAO
@@ -952,9 +952,9 @@
 			    const percepcao = [];
 				const checkedCheckboxes = document.querySelectorAll('input[name="percepcao"]:checked'); //pegar todos checks de nome percepcao
 			    
-				let count = 0;
+				let count = 1;
 			    checkedCheckboxes.forEach(checkbox => {					
-				  if (count > 3) return;
+				  if (count >= 3) return;
 			      if (checkbox.id === 'percepcao9' && outraInput.value) {
 			        percepcao.push(outraInput.value);
 			      } else {
@@ -1014,6 +1014,7 @@
 							formData.append("grauSatisfacaoDeAtendimento", grau_satisfacao_de_atendimento);
 							formData.append("grauSatisfacaoInteracao", grau_satisfacao_interacao);
 							formData.append("satisfacaoPrecoDoBilhete", satisfacao_preco_do_bilhete);
+							formData.append("servicoAdicional", servico_adicional);
 							formData.append("grauSatisfacaoCafetaria", grau_satisfacao_cafetaria);
 							formData.append("grauSatisfacaoMenuCafetaria", grau_satisfacao_menu_cafetaria);
 							formData.append("grauSatisfacaoAtendimentoLoja", grau_satisfacao_atendimento_loja);
@@ -1021,13 +1022,12 @@
 							formData.append("grauSatisfacaoLimpeza", grau_satisfacao_limpeza);
 							formData.append("recomendaCcl", recomenda_ccl);
 							formData.append("comentario", comentario);
-							formData.append("email", email);
-							
-							
+							formData.append("email", email);							
+							//-------------------------------------
 							for (let [chave, valor] of formData.entries()) {
 							  console.log(" >>>> "+chave +" : "+ valor+"\n");
 							}
-							
+
 							//
 							Swal.fire({
 					          title: "Enviando...",
@@ -1039,8 +1039,8 @@
 							
 							//######## Enviar via AJAX 
 							fetch("/ccl/fomulario-inquerito-acao", {
-							  method: "POST",
-							  body: formData,
+								method: "POST",
+								body: formData
 							})
 							  .then(async response => {
 							    const data = await response.text();

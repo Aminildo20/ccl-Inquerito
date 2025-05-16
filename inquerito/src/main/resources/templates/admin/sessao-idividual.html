@@ -77,11 +77,13 @@
                   </div>
                   <div class="div-block-450">
                     <div class="text-block-147 _1">9. Descrição do CCL</div>
-                    <div class="div-block-451" th:each="item : ${inquerito.percepcao}">
-                      <div class="div-block-449" >
-                        <div class="text-block-129 _2">r</div>
-                        <div class="list-item _0" th:text="${item}">Educativo</div>
-                      </div>
+                    <div class="div-block-451">						
+						<th:block th:each="item : ${inquerito.percepcao}">
+	                      <div class="div-block-449" >
+	                        <div class="text-block-129 _2">r</div>
+	                        <div class="list-item _0" th:text="${item}">Educativo</div>
+	                      </div>
+						</th:block> 						
                     </div>
                   </div>
                   <div class="div-block-450">
