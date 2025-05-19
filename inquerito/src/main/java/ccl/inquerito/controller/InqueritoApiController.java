@@ -1,6 +1,8 @@
 package ccl.inquerito.controller;
 
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,13 +42,14 @@ public class InqueritoApiController {
 	public ResponseEntity<String> salvarInquerito(@RequestBody InqueritoDTO inquerit) {
         try {
         	
+        	inquerit.setDataCriacao(LocalDateTime.now());
         	InqueritoModel inquerito = new InqueritoModel();
         	inquerito = inqueritoImpl.converterParaEntidade(inquerit);
         	
         	//formatar snake_case
         	inquerito.setNivelAcademico(formatarParaSnakeCase(inquerito.getNivelAcademico()));
         	inquerito.setIdade(formatarFaixaEtaria(inquerito.getIdade()));
-        	
+        	/*
         	System.out.println(" --- DADOS API ---");
         	//System.out.println(" PERCEPCAO >>> "+inquerito.getPercepcao());
         	System.out.println("Actividade remunerada - "+inquerito.getActividadeRemunerada());
@@ -68,10 +71,10 @@ public class InqueritoApiController {
         	System.out.println("Nivel academico - "+inquerito.getNivelAcademico());
         	System.out.println("De Onde ouviu CCL - "+inquerito.getOrigemInfo());
         	System.out.println("descrever CCL (percepcao) - "+inquerito.getPercepcao());
-        	System.out.println(" ----------------");
-        	
-        
-        	//inqueritoImpl.novoInquerito(inquerito);
+        	System.out.println("data inquirido - "+inquerito.getDataCriacao());
+        	System.out.println("#####----------------###");*/
+        	       	
+	        inqueritoImpl.novoInquerito(inquerito);
             return ResponseEntity.ok("Inquérito salvo com sucesso! - Obrigado pela sua opinião sobre a sua experiência connosco ");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Erro nos dados: " + e.getMessage());
@@ -87,9 +90,9 @@ public class InqueritoApiController {
     }
 	
 	public String formatarFaixaEtaria(String idadeTexto) {
-		if (idadeTexto == null || idadeTexto.isBlank()) {
-	        return "";
-	    }
+		if(idadeTexto.equalsIgnoreCase("80 anos ou mais")) return "+80";
+		
+		if (idadeTexto == null || idadeTexto.isBlank()) return "";
 
 	    // Remove "anos", espaços extras e substitui " a " por "-"
 	    return idadeTexto
@@ -98,5 +101,4 @@ public class InqueritoApiController {
 	        .replaceAll("\\s*a\\s*", "-")
 	        .trim();
     }
-
 }

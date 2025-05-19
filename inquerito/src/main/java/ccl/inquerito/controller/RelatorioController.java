@@ -51,7 +51,7 @@ public class RelatorioController {
 		model.addAttribute("titulo","Dashboard Admin");
 		model.addAttribute("content","Dashboard Admin");
 		model.addAttribute("totalEnviados", totalEnviados);
-		model.addAttribute("ultimosTrintaDias", totalUltimosTrintaDias);
+		//model.addAttribute("ultimosTrintaDias", totalUltimosTrintaDias);
 		model.addAttribute("ultimosTrintaDiasPercentual", (totalUltimosTrintaDias * 100.0) / totalEnviados);
 		model.addAttribute("totalVisitas", totalVisitas);
 		model.addAttribute("TaxaSatisfacaoMedia", inqueritoImpl.SatisfacaoMediaGeral());
@@ -67,7 +67,7 @@ public class RelatorioController {
 		model.addAttribute("numVisitanteInsatisfeito", insatisfeitos);
 		model.addAttribute("percentual", percentual);
 		
-		System.out.println(" percentual >>"+percentual);
+		//System.out.println(" percentual >>"+percentual);
 		
 		//DADOS DO GRAFICO DE SATISFACAO POR CATEGORIA
 		//'Exposições', 'Guias', 'Bilheteira', 'Loja', 'Cafetaria', 'Limpeza'
@@ -79,7 +79,7 @@ public class RelatorioController {
 		List<Double> muitoInsatisfeito1 = inqueritoImpl.calcularPercentuais(1, totalEnviados, false);
 		List<Double> muitoInsatisfeito2 = inqueritoImpl.calcularPercentuais(0, totalEnviados, false);
 		
-		System.out.println(" >>> Insatisfeito - "+insatisfeito);
+		//System.out.println(" >>> Insatisfeito - "+insatisfeito);
 		
 		List<Double> muitoInsatisfeito = inqueritoImpl.somarListas(muitoInsatisfeito1, muitoInsatisfeito2); 
 		
@@ -297,7 +297,7 @@ public class RelatorioController {
 		model.addAttribute("titulo","Relatório dos Visitantes");
 		model.addAttribute("content","Relatório dos Visitantes");
 		model.addAttribute("percentualDeficiencia", percentualDeficiencia);
-		model.addAttribute("deficienciaUltimosDias", DeficienciaUltimosDias);
+		//model.addAttribute("deficienciaUltimosDias", DeficienciaUltimosDias);
 		model.addAttribute("deficienciaUltimosDiasPercentual", DeficienciaUltimosDias * 100.0 / totalEnviados);
 		model.addAttribute("FaixaEtariaPredominante", FaixaEtariaPredominante);
 		model.addAttribute("FaixaEtariaMenor", FaixaEtariaMenor);

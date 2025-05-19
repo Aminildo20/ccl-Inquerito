@@ -1,6 +1,8 @@
 <!DOCTYPE html><!--  Last Published: Fri Apr 25 2025 13:40:40 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="6800aeb4641ae1fdf1aec94c" data-wf-site="6800aeb4641ae1fdf1aec8ae">
-<head th:insert="~{/fragmentos/header :: header}"></head>
+<!--<head th:insert="~{/fragmentos/header :: header}"></head>-->
+<head th:replace="~{/fragmentos/header :: header}"></head>
+
 <body>
   <div class="mother-div dash">
     <div class="page-content-wrapper">
@@ -45,7 +47,7 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon" th:text="${ultimosTrintaDias} ?: 0" >0</div>
+                                <div class="main-font-icon smaller-icon">8</div>
                               </div>
                               <div class="stats" th:text="${ultimosTrintaDiasPercentual != null ? #numbers.formatDecimal(ultimosTrintaDiasPercentual, 2, 2) : 0} + ' %' ">0%</div>
 							  
@@ -136,7 +138,7 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon" ></div>
+                                <div class="main-font-icon smaller-icon">8</div>
                               </div>
                               <div class="stats" th:text="${Ultimos30diasMediaGeral != null ? #numbers.formatDecimal(Ultimos30diasMediaGeral, 2, 2) : 0} + ' %'">0%</div>
 							  

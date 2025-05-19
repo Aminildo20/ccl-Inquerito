@@ -1,5 +1,7 @@
 package ccl.inquerito.DTO;
 
+import java.time.LocalDateTime;
+
 public class InqueritoDTO {
 
 
@@ -28,6 +30,7 @@ public class InqueritoDTO {
     private String recomendaCcl;
     private String comentario;
     private String email;
+    private LocalDateTime dataCriacao;
 	
 	
 	public String getIdade() {
@@ -179,6 +182,12 @@ public class InqueritoDTO {
 	}
 	public void setIdIquerito(Long idIquerito) {
 		this.idIquerito = idIquerito;
+	}
+	public LocalDateTime getDataCriacao() {
+		return dataCriacao;
+	}
+	public void setDataCriacao(LocalDateTime dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 	
 }

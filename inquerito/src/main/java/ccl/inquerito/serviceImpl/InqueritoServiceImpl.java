@@ -326,8 +326,18 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	    inquerito.setGenero(dto.getGenero());
 	    inquerito.setPortadorDeDeficiencia(dto.getPortadorDeDeficiencia());
 	    inquerito.setAreaDeResidencia(dto.getAreaDeResidencia());
-	    inquerito.setActividadeRemunerada(dto.getActividadeRemunerada());
-	    inquerito.setAcupacao(dto.getAcupacao());
+
+	    inquerito.setAcupacao(dto.getAcupacao());	    
+	    if(dto.getActividadeRemunerada().equalsIgnoreCase("")){	
+		    inquerito.setActividadeRemunerada("Nao");		   
+	    }
+	    else{
+		    inquerito.setAcupacao(dto.getActividadeRemunerada());
+		    inquerito.setActividadeRemunerada("sim");
+	    }
+	    	
+
+	    
 	    inquerito.setPercepcao(String.join(",", dto.getPercepcao())); // se quiser guardar como string
 	    inquerito.setOrigemInfo(dto.getOrigemInfo());
 	    inquerito.setProposito(dto.getProposito());
@@ -345,6 +355,7 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	    inquerito.setRecomendaCcl(dto.getRecomendaCcl());
 	    inquerito.setComentario(dto.getComentario());
 	    inquerito.setEmail(dto.getEmail());
+	    inquerito.setDataCriacao(dto.getDataCriacao());
 
 	    return inquerito;
 	}

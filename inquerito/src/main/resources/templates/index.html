@@ -34,7 +34,7 @@
       <div class="navbar">
         <a href="#inicio" class="link-block w-inline-block"></a>
         <div class="div-block">
-          <div class="field_label_wrapper _2">Questionário de satisfação</div>
+          <div class="field_label_wrapper _2">Questionário de Satisfação</div>
         </div>
       </div>
     </div>
@@ -148,7 +148,7 @@
                   </label></div>
               </div>
             </div>
-            <div class="section_query"><label for="name" class="field_label_wrapper">3. Com base na lista abaixo, qual resposta estaria mais alinhada  com a sua identificação de gênero?</label>
+            <div class="section_query"><label for="name" class="field_label_wrapper">3. Com base na lista abaixo, qual das respostas está mais alinhada com a sua identidade de género?</label>
               <div class="w-layout-grid grid">
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
@@ -169,7 +169,7 @@
                   </label></div>
               </div>
             </div>
-            <div class="section_query"><label for="name" class="field_label_wrapper">4. É portador de alguma deficiência? Se sim, marque as opções  correspondentes:</label>
+            <div class="section_query"><label for="name" class="field_label_wrapper">4. É portador de alguma deficiência? Se sim, marque a opção correspondente:</label>
               <div class="w-layout-grid grid _1">
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
@@ -403,7 +403,7 @@
                   </label><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
 					<input type="radio" data-name="Radio 32" onclick="desabilitarCampos('origem_info_field', 'outraOrigem_info')" id="radio-32" name="origem_info" style="opacity:0;position:absolute;z-index:-1" value="Instituição social">
-					<span class="radio-button-label w-form-label" for="radio-32">Instituição social</span>
+					<span class="radio-button-label w-form-label" for="radio-32">Instituição Social</span>
                   </label>
                   <div class="check_input"><label class="radio-button-field w-radio">
                       <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
@@ -436,7 +436,7 @@
                 </div>
               </div>
             </div>
-            <div class="section_query"><label for="name" class="field_label_wrapper">12. Qual a exposição / experiências que gostou mais?</label>
+            <div class="section_query"><label for="name" class="field_label_wrapper">12. Qual a exposição / experiência que gostou mais?</label>
               <div class="w-layout-grid grid">
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
@@ -483,7 +483,7 @@
                   </label></div>
               </div>
             </div>
-            <div class="section_query"><label for="name" class="field_label_wrapper">13. Qual o seu grau de satisfação em relação à qualidade das  exposições e experiências oferecidas no CCL?</label>
+            <div class="section_query"><label for="name" class="field_label_wrapper">13. Qual o seu grau de satisfação em relação à qualidade das  Exposições e Experiências oferecidas no CCL?</label>
               <div class="w-layout-grid grid _2">
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
@@ -559,7 +559,7 @@
                   </label></div>
               </div>
             </div>
-            <div class="section_query"><label for="name" class="field_label_wrapper">16. Considera que os preços dos bilhetes são?</label>
+            <div class="section_query"><label for="name" class="field_label_wrapper">16. Considera que os preços dos bilhetes são:</label>
               <div class="w-layout-grid grid _2">
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
@@ -856,7 +856,7 @@
 		  atualizarCampos();
 		
 		  
-		  //VALIDA CHECK
+		  //VALIDA CHECK (LIMITA A SELECAO DE ATE 3 OPCOES)
 		  const checkboxes = document.querySelectorAll('input[name="percepcao"]');
 	      const limite = 3;
 
@@ -954,7 +954,7 @@
 			    
 				let count = 1;
 			    checkedCheckboxes.forEach(checkbox => {					
-				  if (count >= 3) return;
+				  if (count > 3) return;
 			      if (checkbox.id === 'percepcao9' && outraInput.value) {
 			        percepcao.push(outraInput.value);
 			      } else {

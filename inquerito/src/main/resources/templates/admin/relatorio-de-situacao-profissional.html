@@ -1,7 +1,6 @@
 <!DOCTYPE html><!--  Last Published: Fri Apr 25 2025 13:40:40 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="680a2490cb2ad9d128d4dc09" data-wf-site="6800aeb4641ae1fdf1aec8ae">
 <head th:insert="~{/fragmentos/header :: header}"></head>
-
 <body>
   <div class="mother-div dash">
     <div class="page-content-wrapper">
@@ -56,7 +55,7 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon" th:text="${RemuneradosUltimosDias ?: 0}" >0</div>
+                                <div class="main-font-icon smaller-icon" >8</div>
                               </div>
                               <div class="stats" th:text="${PercentualRemuneradosUltimosDias != null ? #numbers.formatDecimal(PercentualRemuneradosUltimosDias ?: 0, 2, 2) :0} + ' %'">0%</div>
 							  
@@ -109,7 +108,7 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-                                <div class="main-font-icon smaller-icon" th:text="${estudantesUltimosDias} ?: 0">0</div>
+                                <div class="main-font-icon smaller-icon">8</div>
                               </div>
                               <div class="stats" th:text="${percentualEstudantesUltimosDias != null ? #numbers.formatDecimal(percentualEstudantesUltimosDias ?: 0, 2, 2) : 0} + '%'">0%</div>							  
                             </div>

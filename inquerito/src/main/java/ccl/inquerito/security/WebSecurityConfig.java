@@ -38,7 +38,6 @@ public class WebSecurityConfig {
 						"/templates/**",
 						"/images/**",
 						"/js/**",
-						"/css/**",
 						"/process-login"
                 		).permitAll()
                 .requestMatchers("/admin/relatorio/**").authenticated()
