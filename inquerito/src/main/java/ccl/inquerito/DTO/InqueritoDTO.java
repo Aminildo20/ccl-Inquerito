@@ -11,6 +11,7 @@ public class InqueritoDTO {
     private String genero;
     private String portadorDeDeficiencia;
     private String areaDeResidencia;
+    private String areaDeResidenciaOutro; //textField novo
     private String actividadeRemunerada;
     private String acupacao;
     private String[] percepcao;
@@ -188,6 +189,12 @@ public class InqueritoDTO {
 	}
 	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+	public String getAreaDeResidenciaOutro() {
+		return areaDeResidenciaOutro;
+	}
+	public void setAreaDeResidenciaOutro(String areaDeResidenciaOutro) {
+		this.areaDeResidenciaOutro = areaDeResidenciaOutro;
 	}
 	
 }

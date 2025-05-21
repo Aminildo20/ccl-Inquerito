@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import ccl.inquerito.DTO.InqueritoDTO;
+import ccl.inquerito.DTO.InqueritoDTOflutterFlow;
 import ccl.inquerito.model.InqueritoModel;
 import ccl.inquerito.repository.InqueritoRepository;
 import ccl.inquerito.service.InqueritoService;
@@ -359,6 +360,101 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 
 	    return inquerito;
 	}
+	
+	
+	public InqueritoModel converterDTOParaEntidade(InqueritoDTOflutterFlow dto) {
+	    InqueritoModel inquerito = new InqueritoModel();
+
+	    inquerito.setIdade(dto.getIdade());
+	    inquerito.setNivelAcademico(dto.getNivelAcademico());
+	    inquerito.setGenero(dto.getGenero());
+	    inquerito.setPortadorDeDeficiencia(dto.getPortadorDeDeficiencia());
+	    
+	 // Prioriza campos personalizados, se existirem
+	    inquerito.setAreaDeResidencia(priorizarCampo(dto.getAreaDeResidenciaOutroPais(), dto.getAreaDeResidenciaOutroProvincia(), dto.getAreaDeResidencia()));
+
+	    //***
+	    inquerito.setActividadeRemunerada(priorizarCampo(dto.getActividadeRemuneradaFiled(), dto.getActividadeRemunerada()));
+	    inquerito.setAcupacao(priorizarCampo(dto.getAcupacaoField(), dto.getAcupacao()));
+	    
+	    if(inquerito.getActividadeRemunerada().equalsIgnoreCase("") || inquerito.getActividadeRemunerada().equalsIgnoreCase(null)){	
+		    inquerito.setActividadeRemunerada("Nao");		   
+	    }
+	    else{
+		    inquerito.setAcupacao((inquerito.getActividadeRemunerada() != null && !inquerito.getActividadeRemunerada().trim().isEmpty()) ? inquerito.getActividadeRemunerada() : "Não informado");
+		    inquerito.setActividadeRemunerada("sim");
+	    }//***
+	    
+	    inquerito.setOrigemInfo(priorizarCampo(dto.getOrigemInfoFiled(), dto.getOrigemInfo()));
+	    inquerito.setProposito(priorizarCampo(dto.getPropositoField(), dto.getProposito()));
+	    //inquerito.setPercepcao(String.join(",", dto.getPercepcao())); // guardar como string
+	    //***
+	    String[] percepcoesArray = converterParaVetor(dto.getPercepcao());
+	    String percepcaoExtra = dto.getPercepcaoFiled();
+
+	    //System.out.println("***** VALOR DO PERCEPCAO >>>> "+String.join(", ", percepcoesArray));
+	    //Verifica se percepcaoExtra tem valor.
+	    //Se sim, substitui a última posição do array com esse valor.
+	    if (percepcaoExtra != null && !percepcaoExtra.trim().isEmpty() && percepcoesArray != null && percepcoesArray.length > 0) {
+	        percepcoesArray[percepcoesArray.length - 1] = percepcaoExtra.trim();
+	    }	   
+	    //String.join() para unir os elementos do array com vírgula.Se o array for null ou vazio, usa percepcaoExtra como valor final.
+	    String percepcoesComoTexto = (percepcoesArray != null && percepcoesArray.length > 0) ? String.join(", ", percepcoesArray)
+	            : (percepcaoExtra != null ? percepcaoExtra.trim() : "");
+	    
+	    //System.out.println("#### VALOR DO PERCEPCAO >>>> "+ percepcoesComoTexto);
+	    //System.out.println("#### VALOR DO OUTRO FIELD PERCEPCAO >>>> "+dto.getPercepcaoFiled());
+
+	    inquerito.setPercepcao(percepcoesComoTexto);
+
+	    //***	    
+	    inquerito.setExperiencia(dto.getExperiencia());
+	    inquerito.setGrauSatisfacaoDeQualidade(converterGrau(dto.getGrauSatisfacaoDeQualidade()));
+	    inquerito.setGrauSatisfacaoDeAtendimento(converterGrau(dto.getGrauSatisfacaoDeAtendimento()));
+	    inquerito.setGrauSatisfacaoInteracao(converterGrau(dto.getGrauSatisfacaoInteracao()));
+	    inquerito.setSatisfacaoPrecoDoBilhete(converterGrau(dto.getSatisfacaoPrecoDoBilhete()));
+	    inquerito.setServicoAdicional(priorizarCampo(dto.getServicoAdicionalField(), dto.getServicoAdicional()));	    
+	    inquerito.setGrauSatisfacaoCafetaria(converterGrau(dto.getGrauSatisfacaoCafetaria()));
+	    inquerito.setGrauSatisfacaoMenuCafetaria(converterGrau(dto.getGrauSatisfacaoMenuCafetaria()));
+	    inquerito.setGrauSatisfacaoAtendimentoLoja(converterGrau(dto.getGrauSatisfacaoAtendimentoLoja()));
+	    inquerito.setGrauSatisfacaoProdutoLoja(converterGrau(dto.getGrauSatisfacaoProdutoLoja()));
+	    inquerito.setGrauSatisfacaoLimpeza(converterGrau(dto.getGrauSatisfacaoLimpeza()));	    
+	    inquerito.setRecomendaCcl(dto.getRecomendaCcl());
+	    inquerito.setComentario(dto.getComentario());
+	    inquerito.setEmail(dto.getEmail());
+	    inquerito.setDataCriacao(dto.getDataCriacao());
+
+	    return inquerito;
+	}
+	
+	private String priorizarCampo(String... opcoes) {
+	    for (String opcao : opcoes) {
+	        if (opcao != null && !opcao.trim().isEmpty()) {
+	            return opcao.trim();
+	        }
+	    }
+	    return "";
+	}
+	
+	private String[] converterParaVetor(Object entrada) {
+		if (entrada == null) {
+	        return new String[0];
+	    }
+	   
+	    if (entrada instanceof String[]) {
+	        return (String[]) entrada;
+	    }
+	    // Se for uma única string separada por vírgulas, converte para vetor
+	    if (entrada instanceof String) {
+	        String texto = ((String) entrada).trim();
+	        if (texto.isEmpty()) {
+	            return new String[0];
+	        }
+	        return texto.split("\\s*,\\s*"); // Divide por vírgula e remove espaços ao redor
+	    }
+		return null;
+	}
+
 	
 	
 	public String desconverterGrau(int valor) {

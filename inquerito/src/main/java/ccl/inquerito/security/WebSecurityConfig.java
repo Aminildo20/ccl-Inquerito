@@ -25,7 +25,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-            	.requestMatchers("/api-ccl/inquerito").permitAll()
+            	.requestMatchers("/api-ccl/inquerito","/api-ccl/inquerito-Teste").permitAll()
             	.requestMatchers("/conta/**").permitAll()
                 .requestMatchers(
                 		"/admin/login", 

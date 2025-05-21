@@ -2258,7 +2258,7 @@ a {
 }
 
 .form-header.flex {
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 35px;
   display: flex;

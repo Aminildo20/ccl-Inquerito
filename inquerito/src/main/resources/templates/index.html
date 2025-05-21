@@ -44,7 +44,7 @@
       <div class="wrapper_gn">
         <div class="logo_ccl"></div>
         <div class="wrapper_text">
-          <h1 class="text-h1">Questionário de satisfação</h1>
+          <h1 class="text-h1">Questionário de Satisfação</h1>
           <p class="paragraph">O Centro de Ciências de Luanda está sempre aberto a sugestões e deseja ouvir a sua opinião sobre a sua experiência connosco. Por isso, pedimos-lhe 3 minutos de atenção para responder a este breve questionário. As suas respostas vão auxiliar a melhorar os nossos serviços.</p>
         </div>
       </div>
@@ -436,7 +436,7 @@
                 </div>
               </div>
             </div>
-            <div class="section_query"><label for="name" class="field_label_wrapper">12. Qual a exposição / experiência que gostou mais?</label>
+            <div class="section_query"><label for="name" class="field_label_wrapper">12. Qual a Exposição/Experiência que gostou mais?</label>
               <div class="w-layout-grid grid">
                 <div class="wrapper_select_check"><label class="radio-button-field w-radio">
                     <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div>
@@ -983,7 +983,7 @@
 				const grau_satisfacao_interacao = getRadioValueOrDefault('grau_satisfacao_interacao');
 				const satisfacao_preco_do_bilhete = getRadioValueOrDefault('satisfacao_preco_do_bilhete');
 				
-				const servico_adicional = getRadioValueOrDefault('servico_adicional');
+				let servico_adicional = getRadioValueOrDefault('servico_adicional');
 				if(servico_adicional == 'servico_adicional_sim'){
 					servico_adicional = document.getElementById("servico_adicional_field").value;			
 				}
