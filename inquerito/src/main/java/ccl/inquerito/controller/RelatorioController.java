@@ -102,7 +102,8 @@ public class RelatorioController {
 		Double indiceSatisfeitos = inqueritoImpl.SatisfacaoMediaGeral();
 		long insatisfeitos = inqueritoImpl.NumVisitanteInsatisfeito();
 		
-		long ulitmosDiasSatisfeito = inqueritoImpl.NumVisitanteSatisfeitoUltimosDias(LocalDateTime.now().minusDays(20));
+		long ulitmosDiasSatisfeito = inqueritoImpl.NumVisitanteSatisfeitoUltimosDias(LocalDateTime.now().minusDays(30));
+		long ulitmosDiasInsatisfeito = inqueritoImpl.NumVisitanteSatisfeitoUltimosDias(LocalDateTime.now().minusDays(30));
 		
 		//
 		//List<String> nivelSatisfacao = List.of("Muito Insatisfeito","Insatisfeito","Indiferente","Satisfeito","Muito Satisfeito");
@@ -112,9 +113,10 @@ public class RelatorioController {
 		model.addAttribute("indiceSastifeitos", indiceSatisfeitos);
 		model.addAttribute("indiceSastifeitosUltimosDias", inqueritoImpl.SatisfacaoMediaGeralUltimosDias(LocalDateTime.now().minusDays(30)));
 		model.addAttribute("percentualSatisfeitos", (satisfeitos * 100.0) / totalEnviados);
+		model.addAttribute("percentualSatisfeitosUltimosDias", ulitmosDiasSatisfeito * 100.0 / totalEnviados);
+		model.addAttribute("percentualInsatisfeitosUltimosDias", ulitmosDiasInsatisfeito * 100.0 / totalEnviados);
 		model.addAttribute("percentualInsatisfeitos", (insatisfeitos * 100.0) / totalEnviados);
 		model.addAttribute("SatisfeitosUltimosDias", ulitmosDiasSatisfeito);
-		model.addAttribute("percentualSatisfeitosUltimosDias", ulitmosDiasSatisfeito * 100.0 / totalEnviados);
 		//model.addAttribute("InsatisfeitosUltimosDias", inqueritoImpl.NumVisitanteInsatisfeitoUltimosDias(LocalDate.now().minusDays(30)));
 		model.addAttribute("satisfeitos", satisfeitos);
 		model.addAttribute("insatisfeitos", insatisfeitos);

@@ -108,7 +108,7 @@
                               <div class="icon kpi-stats-icon">
                                 <div class="main-font-icon smaller-icon">8</div>
                               </div>
-                              <div class="stats" th:text="${percentualSatisfeitosUltimosDias != null ? #numbers.formatDecimal(percentualSatisfeitosUltimosDias ?: 0, 2, 2) : 0}">0%</div>
+                              <div class="stats" th:text="${percentualSatisfeitosUltimosDias != null ? #numbers.formatDecimal(percentualSatisfeitosUltimosDias ?: 0, 2, 2) : 0} + ' %'">0%</div>
 							  
                             </div>
                             <div class="kpi-stats negative hidden">
@@ -159,10 +159,11 @@
                           <div class="kpi-stats-wrapper">
                             <div class="kpi-stats positive">
                               <div class="icon kpi-stats-icon">
-<!--                                <div class="main-font-icon smaller-icon" th:text="${InsatisfeitosUltimosDias} ?: 0">0</div>-->
 								<div class="main-font-icon smaller-icon">8</div>
                               </div>
-                              <div class="stats">0%</div>
+                              <div class="stats" th:text="${percentualInsatisfeitosUltimosDias != null ? #numbers.formatDecimal(percentualInsatisfeitosUltimosDias ?: 0, 2, 2) : 0} + ' %'">0%</div>
+							  
+							  <!--  <div class="main-font-icon smaller-icon" th:text="${InsatisfeitosUltimosDias} ?: 0">0</div>-->
                             </div>
                             <div class="kpi-stats negative hidden">
                               <div class="icon kpi-stats-icon">

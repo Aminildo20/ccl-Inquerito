@@ -65,14 +65,14 @@
                     <div class="text-block-147 _1">7. Tipo de atividade remunerada</div>
                     <div class="div-block-449">
                       <div class="text-block-129 _2">r</div>
-                      <div class="list-item _0" th:text="${inquerito?.actividadeRemunerada != 'Nao' ? inquerito?.actividadeRemunerada : '---'}">Empregado do sector privado</div>
+                      <div class="list-item _0" th:text="${inquerito?.actividadeRemunerada == 'sim' ? inquerito?.acupacao : '---'}">Empregado do sector privado</div>
                     </div>
                   </div>
                   <div class="div-block-450">
                     <div class="text-block-147 _1">8. Situação sem atividade remunerada</div>
                     <div class="div-block-449">
                       <div class="text-block-129 _2">r</div>
-                      <div class="list-item _0"th:text="${inquerito?.actividadeRemunerada == 'Nao' ? inquerito?.acupacao : '---'}">Estudante</div>
+                      <div class="list-item _0"th:text="${inquerito?.actividadeRemunerada == 'nao' ? inquerito?.acupacao : '---'}">Estudante</div>
                     </div>
                   </div>
                   <div class="div-block-450">

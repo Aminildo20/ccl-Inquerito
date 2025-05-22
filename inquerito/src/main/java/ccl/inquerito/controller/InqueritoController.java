@@ -46,7 +46,7 @@ public class InqueritoController {
     	//System.out.println(" --- DADOS DO FORM ---");
 		
 		try {
-/*
+
         	System.out.println(" --- DADOS DO FORM ---");
 			System.out.println("Actividade remunerada - "+inquerito.getActividadeRemunerada());
         	System.out.println("Ocupacao - "+inquerito.getAcupacao());
@@ -67,7 +67,7 @@ public class InqueritoController {
         	System.out.println("Nivel academico - "+inquerito.getNivelAcademico());
         	System.out.println("De Onde ouviu CCL - "+inquerito.getOrigemInfo());
         	System.out.println("descrever CCL (percepcao) - "+inquerito.getPercepcao());
-        	System.out.println(" ----------------");	*/
+        	System.out.println(" ----------------");	
 			
 	        inqueritoImpl.novoInquerito(inquerito);
 	        return ResponseEntity.ok("Inquérito salvo com sucesso!");
