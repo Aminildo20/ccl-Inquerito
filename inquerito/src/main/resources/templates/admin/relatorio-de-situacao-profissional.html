@@ -387,15 +387,15 @@
                   <div class="div-block-406">
                     <div class="list-item">
                       <div class="list-item-lable">Percentual dos empregados</div>
-                      <div class="list-item" th:text="${percentualEmpregado ?: 0 } + '%'">100%</div>
-                    </div>
+                      <div class="list-item" th:text="${percentualEmpregado != null ? #numbers.formatDecimal(percentualEmpregado ?: 0, 2, 2) : 0} + ' %'">100%</div>
+				    </div>
                     <div class="list-item">
                       <div class="list-item-lable">Percentual dos estudantes</div>
-                      <div class="list-item" th:text="${percentualEstudante ?: 0 } + '%'">80%</div>
+                      <div class="list-item" th:text="${percentualEstudante != null ? #numbers.formatDecimal(percentualEstudante ?: 0, 2, 2) : 0} + ' %'">80%</div>					  
                     </div>
                     <div class="list-item">
                       <div class="list-item-lable">Percentual dos aposentados</div>
-                      <div class="list-item" th:text="${percentualAposentado ?: 0 } + '%'">80%</div>
+                      <div class="list-item" th:text="${percentualAposentado != null ? #numbers.formatDecimal(percentualAposentado ?: 0, 2, 2) : 0} + ' %'">80%</div>					  
                     </div>
                   </div>
                 </div>
