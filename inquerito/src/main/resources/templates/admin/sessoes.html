@@ -1,6 +1,6 @@
 <!DOCTYPE html><!--  Last Published: Thu May 15 2025 16:32:20 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="681e2586753337b4ce3541a1" data-wf-site="6800aeb4641ae1fdf1aec8ae">
-<head th:insert="~{/fragmentos/header :: header}"></head>
+<head th:replace="~{/fragmentos/header :: header}"></head>
 <body>
   <div class="mother-div dash">
     <div class="page-content-wrapper">
@@ -21,7 +21,9 @@
                 <div class="form-block-2 w-form">
 					<form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-3" data-wf-page-id="681e2586753337b4ce3541a1" data-wf-element-id="dd3e132f-73cf-8d9e-2aed-b187fc2410a2">
 					  <div class="form-field-wrapper wrap-search _10 full">
-					    <div class="search-field-wrapper"><input class="form-search-field w-input" maxlength="256" name="search-2" data-name="Search 2" placeholder="Pesquisar" type="text" id="search-2">
+						<!--<input type="date" onchange="filtrarData(this.value)" th:value="${dataFiltro} ?: ''" class="date-filter">
+						<a href="#" id="baixarPdfBtn" class="link_add w-inline-block"><div>Baixar Lista de Email</div></a>-->
+					    <div class="search-field-wrapper">							
 					      <div class="search-icon">
 					        <div class="icon">
 					          <div class="main-font-icon smaller-icon">x</div>
@@ -30,10 +32,8 @@
 					    </div>
 					  </div>
 					  <div class="w-layout-grid grid-18">
-					<input type="date" onchange="filtrarData(this.value)" th:value="${dataFiltro} ?: ''" class="date-filter">
-					<a href="#" id="baixarPdfBtn" class="link_add w-inline-block">
-					      <div>Baixar Lista de Email</div>
-					    </a>
+						<input type="date" onchange="filtrarData(this.value)" th:value="${dataFiltro} ?: ''" class="date-filter">
+						<a href="#" id="baixarPdfBtn" class="link_add w-inline-block"><div>Baixar Lista de Email</div></a>
 					  </div>
 					</form>
                   <div class="w-form-done">
@@ -131,13 +131,31 @@
           const { jsPDF } = window.jspdf;
           const doc = new jsPDF();
 
+		 
+		  const logoCCL = ' /images/ccl-logo.png'; // aqui vai o base64 da imagem
+		  doc.addImage(logoCCL, 'PNG', 80, 10, 20, 20); // (imagem, tipo, x, y, largura, altura)
+		  
+		  const title = "LISTA DE EMAILS - INQUÉRITO";
+		  const pageWidth = doc.internal.pageSize.getWidth();
+		  const pageHeight = doc.internal.pageSize.getHeight();
+		  const textWidth = doc.getTextWidth(title);
+		  const x = (pageWidth - textWidth) / 2; // centralizar
+		  
           doc.setFontSize(14);
-          doc.text("LISTA DE EMAILS - INQUÉRITO", 10, 10);
-		  console.log(dados)
-          let y = 20;
+          doc.text(title, x, 40);
+		  doc.setFontSize(12);
+//		  console.log(dados)
+          let y = 50;
+		  const marginBottom = 10;
+		  const lineHeight = 10;
 		  dados.forEach(item => {
 		    const email = item.trim();
 		    if (email) { // só adiciona se não for vazio
+				if (y + lineHeight > pageHeight - marginBottom) {
+			      doc.addPage(); // cria nova página
+			      y = 20; // reinicia Y na nova página (com margem superior)
+			    }
+				
 		      doc.text(email, 10, y);
 		      y += 10;
 		    }

@@ -547,7 +547,7 @@ a {
   width: 50%;
   max-width: none;
   margin-right: 15px;
-  display: none;
+  display: block;
 }
 
 .form-field-wrapper._1 {
@@ -1402,6 +1402,7 @@ a {
 .search-field-wrapper {
   background-color: var(--white);
   position: relative;
+  display: none;
 }
 
 .kpi-top-section {
@@ -8373,6 +8374,7 @@ a {
   border: 1px solid var(--light-steel-blue);
   border-radius: 4px;
   padding: 20px 12px;
+  width: 100%;
 }
 
 .seccao_item {
@@ -8532,6 +8534,8 @@ a {
     width: 100%;
     max-width: 100%;
     margin-bottom: 10px;
+	display: none;
+	align-items: stretch;
   }
 
   .form-field-wrapper.nome {
