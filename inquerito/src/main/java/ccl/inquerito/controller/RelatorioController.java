@@ -324,6 +324,7 @@ public class RelatorioController {
             @RequestParam(defaultValue = "10") int size) {
 		
 		Page<InqueritoModel> inqueritoPage;
+		List<String> listaRelatorio = inqueritoImpl.buscarTodoEmail();
 		
 		if(data != null) {
 	         inqueritoPage = inqueritoImpl.buscarPorData(page, size, data.atStartOfDay());//// data.atStartOfDay() Converte LocalDate para LocalDateTime
@@ -341,6 +342,7 @@ public class RelatorioController {
 
 		model.addAttribute("titulo","Sessões");
 		model.addAttribute("content","Sessão sessões");
+		model.addAttribute("lista",listaRelatorio);
 	
 		return "admin/sessoes";
 	}

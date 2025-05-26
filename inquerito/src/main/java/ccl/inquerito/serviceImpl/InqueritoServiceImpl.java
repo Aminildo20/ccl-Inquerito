@@ -543,4 +543,9 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	//return inqueritoRepository.findByDataCriacao(PageRequest.of(page, size), data);
 	}
 
+	@Override
+	public List<String> buscarTodoEmail() {
+		return inqueritoRepository.findAllEmail();
+	}
+
 }

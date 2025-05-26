@@ -65,6 +65,7 @@ public interface InqueritoService {
 	public Page<InqueritoModel> listarAssociadoPaginacao(int page, int size);
 	public Optional<InqueritoModel> buscaPorId(Long idInquerito);
 	public Page<InqueritoModel> buscarPorData(int page, int size, LocalDateTime data);
+	public List<String> buscarTodoEmail();
 	
 	
 }

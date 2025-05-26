@@ -116,9 +116,11 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	 
 	 //SESSÕES PAGINACAO
 	 //Page<InqueritoModel> findAll(Pageable pageable);
-	 Page<InqueritoModel> findAll(Pageable pageable);
 	 Page<InqueritoModel> findByDataCriacao(Pageable pageable, LocalDateTime dataCriacao);
 	 Page<InqueritoModel> findByDataCriacaoBetween(Pageable pageable, LocalDateTime inicio, LocalDateTime fim);
+
+	 @Query("SELECT email FROM InqueritoModel")
+	 List<String> findAllEmail();
 
 	 
 }
