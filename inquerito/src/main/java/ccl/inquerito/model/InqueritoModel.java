@@ -17,6 +17,7 @@ public class InqueritoModel {
     private String genero;
     private String portadorDeDeficiencia;
     private String areaDeResidencia;
+    private String areaDeResidenciaField;
     private String actividadeRemunerada;
     private String acupacao;
     private String percepcao;
@@ -256,6 +257,14 @@ public class InqueritoModel {
 
 	public void setTotalVisitas(long totalVisitas) {
 		this.totalVisitas = totalVisitas;
+	}
+
+	public String getAreaDeResidenciaField() {
+		return areaDeResidenciaField;
+	}
+
+	public void setAreaDeResidenciaField(String areaDeResidenciaField) {
+		this.areaDeResidenciaField = areaDeResidenciaField;
 	}
     
 }

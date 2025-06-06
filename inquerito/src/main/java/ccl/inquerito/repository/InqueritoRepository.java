@@ -93,6 +93,9 @@ public interface InqueritoRepository extends JpaRepository<InqueritoModel, Long>
 	 @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.idade = :valor")
 	 	int contaFaixaEtaria(String valor);
 	 
+	int countByAreaDeResidencia(String valor);
+	int countByAreaDeResidenciaField(String valor);
+	int countByPortadorDeDeficiencia(String valor);
 	// @Query("SELECT COUNT(i) FROM InqueritoModel i WHERE i.idade = :valor")
 	 	//int contaFaixaEtaria(String valor);
 	 int countByRecomendaCcl(String valor);

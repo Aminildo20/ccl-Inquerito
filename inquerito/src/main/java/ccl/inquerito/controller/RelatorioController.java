@@ -78,19 +78,106 @@ public class RelatorioController {
 		List<Double> insatisfeito = inqueritoImpl.calcularPercentuais(2, totalEnviados, false);
 		List<Double> muitoInsatisfeito1 = inqueritoImpl.calcularPercentuais(1, totalEnviados, false);
 		List<Double> muitoInsatisfeito2 = inqueritoImpl.calcularPercentuais(0, totalEnviados, false);
+		//------------------------
 		
-		//System.out.println(" >>> Insatisfeito - "+insatisfeito);
 		
-		List<Double> muitoInsatisfeito = inqueritoImpl.somarListas(muitoInsatisfeito1, muitoInsatisfeito2); 
+		//GRAFICO GENERO
+		int homens = inqueritoImpl.ContaGenero("Homem");
+		int mulheres = inqueritoImpl.ContaGenero("Mulher");
+		int outro = inqueritoImpl.ContaGenero("Outro");
+		int prefiroNaoFalar = inqueritoImpl.ContaGenero("Nao");
 		
-        model.addAttribute("muitoSatisfeito", muitoSatisfeito);
-        model.addAttribute("satisfeito", satisfeito);
-        model.addAttribute("indiferente", indiferente);
-        model.addAttribute("insatisfeito", insatisfeito);
-        model.addAttribute("muitoInsatisfeito", muitoInsatisfeito);
+		model.addAttribute("homens", homens);
+		model.addAttribute("mulheres", mulheres);
+		model.addAttribute("outro", outro);
+		model.addAttribute("prefiroNaoFalar", prefiroNaoFalar);
+		
 		
 		return "admin/dashboard-admin";
 	}
+	
+	
+	//------ RELATORIO DEMOGRAFICO
+	@GetMapping("/relatorio/demografico")
+	public String relatorioDemografico(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+	
+		model.addAttribute("titulo","Relatório dos visitantes");
+		model.addAttribute("content","Relatório dos visitantes");
+		
+		//--
+		long totalEnviados = inqueritoImpl.TotalQuestionariosEnviados();
+		Double percentualDeficiencia = inqueritoImpl.pessoasComDeficiencia();
+		int DeficienciaUltimosDias = inqueritoImpl.pessoasComDeficienciaUltimosDias(LocalDateTime.now().minusDays(30));
+		String FaixaEtariaPredominante = inqueritoImpl.FaixaEtariaPredominante();
+		String FaixaEtariaMenor = inqueritoImpl.FaixaEtariaMenor();
+		int homens = inqueritoImpl.ContaGenero("Homem");
+		int mulheres = inqueritoImpl.ContaGenero("Mulher");
+		int outro = inqueritoImpl.ContaGenero("Outro");
+		int prefiroNaoFalar = inqueritoImpl.ContaGenero("Nao");
+		
+		String generoMaiorParticipacao = "Homens";
+		if(mulheres > homens )
+			generoMaiorParticipacao = "Mulheres";
+		
+		
+		model.addAttribute("percentualDeficiencia",percentualDeficiencia);
+		model.addAttribute("deficienciaUltimosDias",DeficienciaUltimosDias);
+		model.addAttribute("faixaEtariaPredominante",FaixaEtariaPredominante);
+		model.addAttribute("generoMaiorParticipacao",generoMaiorParticipacao);
+		//------- GRAFICO GENERO ----------demografia//
+		model.addAttribute("homens", homens);
+		model.addAttribute("mulheres", mulheres);
+		model.addAttribute("outro", outro);
+		model.addAttribute("prefiroNaoFalar", prefiroNaoFalar);
+		model.addAttribute("totalGenero", homens+mulheres);
+		
+		//--------GRAFICO FAIXA ETARIA ---------------//	
+		model.addAttribute("graficoFaixaEtaria", inqueritoImpl.totalDeCadaFaixaEtaria());
+		model.addAttribute("totalEnviados", totalEnviados);
+		model.addAttribute("faixasEtarias", inqueritoImpl.listaDeFaixaEtaria());
+
+		//#-------- GRAFICO Distribuição Geográfica --------
+		model.addAttribute("graficoResidencia", inqueritoImpl.totalDeCadaResidencia());
+		model.addAttribute("listaResidencia", inqueritoImpl.listaDeResidencias());
+		
+		//#-------- GRAFICO NIVEL ESCOLARIDADE ------
+		model.addAttribute("graficoEscolaridade", inqueritoImpl.totalNivelAcademico());
+		model.addAttribute("listaEscolaridade", inqueritoImpl.listaDeNivelAcademico());
+		
+		
+		
+		
+		return "admin/relatorio-demografico";
+	}
+	
+	//------ RELATORIO EXPERIENCIA DO CLIENTE
+	@GetMapping("/relatorio/experiencia-do-cliente")
+	public String relatorioExperienciaDoCliente(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+	
+		
+		
+		return "admin/relatorio-da-experiencia-do-cliente";
+	}
+	
+	//------ RELATORIO GRAU SATISFACAO
+	@GetMapping("/relatorio/relatorio-de-satisfacao")
+	public String relatorioSatisfacao(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+	
+		
+		
+		return "admin/relatorio-de-satisfacao";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/relatorio/geral")
 	public String relatorioGeral(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {

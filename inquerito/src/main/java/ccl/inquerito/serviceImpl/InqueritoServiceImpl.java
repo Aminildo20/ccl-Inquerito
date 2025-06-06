@@ -117,13 +117,27 @@ public class InqueritoServiceImpl implements InqueritoService{
 	public int pessoasComDeficienciaUltimosDias(LocalDateTime data) {
 		return inqueritoRepository.contarPessoasComDeficienciaDesde(data);
 	}
+	
 
 	@Override
 	public String FaixaEtariaPredominante() {
-
-		List<String> faixa = List.of("15-19","20-24", "25-29","30-34","35-39","40-44","45-49","50-55","56-59","60-69","70-79","+80");		
-
+		List<String> faixa = List.of("15-19","20-24", "25-29","30-34","35-39","40-44","45-49","50-55","56-59","60-69","70-79","+80");
 		return faixa.get(posicaoMaior(totalDeCadaFaixaEtaria()));
+	}	
+	
+	@Override
+	public String FaixaEtariaMenor() {		
+		List<String> faixa = List.of("15-19","20-24", "25-29","30-34","35-39","40-44","45-49","50-55","56-59","60-69","70-79","+80");		
+		return faixa.get(posicaoMenor(totalDeCadaFaixaEtaria()));	
+	}
+	
+	public List<String> listaDeFaixaEtaria(){
+	List<String> faixasEtarias = List.of(
+		    "15 a 19 anos", "20 a 24 anos", "25 a 29 anos", "30 a 34 anos",
+		    "35 a 39 anos", "40 a 44 anos", "45 a 49 anos", "50 a 55 anos",
+		    "56 a 59 anos", "60 a 69 anos", "70 a 79 anos", "80 anos ou mais"
+		);	
+	return faixasEtarias;
 	}
 	
 	@Override
@@ -138,13 +152,52 @@ public class InqueritoServiceImpl implements InqueritoService{
 		return faixaEtaria;
 	}
 	
-	@Override
-	public String FaixaEtariaMenor() {
-		
-		List<String> faixa = List.of("15-19","20-24", "25-29","30-34","35-39","40-44","45-49","50-55","56-59","60-69","70-79","+80");
-		
-		return faixa.get(posicaoMenor(totalDeCadaFaixaEtaria()));	
+	public List<String> listaDeResidencias(){
+		List<String> faixasEtarias = List.of(
+				"Zona Central da Cidade de Luanda", "Zona Oeste da Cidade de Luanda","Zona Norte da Cidade de Luanda",
+				"Zona Sul da Cidade de Luanda", "Moro noutra província","Moro noutro país"
+			);	
+		return faixasEtarias;
 	}
+	
+	@Override
+	public List<Integer> totalDeCadaResidencia(){
+		List<Integer> residencias = List.of(
+				inqueritoRepository.countByAreaDeResidencia("Zona Central da Cidade de Luanda"),
+				inqueritoRepository.countByAreaDeResidencia("Zona Oeste da Cidade de Luanda"),
+				inqueritoRepository.countByAreaDeResidencia("Zona Norte da Cidade de Luanda"),
+				inqueritoRepository.countByAreaDeResidencia("Zona Sul da Cidade de Luanda"),
+				inqueritoRepository.countByAreaDeResidencia("Moro noutra província"),
+				inqueritoRepository.countByAreaDeResidencia("Moro noutro país")
+				);		
+		
+		return residencias;
+	}
+
+	
+	
+	public List<String> listaDeNivelAcademico(){
+		List<String> faixasEtarias = List.of(
+				"Sem instrução escolar", "Ensino Fundamental incompleto","Ensino Fundamental completo","Ensino Médio incompleto",
+				"Ensino Médio completo","Ensino Superior incompleto","Ensino Superior completo","Pós-graduação"
+			);	
+		return faixasEtarias;
+	}
+	@Override
+	public List<Integer> totalNivelAcademico(){
+		List<Integer> niveisAcademico = List.of(
+				inqueritoRepository.countByNivelAcademico("sem_instrucao"),
+				inqueritoRepository.countByNivelAcademico("ensino_fundamental_incompleto"),
+				inqueritoRepository.countByNivelAcademico("ensino_fundamental_completo"),
+				inqueritoRepository.countByNivelAcademico("ensino_medio_incompleto"),
+				inqueritoRepository.countByNivelAcademico("ensino_medio_completo"),
+				inqueritoRepository.countByNivelAcademico("ensino_superior_incompleto"),
+				inqueritoRepository.countByNivelAcademico("ensino_superior_completo"),
+				inqueritoRepository.countByNivelAcademico("pos_graduacao")
+				);		
+		return niveisAcademico; 
+	}
+	
 	
 	@Override
 	public int ContaGenero(String valor) {

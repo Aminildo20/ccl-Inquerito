@@ -547,7 +547,7 @@ a {
   width: 50%;
   max-width: none;
   margin-right: 15px;
-  display: block;
+  display: none;
 }
 
 .form-field-wrapper._1 {
@@ -1402,7 +1402,6 @@ a {
 .search-field-wrapper {
   background-color: var(--white);
   position: relative;
-  display: none;
 }
 
 .kpi-top-section {
@@ -1715,6 +1714,7 @@ a {
 }
 
 .list-item._2 {
+  text-align: right;
   margin-bottom: 5px;
 }
 
@@ -1732,6 +1732,10 @@ a {
   font-size: 18px;
 }
 
+.list-item.line {
+  border-bottom: 1px solid var(--border);
+}
+
 .list-item-lable {
   color: var(--slate-grey);
   letter-spacing: -.3px;
@@ -1742,6 +1746,10 @@ a {
 
 .list-item-lable._1 {
   margin-right: 5px;
+}
+
+.list-item-lable.center {
+  text-align: center;
 }
 
 .table-header-copy {
@@ -7665,13 +7673,13 @@ a {
   flex-flow: column;
   justify-content: center;
   align-items: flex-start;
-  width: 34%;
+  width: 30%;
   height: 220px;
   padding: 20px 40px;
 }
 
 .div-block-406._1 {
-  height: 220px;
+  height: auto;
 }
 
 .div-block-407 {
@@ -8374,7 +8382,6 @@ a {
   border: 1px solid var(--light-steel-blue);
   border-radius: 4px;
   padding: 20px 12px;
-  width: 100%;
 }
 
 .seccao_item {
@@ -8431,6 +8438,25 @@ a {
 
 .div-block-453 {
   border-right: 1px solid var(--slate-grey);
+}
+
+.title-main {
+  padding-bottom: 5px;
+}
+
+.grid-43 {
+  grid-template-rows: auto auto auto auto;
+}
+
+.div-block-454 {
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  margin-bottom: 8px;
+  display: flex;
+}
+
+.div-block-455 {
+  width: 50%;
 }
 
 @media screen and (max-width: 991px) {
@@ -8534,8 +8560,6 @@ a {
     width: 100%;
     max-width: 100%;
     margin-bottom: 10px;
-	display: none;
-	align-items: stretch;
   }
 
   .form-field-wrapper.nome {

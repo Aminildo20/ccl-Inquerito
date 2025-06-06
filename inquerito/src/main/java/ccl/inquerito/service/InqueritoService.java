@@ -32,11 +32,13 @@ public interface InqueritoService {
 	public int satisfacaoCafetaria(int valor);
 	public int satisfacaoLimpeza(int valor);
 	
-	//RELATORIO VISITANTES
+	//RELATORIO Demografico
 	public Double pessoasComDeficiencia();
 	public int pessoasComDeficienciaUltimosDias(LocalDateTime data);
 	public String FaixaEtariaPredominante();
-	public List<Integer> totalDeCadaFaixaEtaria();	
+	public List<Integer> totalDeCadaFaixaEtaria();
+	public List<Integer> totalDeCadaResidencia();
+	public List<Integer> totalNivelAcademico();	
 	public String FaixaEtariaMenor();
 	public int ContaGenero(String valor);
 	public int FaixaEtariaFranca();
@@ -60,6 +62,8 @@ public interface InqueritoService {
 	public int mesMenorDesempenho(List<Integer> listaMes);
 	public int totalUltimosTrintasDias(LocalDateTime data);
 	public Double Ultimos30diasMediaGeral(LocalDateTime data);
+	
+	
 	
 	//SESSÕES
 	public Page<InqueritoModel> listarAssociadoPaginacao(int page, int size);

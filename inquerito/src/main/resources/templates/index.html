@@ -914,12 +914,12 @@
 				const genero = getRadioValueOrDefault('genero');
 				const deficiencia = getRadioValueOrDefault('deficiencia');
 				
-				let residencia =getRadioValueOrDefault('residencia');
+				let residencia = getRadioValueOrDefault('residencia');
 				if(residencia == 'Moro noutra província'){
-					residencia = document.getElementById("provincia_field").value;			
+				 	let residenciaField = document.getElementById("provincia_field").value;			
 				}
 				else if(residencia == 'Moro noutro país'){
-					 residencia = document.getElementById("pais_field").value;
+					let residenciaField = document.getElementById("pais_field").value;
 				}
 				
 
@@ -1002,6 +1002,7 @@
 					        formData.append("genero", genero);
 							formData.append("portadorDeDeficiencia", deficiencia);
 							formData.append("areaDeResidencia", residencia);
+							formData.append("areaDeResidenciaField", residenciaField);							
 							formData.append("actividadeRemunerada", atividade_remunerada);
 							formData.append("acupacao", ocupacao);
 							formData.append("percepcao", percepcao);

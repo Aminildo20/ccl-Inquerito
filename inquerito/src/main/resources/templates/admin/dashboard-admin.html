@@ -174,142 +174,129 @@
                 <div class="w-layout-grid grid-40">
                   <div class="div-block-408">
                     <div class="w-embed w-script">
-                      <!DOCTYPE html>
-                      <html lang="pt">
-                      <head>
-                        <meta charset="UTF-8">
-                        <title>Gráfico de Satisfação por Área - CCL</title>
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <style>
-    body {
-      font-family: Barlow;
-      padding: 40px;
-      background: #f8f9fa;
-    }
-    canvas {
-      width: 700px;
-      height: 300px;
-      margin: auto;
-    }
-  </style>
-                      </head>
-                      <body>
-                        <h2 style="margin-bottom: 50px; font-weight: 400;">Grau de Satisfação por Área</h2>
-                        <canvas id="satisfacaoChart"></canvas>
-                        <script th:inline="javascript">
-    const ctx = document.getElementById('satisfacaoChart').getContext('2d');
-    const data = {
-      labels: ['Exposições', 'Guias', 'Bilheteira', 'Loja', 'Cafetaria', 'Limpeza'],
-      datasets: [
-        {
-          label: 'Muito Satisfeito',
-          data: /*[[${muitoSatisfeito}]]*/ [],
-          backgroundColor: '#4CAF50',
-          categoryPercentage: 0.8,
-          barPercentage: 0.9
-        },
-        {
-          label: 'Satisfeito',
-          data: /*[[${satisfeito}]]*/ [],
-          backgroundColor: '#8BC34A',
-          categoryPercentage: 0.8,
-          barPercentage: 0.9
-        },
-        {
-          label: 'Indiferente',
-          data: /*[[${indiferente}]]*/ [],
-          backgroundColor: '#FFC107',
-          categoryPercentage: 0.8,
-          barPercentage: 0.9
-        },
-        {
-          label: 'Insatisfeito',
-          data: /*[[${insatisfeito}]]*/ [],
-          backgroundColor: '#FF9800',
-          categoryPercentage: 0.8,
-          barPercentage: 0.9
-        },
-        {
-          label: 'Muito Insatisfeito',
-          data: /*[[${muitoInsatisfeito}]]*/ [],
-          backgroundColor: '#F44336',
-          categoryPercentage: 0.8,
-          barPercentage: 0.9
-        }
-      ]
-    };
-    const config = {
-      type: 'bar',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: false
-          },
-          tooltip: {
-            mode: 'index',
-            intersect: false
-          },
-          legend: {
-            position: 'top'
-          }
-        },
-        interaction: {
-          mode: 'nearest',
-          axis: 'x',
-          intersect: false
-        },
-        scales: {
-          x: {
-            stacked: false, // Alterado para false para separar as barras
-            grid: {
-              display: false
-            }
-          },
-          y: {
-            stacked: false, // Alterado para false para separar as barras
-            title: {
-              display: true,
-              text: 'Percentual (%)'
-            },
-            max: 100,
-            beginAtZero: true
-          }
-        },
-        // Ajuste o espaçamento entre as barras do mesmo grupo
-        barPercentage: 0.8,
-        categoryPercentage: 0.9
-      }
-    };
-    new Chart(ctx, config);
-  </script>
-                      </body>
-                      </html>
+						<!DOCTYPE html>
+						                      <html lang="pt-br">
+						                      <head>
+						                        <meta charset="UTF-8">
+						                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+						                        <title>Gráfico de Gênero</title>
+						                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+						                        <style>
+						        .chart-container {
+						            width: 100%;
+						            max-width: 450px;
+						            height: 450px;
+						            margin: 0 auto;
+						            position: relative;
+						        }
+						    </style>
+						                      </head>
+						                      <body>
+						                        <h2 style="margin-bottom: 50px; font-weight: 400;">Gênero</h2>
+						                        <div class="chart-container">
+						                          <canvas id="genderChart"></canvas>
+						                        </div>
+						                        <script>
+						        document.addEventListener('DOMContentLoaded', function() {
+						            // Dados do gráfico
+						            const data = {
+						                labels: ['Homem', 'Mulher', 'Outros', 'Prefiro não responder'],
+						                datasets: [{
+						                    data: [	[[${homens}]], [[${mulheres}]], [[${outro}]], [[${prefiroNaoFalar}]] ],
+						                    backgroundColor: [
+						                        'rgba(54, 162, 235, 0.7)',
+						                        'rgba(255, 99, 132, 0.7)',
+						                        'rgba(255, 206, 86, 0.7)',
+						                        'rgba(75, 192, 192, 0.7)'
+						                    ],
+						                    borderColor: [
+						                        'rgba(54, 162, 235, 1)',
+						                        'rgba(255, 99, 132, 1)',
+						                        'rgba(255, 206, 86, 1)',
+						                        'rgba(75, 192, 192, 1)'
+						                    ],
+						                    borderWidth: 1
+						                }]
+						            };
+						            // Configurações do gráfico
+						            const config = {
+						                type: 'pie',
+						                data: data,
+						                options: {
+						                    responsive: true,
+						                    maintainAspectRatio: true,
+						                    plugins: {
+						                        legend: {
+						                            position: 'bottom',
+						                        },
+						                        tooltip: {
+						                            callbacks: {
+						                                label: function(context) {
+						                                    const label = context.label || '';
+						                                    const value = context.raw || 0;
+						                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+						                                    const percentage = Math.round((value / total) * 100);
+						                                    return `${label}: ${value} (${percentage}%)`;
+						                                }
+						                            }
+						                        }
+						                    }
+						                }
+						            };
+						            // Criar o gráfico
+						            const ctx = document.getElementById('genderChart').getContext('2d');
+						            new Chart(ctx, config);
+						            // Função para redimensionar o gráfico quando a janela for redimensionada
+						            window.addEventListener('resize', function() {
+						                // Chart.js já lida com redimensionamento automaticamente quando responsive: true
+						            });
+						        });
+						    </script>
+						                      </body>
+						                      </html>
                     </div>
                   </div>
-                  <div class="div-block-408 _1">
-                    <div class="div-block-409">
-                      <div class="list-item">
-                        <div class="list-item-lable">Nº de visitantes satisfeito</div>
-                        <div class="list-item" th:text="${numVisitante ?: 0}">800.343</div>
-                      </div>
-                      <div class="list-item">
-                        <div class="list-item-lable">Nº de visitantes insatisfeito</div>
-                        <div class="list-item" th:text="${numVisitanteInsatisfeito ?: 0}">302.045</div>
-                      </div>
-                      <div class="list-item">
-                        <div class="list-item-lable">Percentual de satisfação</div>
-                        <div class="kpi-mind">
-                          <div class="list-item" th:text="${percentual != null ? #numbers.formatDecimal(percentual, 2, 2) : 0}">100</div>
-                          <div class="kpi-valor-3 currency">%</div>
+  				  <div class="div-block-406 _1">
+                      <div class="tabela">
+                        <div class="title-main">
+                          <div class="list-item-lable center">Gênero</div>
+                        </div>
+                        <div class="tabela-list">
+                          <div class="div-block-454">
+                            <div class="div-block-455">
+                              <div class="list-item-lable">Homem</div>
+                            </div>
+                            <div class="div-block-455">
+                              <div class="list-item _2"  th:text="${homens} ?: 0">0</div>
+                            </div>
+                          </div>
+                          <div class="div-block-454">
+                            <div class="div-block-455">
+                              <div class="list-item-lable">Mulher</div>
+                            </div>
+                            <div class="div-block-455">
+                              <div class="list-item _2"  th:text="${mulheres} ?: 0">0</div>
+                            </div>
+                          </div>
+                          <div class="div-block-454">
+                            <div class="div-block-455">
+                              <div class="list-item-lable">Outro</div>
+                            </div>
+                            <div class="div-block-455">
+                              <div class="list-item _2"  th:text="${outro} ?: 0"></div>
+                            </div>
+                          </div>
+                          <div class="div-block-454">
+                            <div class="div-block-455">
+                              <div class="list-item-lable">Prefiro ñ reponder</div>
+                            </div>
+                            <div class="div-block-455">
+                              <div class="list-item _2"  th:text="${prefiroNaoFalar} ?: 0">0</div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="div-block-411">
-                        <a href="relatorio/geral" class="link-9">ver relatório</a>
-                      </div>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
