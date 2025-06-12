@@ -101,33 +101,34 @@ public class InqueritoApiController {
         	inquerito.setIdade(formatarFaixaEtaria(inquerito.getIdade()));
         	
         	System.out.println("\n\n\n --- DADOS API ---");
-        	System.out.println("Idade - " + inquerito.getIdade()); // 1
-        	System.out.println("Nivel academico - " + inquerito.getNivelAcademico()); // 2
-        	System.out.println("Genero - " + inquerito.getGenero()); // 3
-        	System.out.println("Portador de deficiência - " + inquerito.getPortadorDeDeficiencia()); // 4
-        	System.out.println("Área de residência - " + inquerito.getAreaDeResidencia()); // 5
-        	System.out.println("Actividade remunerada - " + inquerito.getActividadeRemunerada()); // 7
-        	System.out.println("Ocupação - " + inquerito.getAcupacao()); // 8
-        	System.out.println("Percepção - " + inquerito.getPercepcao()); // 9
-        	System.out.println("Origem da informação (como soube do CCL) - " + inquerito.getOrigemInfo()); // 10
-        	System.out.println("Propósito - " + inquerito.getProposito()); // 11
-        	System.out.println("Experiência - " + inquerito.getExperiencia()); // 12
-        	System.out.println("Grau de satisfação com a qualidade - " + inquerito.getGrauSatisfacaoDeQualidade()); // 13
-        	System.out.println("Grau de satisfação com o atendimento - " + inquerito.getGrauSatisfacaoDeAtendimento()); // 14
-        	System.out.println("Grau de satisfação com a interação - " + inquerito.getGrauSatisfacaoInteracao()); // 15
-        	System.out.println("Satisfação com o preço do bilhete - " + inquerito.getSatisfacaoPrecoDoBilhete()); // 16
-        	System.out.println("Serviço adicional - " + inquerito.getServicoAdicional()); // 17
-        	System.out.println("Grau de satisfação com a cafetaria - " + inquerito.getGrauSatisfacaoCafetaria()); // 18
-        	System.out.println("Grau de satisfação com o menu da cafetaria - " + inquerito.getGrauSatisfacaoMenuCafetaria()); // 19
-        	System.out.println("Grau de satisfação com o atendimento na loja - " + inquerito.getGrauSatisfacaoAtendimentoLoja()); // 20
-        	System.out.println("Grau de satisfação com o produto da loja - " + inquerito.getGrauSatisfacaoProdutoLoja()); // 21
-        	System.out.println("Grau de satisfação com a limpeza - " + inquerito.getGrauSatisfacaoLimpeza()); // 22
-        	System.out.println("Recomenda o CCL - " + inquerito.getRecomendaCcl());
-        	System.out.println("Comentário - " + inquerito.getComentario());
-        	System.out.println("Email - " + inquerito.getEmail());
-        	System.out.println("Data de criação - " + inquerito.getDataCriacao());
-        	System.out.println("#####----------------###\n\n\n");
-        	//System.out.println("#####----------------### >>>>> "+inquerito.toString());        
+        	System.out.println("idade: " + inquerito.getIdade());
+        	System.out.println("nivelAcademico: " + inquerito.getNivelAcademico());
+        	System.out.println("genero: " + inquerito.getGenero());
+        	System.out.println("portadorDeDeficiencia: " + inquerito.getPortadorDeDeficiencia());
+        	System.out.println("areaDeResidencia: " + inquerito.getAreaDeResidencia());
+        	System.out.println("areaDeResidenciaField: " + inquerito.getAreaDeResidenciaField());
+        	System.out.println("actividadeRemunerada: " + inquerito.getActividadeRemunerada());
+        	System.out.println("acupacao: " + inquerito.getAcupacao());
+        	System.out.println("percepcao: " + inquerito.getPercepcao());
+        	System.out.println("origemInfo: " + inquerito.getOrigemInfo());
+        	System.out.println("proposito: " + inquerito.getProposito());
+        	System.out.println("experiencia: " + inquerito.getExperiencia());
+        	System.out.println("grauSatisfacaoDeQualidade: " + inquerito.getGrauSatisfacaoDeQualidade());
+        	System.out.println("grauSatisfacaoDeAtendimento: " + inquerito.getGrauSatisfacaoDeAtendimento());
+        	System.out.println("grauSatisfacaoInteracao: " + inquerito.getGrauSatisfacaoInteracao());
+        	System.out.println("satisfacaoPrecoDoBilhete: " + inquerito.getSatisfacaoPrecoDoBilhete());
+        	System.out.println("servicoAdicional: " + inquerito.getServicoAdicional());
+        	System.out.println("servicoAdicionalField: " + inquerito.getServicoAdicionalField());
+        	System.out.println("grauSatisfacaoCafetaria: " + inquerito.getGrauSatisfacaoCafetaria());
+        	System.out.println("grauSatisfacaoMenuCafetaria: " + inquerito.getGrauSatisfacaoMenuCafetaria());
+        	System.out.println("grauSatisfacaoAtendimentoLoja: " + inquerito.getGrauSatisfacaoAtendimentoLoja());
+        	System.out.println("grauSatisfacaoProdutoLoja: " + inquerito.getGrauSatisfacaoProdutoLoja());
+        	System.out.println("grauSatisfacaoLimpeza: " + inquerito.getGrauSatisfacaoLimpeza());
+        	System.out.println("recomendaCcl: " + inquerito.getRecomendaCcl());
+        	System.out.println("comentario: " + inquerito.getComentario());
+        	System.out.println("email: " + inquerito.getEmail());
+        	System.out.println("dataCriacao: " + inquerito.getDataCriacao());
+        	System.out.println("#####----------------###\n\n\n");      
         	       	
 	        inqueritoImpl.novoInquerito(inquerito);
             return ResponseEntity.ok("Inquérito salvo com sucesso! - Obrigado pela sua opinião sobre a sua experiência connosco ");

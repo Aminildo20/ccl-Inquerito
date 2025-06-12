@@ -1,6 +1,7 @@
 package ccl.inquerito.serviceImpl;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import ccl.inquerito.DTO.InqueritoDTO;
 import ccl.inquerito.DTO.InqueritoDTOflutterFlow;
+import ccl.inquerito.model.BubbleChartDTO;
 import ccl.inquerito.model.InqueritoModel;
 import ccl.inquerito.repository.InqueritoRepository;
 import ccl.inquerito.service.InqueritoService;
@@ -44,11 +46,23 @@ public class InqueritoServiceImpl implements InqueritoService{
 		return 0;
 	}
 
+	
 	@Override
 	public Double SatisfacaoMediaGeral() {
-		Double media = inqueritoRepository.calcularTaxaSatisfacaoMediaGeral();
+		return inqueritoRepository.calcularTaxaSatisfacaoMediaGeral();
+	}
+	
+	
+	@Override
+	public Double indiceSatisfacao() {
+		Double media = inqueritoRepository.calcularIndiceSatisfacaoGeral();
 	    return media != null ? media : 0.0;
 		//return inqueritoRepository.calcularTaxaSatisfacaoMediaGeral();
+	}
+	
+	@Override
+	public Double indiceSatisfacaoUltimosDias(LocalDateTime data) {
+		return inqueritoRepository.calcularIndiceSatisfacaoGeralAPartirDe(data);
 	}
 
 	@Override
@@ -130,7 +144,8 @@ public class InqueritoServiceImpl implements InqueritoService{
 		List<String> faixa = List.of("15-19","20-24", "25-29","30-34","35-39","40-44","45-49","50-55","56-59","60-69","70-79","+80");		
 		return faixa.get(posicaoMenor(totalDeCadaFaixaEtaria()));	
 	}
-	
+
+	//--------------------------------------------------------------------
 	public List<String> listaDeFaixaEtaria(){
 	List<String> faixasEtarias = List.of(
 		    "15 a 19 anos", "20 a 24 anos", "25 a 29 anos", "30 a 34 anos",
@@ -152,6 +167,8 @@ public class InqueritoServiceImpl implements InqueritoService{
 		return faixaEtaria;
 	}
 	
+	//-------------------------------------------------------------------
+	//-------------------------------------------------------------------
 	public List<String> listaDeResidencias(){
 		List<String> faixasEtarias = List.of(
 				"Zona Central da Cidade de Luanda", "Zona Oeste da Cidade de Luanda","Zona Norte da Cidade de Luanda",
@@ -174,8 +191,8 @@ public class InqueritoServiceImpl implements InqueritoService{
 		return residencias;
 	}
 
-	
-	
+	//-------------------------------------------------------------------
+	//-------------------------------------------------------------------
 	public List<String> listaDeNivelAcademico(){
 		List<String> faixasEtarias = List.of(
 				"Sem instrução escolar", "Ensino Fundamental incompleto","Ensino Fundamental completo","Ensino Médio incompleto",
@@ -197,6 +214,346 @@ public class InqueritoServiceImpl implements InqueritoService{
 				);		
 		return niveisAcademico; 
 	}
+
+	//-------------------------------------------------------------------
+	//-------------------------------------------------------------------
+	public List<String> listaDeficiencia(){
+		
+		List<String> deficiencias = List.of("Nenhuma", "Visual", "Física",	"Auditiva", "Autista", "Intelectual");
+		
+		return deficiencias;
+	}	
+	public List<Integer> totalDeficiencia(){
+		
+		List<Integer> faixaEtaria = List.of(
+				inqueritoRepository.countByPortadorDeDeficiencia("Não sou portador de deficiência"),
+				inqueritoRepository.countByPortadorDeDeficiencia("Deficiência Visual  (pessoas cegas ou com baixa visão)"),
+				inqueritoRepository.countByPortadorDeDeficiencia("Deficiência Física"),
+				inqueritoRepository.countByPortadorDeDeficiencia("Deficiência Auditiva"),
+				inqueritoRepository.countByPortadorDeDeficiencia("Espectro Autista"),
+				inqueritoRepository.countByPortadorDeDeficiencia("Deficiência Intelectual")
+				);
+		
+		return faixaEtaria;
+	}
+
+	//-------------------------------------------------------------------
+	//-------------------------------------------------------------------	
+	public List<String> listaOcupacoes(){
+		
+		List<String> deficiencias = List.of("Sector Privado", "Sector Publico", "Profissional Liberal","Autónomo", "Empresário",
+											"Estagiário","Desempregado","Estudante");		
+		return deficiencias;
+	}
+	@Override
+	public List<Integer> totalOcupacao(){
+		
+		List<Integer> ocupacao = List.of(
+				inqueritoRepository.countByAcupacao("Empregado do sector privado"),
+				inqueritoRepository.countByAcupacao("Empregado do sector público"),
+				inqueritoRepository.countByAcupacao("Profissional Liberal"),
+				inqueritoRepository.countByAcupacao("Autónomo / por conta própria"),
+				inqueritoRepository.countByAcupacao("Empresário"),
+				inqueritoRepository.countByAcupacao("Estagiário (estudante)"),
+				inqueritoRepository.countByAcupacao("Desempregado"),
+				inqueritoRepository.countByAcupacao("Estudante")
+				);
+		return ocupacao;
+	}
+	
+	//-------------------------------------------------------------------
+	//-------------------------------------------------------------------
+	public List<LocalDateTime> listaAcessoQuinzenal(){
+		
+		List<LocalDateTime> acessoQuinzenal = new ArrayList<>();
+		for (int i = 0; i <= 14; i++) {
+		    acessoQuinzenal.add(LocalDateTime.now().minusDays(i));
+		}		
+		return acessoQuinzenal;
+	}
+	
+	@Override
+	public List<Integer> totalAcessoQuinzenal(){
+		List<Integer> acessoBiSemanal = new ArrayList<>();
+		int dado;
+		System.out.println("QUINZENAL >>>>>>>>>");
+		for (int i = 0; i <= 14; i++) {
+			LocalDateTime inicio = LocalDate.now().minusDays(i).atStartOfDay();
+			LocalDateTime fim = LocalDate.now().minusDays(i).atTime(LocalTime.MAX);
+			System.out.println("Intervalo: " + inicio + " até " + fim);
+
+			dado = inqueritoRepository.countByDataCriacaoBetween( inicio, fim );
+		    acessoBiSemanal.add(dado);
+//			System.out.println("# Há "+i+" dias. TOTAL - "+dado);
+		}
+		System.out.println(">>>>>>>>>");
+		return acessoBiSemanal;
+	}
+	//-------------------------------------------------------------------
+	//-------------------------------------------------------------------
+	public List<String> listaProposito(){		
+		List<String> proposito = List.of("Educação","Lazer","Pesquisa","Outro");		
+		return proposito;
+	}
+	
+	@Override
+	public List<Integer> totalProposito(){
+		
+		List<Integer> proposito = List.of(inqueritoRepository.countByProposito("Educação"),
+										  inqueritoRepository.countByProposito("Lazer"),
+										  inqueritoRepository.countByProposito("Pesquisa"),
+										  inqueritoRepository.countByProposito("Outra. Qual?")
+				);		
+		return proposito;
+	}
+
+	//-------------------------------------------------------------------
+	//-------------------------------------------------------------------
+	public List<String> listaPercepcoes(){		
+		List<String> percepcoes = List.of("Educativo","Criativo","Divertido","Acolhedor","Acessível","Complexo","Elitista");		
+		return percepcoes;
+	}	
+	public List<Integer> listaTotalPercepcao(){		
+		List<Integer> percepcaoTotal = List.of(
+				inqueritoRepository.countByPercepcaoIgnoreCaseContaining("Educativo"),
+				inqueritoRepository.countByPercepcaoIgnoreCaseContaining("Criativo"),
+				inqueritoRepository.countByPercepcaoIgnoreCaseContaining("Divertido"),
+				inqueritoRepository.countByPercepcaoIgnoreCaseContaining("Acolhedor"),
+				inqueritoRepository.countByPercepcaoIgnoreCaseContaining("Acessível"),
+				inqueritoRepository.countByPercepcaoIgnoreCaseContaining("Complexo"),
+				inqueritoRepository.countByPercepcaoIgnoreCaseContaining("Elitista")
+		);
+		return percepcaoTotal;
+	}
+
+	@Override
+	public List<BubbleChartDTO> totalPercepcoes(){
+		
+		 List<String> percepcoes = listaPercepcoes();
+		 List<Integer> totais = listaTotalPercepcao();
+		 List<BubbleChartDTO> bubbleData = new ArrayList<>();
+
+		// Inicializa o valor de x
+		    double x = 1.2;
+		    for (int i = 0; i < percepcoes.size(); i++) {
+		    	double percentual = totais.get(i) * 100.0 / TotalQuestionariosEnviados();
+		    	
+		        bubbleData.add(new BubbleChartDTO(percepcoes.get(i), x, Math.round(percentual * 100.0) / 100.0, 25));
+		        x += 0.5; // Incremento do eixo X
+		    }	 
+		 
+		return bubbleData;
+	}
+	
+	
+	//--------------------------------------------------------------------
+	//--------------------------------------------
+	public List<String> listaExperiencias(){
+		
+		List<String> experiencia = List.of("Dinossauros","MIM","ETU","Fábrica Infinita","Fábrica de Sabão","UAU","POP","Planetário",
+										  "Módulos Externos","Borboletário");		
+		return experiencia;
+	}
+
+	@Override
+	public List<Integer> totalExperiencias(){
+		
+		List<Integer> experiencia = List.of(
+				inqueritoRepository.countByExperiencia("Dinossauros"),
+				inqueritoRepository.countByExperiencia("MIM"),
+				inqueritoRepository.countByExperiencia("ETU"),
+				inqueritoRepository.countByExperiencia("Fábrica Infinita"),
+				inqueritoRepository.countByExperiencia("Fábrica de Sabão"),
+				inqueritoRepository.countByExperiencia("UAU"),
+				inqueritoRepository.countByExperiencia("POP"),
+				inqueritoRepository.countByExperiencia("Planetário"),
+				inqueritoRepository.countByExperiencia("Módulos Externos"),
+				inqueritoRepository.countByExperiencia("Borboletário")
+				);
+		
+		return experiencia;
+	}
+	
+
+	//--------------------------------------------------------------------
+	//--------------------------------------------
+	public List<String> listaOrigemInfo(){
+		
+		List<String> origemInfo = List.of("Amigos / Familiares","Redes Sociais","TV / Rádio","Outdoors","Instituição Educativa",
+										    "Instituição social","Outra. Qual?"
+			);		
+		return origemInfo;
+	}
+
+	@Override
+	public List<Integer> totalOrigemInfo(){
+		List<Integer> origem = List.of(
+				inqueritoRepository.countByOrigemInfo("Amigos / Familiares"),
+				inqueritoRepository.countByOrigemInfo("Redes Sociais"),
+				inqueritoRepository.countByOrigemInfo("TV / Rádio"),
+				inqueritoRepository.countByOrigemInfo("Outdoors"),
+				inqueritoRepository.countByOrigemInfo("Instituição Educativa"),
+				inqueritoRepository.countByOrigemInfo("Instituição social"),
+				inqueritoRepository.countByOrigemInfo("Outra. Qual?")
+				);
+				
+				return origem;
+	}
+	
+	//--------------------------------------------------------------------
+	//--------------------------------------------
+	public List<String> listaSatisfacaoPrecoDoBilhete(){
+		
+		List<String> SatisfacaoPrecoDoBilhete = List.of("Muito Acessíveis","Acessíveis","Caros","Muito Caros");		
+		return SatisfacaoPrecoDoBilhete;
+	}
+
+	@Override
+	public List<Integer> totalSatisfacaoPrecoDoBilhete(){
+		List<Integer> precoBilhete = List.of(
+				inqueritoRepository.countBySatisfacaoPrecoDoBilhete(4),
+				inqueritoRepository.countBySatisfacaoPrecoDoBilhete(3),
+				inqueritoRepository.countBySatisfacaoPrecoDoBilhete(2),
+				inqueritoRepository.countBySatisfacaoPrecoDoBilhete(1)
+				);
+		
+		return precoBilhete;
+	}
+	
+	//--------------------------------------------------------------
+	//------------------------------
+	@Override
+	public int servicoAdicional(String valor){
+		
+		return inqueritoRepository.countByServicoAdicional(valor);
+	}
+
+	@Override
+	public int servicoAdicionalCafetaria(int valor, int valor2) {
+		return inqueritoRepository.countByGrauSatisfacaoCafetariaLessThanEqualAndGrauSatisfacaoMenuCafetariaLessThanEqual(valor, valor2);
+	}
+	@Override
+	public int servicoAdicionalLoja(int valor, int valor2) {
+		return inqueritoRepository.countByGrauSatisfacaoAtendimentoLojaLessThanEqualAndGrauSatisfacaoProdutoLojaLessThanEqual(valor, valor2);
+	}
+	//--------------------------------
+	//--------------------------------
+
+	@Override
+	public int recomendaCcl(String valor) {
+		return inqueritoRepository.countByRecomendaCcl(valor);
+	}
+	//--------------------------------------
+	//--------------------------------------
+	
+	
+	//------ #####  ---- GRAU DE SATISFACAO
+	//--------
+	public List<String> listaGrauSatisfacao(){
+		List<String> faixasEtarias = List.of("Muito Satisfeito","Satisfeito","Indiferente","Insatisfeito","Muito Insatisfeito");	
+		return faixasEtarias;
+	}
+	
+	@Override
+	public List<Integer> totalSatisfacaoExposicao(){		
+		List<Integer> precoBilhete = List.of(
+				inqueritoRepository.countByGrauSatisfacaoDeQualidade(5),
+				inqueritoRepository.countByGrauSatisfacaoDeQualidade(4),
+				inqueritoRepository.countByGrauSatisfacaoDeQualidade(3),
+				inqueritoRepository.countByGrauSatisfacaoDeQualidade(2),
+				inqueritoRepository.countByGrauSatisfacaoDeQualidade(1)				
+				);
+		return precoBilhete;
+	}
+	
+	@Override
+	public List<Integer> totalSatisfacaoAtendimento(){
+		List<Integer> atendimento = List.of(
+				inqueritoRepository.countByGrauSatisfacaoDeAtendimento(5),
+				inqueritoRepository.countByGrauSatisfacaoDeAtendimento(4),
+				inqueritoRepository.countByGrauSatisfacaoDeAtendimento(3),
+				inqueritoRepository.countByGrauSatisfacaoDeAtendimento(2),
+				inqueritoRepository.countByGrauSatisfacaoDeAtendimento(1)				
+				);
+		return atendimento;
+	}
+	
+	@Override
+	public List<Integer> totalSatisfacaoInteracao(){
+		List<Integer> atendimento = List.of(
+				inqueritoRepository.countByGrauSatisfacaoInteracao(5),
+				inqueritoRepository.countByGrauSatisfacaoInteracao(4),
+				inqueritoRepository.countByGrauSatisfacaoInteracao(3),
+				inqueritoRepository.countByGrauSatisfacaoInteracao(2),
+				inqueritoRepository.countByGrauSatisfacaoInteracao(1)				
+				);
+		return atendimento;
+	}
+	
+	@Override
+	public List<Integer> totalSatisfacaoLimpeza(){
+		List<Integer> limpeza = List.of(
+				inqueritoRepository.countByGrauSatisfacaoLimpeza(5),
+				inqueritoRepository.countByGrauSatisfacaoLimpeza(4),
+				inqueritoRepository.countByGrauSatisfacaoLimpeza(3),
+				inqueritoRepository.countByGrauSatisfacaoLimpeza(2),
+				inqueritoRepository.countByGrauSatisfacaoLimpeza(1)		
+				);
+		return limpeza;
+	}
+	
+	@Override
+	public List<Integer> totalSatisfacaoCafetaria(){
+		List<Integer> cafetaria = List.of(
+				inqueritoRepository.countByGrauSatisfacaoCafetaria(5),
+				inqueritoRepository.countByGrauSatisfacaoCafetaria(4),
+				inqueritoRepository.countByGrauSatisfacaoCafetaria(3),
+				inqueritoRepository.countByGrauSatisfacaoCafetaria(2),
+				inqueritoRepository.countByGrauSatisfacaoCafetaria(1)
+				);		
+		return cafetaria;
+	}
+	
+	@Override
+	public List<Integer> totalSatisfacaoMenuCafetaria(){
+		List<Integer> menuCafetaria = List.of(
+				inqueritoRepository.countByGrauSatisfacaoMenuCafetaria(5),
+				inqueritoRepository.countByGrauSatisfacaoMenuCafetaria(4),
+				inqueritoRepository.countByGrauSatisfacaoMenuCafetaria(3),
+				inqueritoRepository.countByGrauSatisfacaoMenuCafetaria(2),
+				inqueritoRepository.countByGrauSatisfacaoMenuCafetaria(1)
+				);		
+		return menuCafetaria;
+	}
+	
+	@Override
+	public List<Integer> totalSatisfacaoAtendimentoLoja(){
+		List<Integer> atendimentoLoja = List.of(
+				inqueritoRepository.countByGrauSatisfacaoAtendimentoLoja(5),
+				inqueritoRepository.countByGrauSatisfacaoAtendimentoLoja(4),
+				inqueritoRepository.countByGrauSatisfacaoAtendimentoLoja(3),
+				inqueritoRepository.countByGrauSatisfacaoAtendimentoLoja(2),
+				inqueritoRepository.countByGrauSatisfacaoAtendimentoLoja(1)
+				);		
+		return atendimentoLoja;
+	}
+	
+	@Override
+	public List<Integer> totalSatisfacaoProdutoLoja(){
+		List<Integer> produtoLoja = List.of(
+				inqueritoRepository.countByGrauSatisfacaoProdutoLoja(5),
+				inqueritoRepository.countByGrauSatisfacaoProdutoLoja(4),
+				inqueritoRepository.countByGrauSatisfacaoProdutoLoja(3),
+				inqueritoRepository.countByGrauSatisfacaoProdutoLoja(2),
+				inqueritoRepository.countByGrauSatisfacaoProdutoLoja(1)
+				);		
+		return produtoLoja;	
+	}
+	
+	
+	
+	
+	
 	
 	
 	@Override
@@ -424,7 +781,8 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	    inquerito.setPortadorDeDeficiencia(dto.getPortadorDeDeficiencia());
 	    
 	 // Prioriza campos personalizados, se existirem
-	    inquerito.setAreaDeResidencia(priorizarCampo(dto.getAreaDeResidenciaOutroPais(), dto.getAreaDeResidenciaOutroProvincia(), dto.getAreaDeResidencia()));
+	    inquerito.setAreaDeResidencia(dto.getAreaDeResidencia().replace(":", "").trim());//remove o : (dois pontos)
+	    inquerito.setAreaDeResidenciaField(priorizarCampo(dto.getAreaDeResidenciaOutroPais(), dto.getAreaDeResidenciaOutroProvincia(), dto.getAreaDeResidencia()));	    
 
 	    //***
 	    inquerito.setActividadeRemunerada(priorizarCampo(dto.getActividadeRemuneradaFiled(), dto.getActividadeRemunerada()));
@@ -439,13 +797,13 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	    }//***
 	    
 	    inquerito.setOrigemInfo(priorizarCampo(dto.getOrigemInfoFiled(), dto.getOrigemInfo()));
-	    inquerito.setProposito(priorizarCampo(dto.getPropositoField(), dto.getProposito()));
+	    inquerito.setProposito(dto.getProposito());
+	    inquerito.setPropositoField(dto.getPropositoField());
 	    //inquerito.setPercepcao(String.join(",", dto.getPercepcao())); // guardar como string
 	    //***
 	    String[] percepcoesArray = converterParaVetor(dto.getPercepcao());
 	    String percepcaoExtra = dto.getPercepcaoFiled();
 
-	    //System.out.println("***** VALOR DO PERCEPCAO >>>> "+String.join(", ", percepcoesArray));
 	    //Verifica se percepcaoExtra tem valor.
 	    //Se sim, substitui a última posição do array com esse valor.
 	    if (percepcaoExtra != null && !percepcaoExtra.trim().isEmpty() && percepcoesArray != null && percepcoesArray.length > 0) {
@@ -455,18 +813,17 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	    String percepcoesComoTexto = (percepcoesArray != null && percepcoesArray.length > 0) ? String.join(", ", percepcoesArray)
 	            : (percepcaoExtra != null ? percepcaoExtra.trim() : "");
 	    
-	    //System.out.println("#### VALOR DO PERCEPCAO >>>> "+ percepcoesComoTexto);
-	    //System.out.println("#### VALOR DO OUTRO FIELD PERCEPCAO >>>> "+dto.getPercepcaoFiled());
-
 	    inquerito.setPercepcao(percepcoesComoTexto);
-
 	    //***	    
 	    inquerito.setExperiencia(dto.getExperiencia());
 	    inquerito.setGrauSatisfacaoDeQualidade(converterGrau(dto.getGrauSatisfacaoDeQualidade()));
 	    inquerito.setGrauSatisfacaoDeAtendimento(converterGrau(dto.getGrauSatisfacaoDeAtendimento()));
 	    inquerito.setGrauSatisfacaoInteracao(converterGrau(dto.getGrauSatisfacaoInteracao()));
 	    inquerito.setSatisfacaoPrecoDoBilhete(converterGrau(dto.getSatisfacaoPrecoDoBilhete()));
-	    inquerito.setServicoAdicional(priorizarCampo(dto.getServicoAdicionalField(), dto.getServicoAdicional()));	    
+	    //Servico Adicional
+	    inquerito.setServicoAdicional(dto.getServicoAdicional());
+	    inquerito.setServicoAdicionalField(priorizarCampo(dto.getServicoAdicionalField(), dto.getServicoAdicional()));	    
+	    
 	    inquerito.setGrauSatisfacaoCafetaria(converterGrau(dto.getGrauSatisfacaoCafetaria()));
 	    inquerito.setGrauSatisfacaoMenuCafetaria(converterGrau(dto.getGrauSatisfacaoMenuCafetaria()));
 	    inquerito.setGrauSatisfacaoAtendimentoLoja(converterGrau(dto.getGrauSatisfacaoAtendimentoLoja()));
@@ -480,6 +837,7 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	    return inquerito;
 	}
 	
+	//retornar a primeira string não nula e não vazia
 	private String priorizarCampo(String... opcoes) {
 	    for (String opcao : opcoes) {
 	        if (opcao != null && !opcao.trim().isEmpty()) {
@@ -578,7 +936,7 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	
 	@Override
 	public Page<InqueritoModel> listarAssociadoPaginacao(int page, int size) {
-		return inqueritoRepository.findAll(PageRequest.of(page, size));
+		return inqueritoRepository.findByComentarioNotNull(PageRequest.of(page, size));
 	}
 
 	@Override
@@ -600,5 +958,7 @@ private int posicaoMaior(List<Integer> faixaEtaria) {
 	public List<String> buscarTodoEmail() {
 		return inqueritoRepository.findAllEmail();
 	}
+
+	
 
 }

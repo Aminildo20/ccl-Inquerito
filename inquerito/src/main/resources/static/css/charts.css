@@ -1,0 +1,268 @@
+/* STYLE ACESSO DIARIO */
+.chart-container-ad {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    height: 400px; /* importante para garantir que o canvas tenha altura visível */
+}
+.chart-title-ad {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow, sans-serif;
+}
+
+/* STYLE MOTIVO DA VISITA*/
+.chart-title-mv {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow;
+}
+.chart-container-mv {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 400px;
+}
+
+/* STYLE DESCRICAO CCL */
+.chart-container-dccl {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 450px;
+}
+.chart-title-dccl {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow;
+}
+
+/*STYLE EXPERIENCIA*/
+.chart-container-ee {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 500px;
+}
+.chart-title-ee {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow;
+}
+
+/* STYLE CONHECIMENTO CCL*/
+.chart-container-cc {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 450px;
+}
+.chart-title-cc {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow;
+}
+
+/* STYLE PRECEPCAO BIBLHERTE*/
+    .chart-container-pp {
+        width: 100%;
+        max-width: 650px;
+        margin: 0 auto;
+        height: 450px;
+    }
+    .chart-title-pp {
+        text-align: left;
+        margin-bottom: 20px;
+        font-size: 1.4em;
+        color: #333;
+        font-weight: 400;
+        font-family: Barlow;
+    }
+	
+	
+/*STYLE SERVICO ADICIONAL*/
+      .chart-container-sa {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          height: 400px;
+      }
+      .additional-info {
+          text-align: center;
+          margin-top: 15px;
+          font-family: Barlow;
+      }
+      .chart-title-sa {
+          text-align: left;
+          margin-bottom: 20px;
+          font-size: 1.4em;
+          color: #333;
+          font-weight: 400;
+          font-family: Barlow;
+      }
+
+	  
+/* STYLE RECOMENDA CCL*/
+
+.chart-container-rcl {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 400px;
+}
+.chart-title-rcl {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow;
+}
+
+
+
+/* ######################## */
+/* STYLE GRAFICOS DE GRAU SATISFACAO*/
+/* ######################## */
+
+
+
+/* Style Qualidade das Exposições */
+.chart-container-epx {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.chart-title-epx {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow;
+}
+
+/* Atendimento disponibilidade */
+.chart-container-bi {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;     
+}
+.chart-title-bi {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow;
+}
+
+
+
+/* Grafico Interacao */
+.chart-container-tr {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chart-title-tr {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            color: #333;
+            font-weight: 400;
+            font-family: Barlow;
+        }
+
+		
+/* STYLE Grafico LIMPEZA*/		
+.chart-container-lp {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chart-title-lp {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            color: #333;
+            font-weight: 400;
+            font-family: Barlow;
+        }
+		
+/* STYLE Grafico CAFETARIA */		
+.chart-container-cf {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chart-title-cf {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            color: #333;
+            font-weight: 400;
+            font-family: Barlow;
+        }
+		
+/* STYLE Grafico MENU CAFETARIA*/		
+.chart-container-mcf {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chart-title-mcf {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            color: #333;
+            font-weight: 400;
+            font-family: Barlow;
+        }
+		
+/* STYLE Grafico ATENDIMENTO LOJA*/		
+
+.chart-container-lj {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.chart-title-lj {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 400;
+    font-family: Barlow;
+}
+		
+/* STYLE Grafico PRODUTO LOJA*/
+.chart-container-plj {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.chart-title-plj {
+    text-align: left;
+    font-family: Barlow;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    font-weight: 400;
+    color: #2c3e50;
+}

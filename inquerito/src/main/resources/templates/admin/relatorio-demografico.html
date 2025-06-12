@@ -3,25 +3,25 @@
 
 	<head th:replace="~{/fragmentos/header :: header}"></head>
 	
-<body>
-  <div class="mother-div dash">
-    <div class="page-content-wrapper">
+	<body>
+	  <div class="mother-div dash">
+	    <div class="page-content-wrapper">
 
-		<section th:replace="fragmentos/menu :: menu"></section>
-			  
-      <div class="content">
-        <section class="criar-page-section">
-          <div class="container">
-            <div class="top-section-navigation">
-              <a href="javascript:history.back()" class="seta-para-tras w-inline-block">
-                <div class="text-block-129">q</div>
-              </a>
-              <div class="titulo">
-                <div class="text-block-130">Relatório dos visitantes<br></div>
-              </div>
-            </div>
-            <div class="dash-main-content">
-              <div class="w-form">
+			<section th:replace="fragmentos/menu :: menu"></section>
+			
+	      <div class="content">
+	        <section class="criar-page-section">
+	          <div class="container">
+	            <div class="top-section-navigation">
+	              <a href="javascript:history.back()" class="seta-para-tras w-inline-block">
+	                <div class="text-block-129">q</div>
+	              </a>
+	              <div class="titulo">
+	                <div class="text-block-130">Relatório demográfico<br></div>
+	              </div>
+	            </div>
+	            <div class="dash-main-content">
+	               <div class="w-form">
                 <form id="email-form" name="email-form" data-name="Email Form" method="get" data-wf-page-id="6800aeb4641ae1fdf1aec96e" data-wf-element-id="d98d410b-0c44-bdb6-b60a-4d33c17b8fa5">
                   <div class="w-layout-grid grid-17">
                     <div id="w-node-_8153b235-798a-76e9-2645-689ea16d0a33-f1aec96e" class="kpi-2">
@@ -128,894 +128,812 @@
                   <div>Oops! Something went wrong while submitting the form.</div>
                 </div>
               </div>
-              <div class="div-block-403">
-                <div class="div-block-404">
-                  <div class="div-block-405">
-                    <div class="w-embed w-script">
-                      <!DOCTYPE html>
-                      <html lang="pt-br">
-                      <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Gráfico de Gênero</title>
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <style>
-        .chart-container {
-            width: 300px;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            height: 60vh;
-        }
-        @media (max-width: 600px) {
-            .chart-container {
-                height: 70vh;
-            }
-        }
-    </style>
-                      </head>
-                      <body>
-                        <h2 style="margin-bottom: 50px; font-weight: 400;">Gráfico de Gênero</h2>
-                        <div class="chart-container">
-                          <canvas id="genderChart"></canvas>
-                        </div>
-                        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dados do gráfico
-            const data = {
-                labels: ['Masculino', 'Feminino', 'Outros', 'Prefiro não dizer'],
-                datasets: [{
-                    data: [ [[${homens}]], [[${mulheres}]], [[${outro}]], [[${prefiroNaoFalar}]] ],
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            };
-            // Configurações do gráfico
-            const config = {
-                type: 'pie',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const label = context.label || '';
-                                    const value = context.raw || 0;
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = Math.round((value / total) * 100);
-                                    return `${label}: ${value} (${percentage}%)`;
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-            // Criar o gráfico
-            const ctx = document.getElementById('genderChart').getContext('2d');
-            new Chart(ctx, config);
-            // Função para redimensionar o gráfico quando a janela for redimensionada
-            window.addEventListener('resize', function() {
-                // Chart.js já lida com redimensionamento automaticamente quando responsive: true
-            });
-        });
-    </script>
-                      </body>
-                      </html>
-                    </div>
-                  </div>
-                  <div class="div-block-406 _1">
-                    <div class="tabela">
-                      <div class="title-main">
-                        <div class="list-item-lable center">Gênero</div>
+	              <div class="div-block-403">
+	                <div class="div-block-404">
+	                  <div class="div-block-405">
+	                    <div class="w-embed w-script">
+	                      <!DOCTYPE html>
+	                      <html lang="pt-br">
+	                      <head>
+	                        <meta charset="UTF-8">
+	                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	                        <title>Gráfico de Gênero</title>
+	                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	                        <style>
+	    .chart-container-i {
+	        width: 100%;
+	        max-width: 500px;
+	        height: 450px;
+	        margin: 0 auto;
+	    }
+	</style>
+	                      </head>
+	                      <body>
+	                        <h2 style="margin-bottom: 20px; font-weight: 400; font-size: 1.4em"> Gráfico de Gênero</h2>
+	                        <div class="chart-container-i">
+	                          <canvas id="genderChart"></canvas>
+	                        </div>
+	                        <script>
+	        document.addEventListener('DOMContentLoaded', function() {
+	            // Dados do gráfico
+	            const data = {
+	                labels: ['Homem', 'Mulher', 'Outros', 'Prefiro não responder'],
+	                datasets: [{
+	                    data: [ [[${homens}]], [[${mulheres}]], [[${outro}]], [[${prefiroNaoFalar}]] ],
+	                    backgroundColor: [
+	                        'rgba(54, 162, 235, 0.7)',
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(255, 206, 86, 0.7)',
+	                        'rgba(75, 192, 192, 0.7)'
+	                    ],
+	                    borderColor: [
+	                        'rgba(54, 162, 235, 1)',
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(255, 206, 86, 1)',
+	                        'rgba(75, 192, 192, 1)'
+	                    ],
+	                    borderWidth: 1
+	                }]
+	            };
+	            // Configurações do gráfico
+	            const config = {
+	                type: 'pie',
+	                data: data,
+	                options: {
+	                    responsive: true,
+	                    maintainAspectRatio: false,
+	                    plugins: {
+	                        legend: {
+	                            position: 'bottom',
+	                            labels: {
+	                            padding: 15,
+	                            usePointStyle: true,
+	                            pointStyle: 'circle'
+	                            }
+	                        },
+	                        tooltip: {
+	                            callbacks: {
+	                                label: function(context) {
+	                                    const label = context.label || '';
+	                                    const value = context.raw || 0;
+	                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+	                                    const percentage = Math.round((value / total) * 100);
+	                                    return `${label}: ${value} (${percentage}%)`;
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            };
+	            // Criar o gráfico
+	            const ctx = document.getElementById('genderChart').getContext('2d');
+	            new Chart(ctx, config);
+	            // Função para redimensionar o gráfico quando a janela for redimensionada
+	            window.addEventListener('resize', function() {
+	                // Chart.js já lida com redimensionamento automaticamente quando responsive: true
+	            });
+	        });
+	    </script>
+	                      </body>
+	                      </html>
+	                    </div>
+	                  </div>
+	                  <div class="div-block-406 _1">
+	                     <div class="tabela">
+	                      <div class="title-main">
+	                        <div class="list-item-lable center">Gênero</div>
+	                      </div>
+	                      <div class="tabela-list">
+	                        <div class="div-block-454">
+	                          <div class="div-block-455">
+	                            <div class="list-item-lable">Total dos gêneros</div>
+	                          </div>
+	                          <div class="div-block-455">
+	                            <div class="list-item _2"  th:text="${totalGenero} ?: 0">0</div>
+	                          </div>
+	                        </div>
+	                        <div class="div-block-454">
+	                          <div class="div-block-455">
+	                            <div class="list-item-lable">Homem</div>
+	                          </div>
+	                          <div class="div-block-455">
+	                            <div class="list-item _2"  th:text="${homens} ?: 0">0</div>
+	                          </div>
+	                        </div>
+	                        <div class="div-block-454">
+	                          <div class="div-block-455">
+	                            <div class="list-item-lable">Mulher</div>
+	                          </div>
+	                          <div class="div-block-455">
+	                            <div class="list-item _2"  th:text="${mulheres} ?: 0">0</div>
+	                          </div>
+	                        </div>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="div-block-404">
+	                  <div class="div-block-405">
+	                    <div class="w-embed w-script">
+	                      <!DOCTYPE html>
+	                      <html lang="pt-br">
+	                      <head>
+	                        <meta charset="UTF-8">
+	                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	                        <title>Distribuição por Faixa Etária</title>
+	                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	                        <style>
+	        .chart-container {
+	            width: 100%;
+	            max-width: 800px;
+	            margin: 0 auto;
+	            height: 500px;
+	        }
+	        .chart-title {
+	            text-align: left;
+	            margin-bottom: 20px;
+	            font-size: 1.4em;
+	            color: #333;
+	            font-weight: 400;
+	            font-family: Barlow;
+	        }
+	    </style>
+	                      </head>
+	                      <body>
+	                        <div class="chart-title">Distribuição por Faixa Etária</div>
+	                        <div class="chart-container">
+	                          <canvas id="ageChart"></canvas>
+	                        </div>
+	                        <script>
+	        document.addEventListener('DOMContentLoaded', function() {
+	            // Dados do gráfico (valores de exemplo - substitua pelos seus dados)
+	            const data = {
+	                labels: [
+	                    '15 a 19 anos', 
+	                    '20 a 24 anos',
+	                    '25 a 29 anos',
+	                    '30 a 34 anos',
+	                    '35 a 39 anos',
+	                    '40 a 44 anos',
+	                    '45 a 49 anos',
+	                    '50 a 55 anos',
+	                    '56 a 59 anos',
+	                    '60 a 69 anos',
+	                    '70 a 79 anos',
+	                    '80 anos ou mais'
+	                ],
+	                datasets: [{
+	                    label: 'Quantidade de Pessoas',
+	                    data: [[${graficoFaixaEtaria}]], // Valores de exemplo
+	                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+	                    borderColor: 'rgba(54, 162, 235, 1)',
+	                    borderWidth: 1
+	                }]
+	            };
+	            // Configurações do gráfico
+	            const config = {
+	                type: 'bar',
+	                data: data,
+	                options: {
+	                    responsive: true,
+	                    maintainAspectRatio: false,
+	                    indexAxis: 'x', // Barras verticais
+	                    scales: {
+	                        y: {
+	                            beginAtZero: true,
+	                            title: {
+	                                display: true,
+	                                text: 'Quantidade de Pessoas',
+	                                font: { family: 'Barlow'}
+	                            }
+	                        },
+	                        x: {
+	                            title: {
+	                                display: true,
+	                                text: 'Faixa Etária',
+	                                font: { family: 'Barlow'}
+	                            },
+	                            ticks: {
+	                                autoSkip: false,
+	                                maxRotation: 45,
+	                                minRotation: 45
+	                            }
+	                        }
+	                    },
+	                    plugins: {
+	                        legend: {
+	                            display: true,
+	                            position: 'top',
+	                        },
+	                        tooltip: {
+	                            callbacks: {
+	                                afterLabel: function(context) {
+	                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+	                                    const value = context.raw;
+	                                    const percentage = ((value / total) * 100).toFixed(1);
+	                                    return `Representa ${percentage}% do total`;
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            };
+	            // Criar o gráfico
+	            const ctx = document.getElementById('ageChart').getContext('2d');
+	            new Chart(ctx, config);
+	        });
+	    </script>
+	                      </body>
+	                      </html>
+	                    </div>
+	                  </div>
+	                  <div class="div-block-406 _1">
+	                    <div class="tabela">
+	                      <div class="title-main">
+	                        <div class="list-item-lable center">Idade</div>
+	                      </div>
+	                      <div class="tabela-list">
+							<div th:each="i, stat : ${#numbers.sequence(0, faixasEtarias.size() - 1)}" class="div-block-454">
+							    <div class="div-block-455">
+							        <div class="list-item-lable" th:text="${faixasEtarias[i]}">Faixa Etária</div>
+							    </div>
+							    <div class="div-block-455">
+							        <div class="list-item _2" th:text="${graficoFaixaEtaria[i]}">0</div>
+							    </div>
+							</div>
                       </div>
-                      <div class="tabela-list">
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Total dos gêneros</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2"  th:text="${totalGenero} ?: 0">0</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Homem</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2"  th:text="${homens} ?: 0">0</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Mulher</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2"  th:text="${mulheres} ?: 0">0</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="div-block-404">
-                  <div class="div-block-405">
-                    <div class="w-embed w-script">
-                      <!DOCTYPE html>
-                      <html lang="pt-br">
-                      <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Distribuição por Faixa Etária</title>
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <style>
-        .chart-container {
-            width: 800px;
-            margin: 0 auto;
-            position: relative;
-            height: 500;
-        }
-    </style>
-                      </head>
-                      <body>
-                        <h2 style="margin-bottom: 50px; font-weight: 400;">Distribuição por Faixa Etária</h2>
-                        <div class="chart-container">
-                          <canvas id="ageChart"></canvas>
-                        </div>
-                        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dados do gráfico (valores de exemplo - substitua pelos seus dados)
-            const data = {
-                labels: [
-                    '15 a 19 anos', 
-                    '20 a 24 anos',
-                    '25 a 29 anos',
-                    '30 a 34 anos',
-                    '35 a 39 anos',
-                    '40 a 44 anos',
-                    '45 a 49 anos',
-                    '50 a 55 anos',
-                    '56 a 59 anos',
-                    '60 a 69 anos',
-                    '70 a 79 anos',
-                    '80 anos ou mais'
-                ],
-                datasets: [{
-                    label: 'Quantidade de Pessoas',
-                   // data: [120, 180, 15, 190, 160, 140, 110, 90, 70, 60, 40, 30], // Valores de exemplo
-					data: [[${graficoFaixaEtaria}]],
-                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            };
-            // Configurações do gráfico
-            const config = {
-                type: 'bar',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'x', // Barras verticais
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Quantidade de Pessoas'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Faixa Etária'
-                            },
-                            ticks: {
-                                autoSkip: false,
-                                maxRotation: 45,
-                                minRotation: 45
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                afterLabel: function(context) {
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const value = context.raw;
-                                    const percentage = ((value / total) * 100).toFixed(1);
-                                    return `Representa ${percentage}% do total`;
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-            // Criar o gráfico
-            const ctx = document.getElementById('ageChart').getContext('2d');
-            new Chart(ctx, config);
-        });
-    </script>
-                      </body>
-                      </html>
-                    </div>
-                  </div>
-                  <div class="div-block-406 _1">
-                    <div class="tabela">
-                      <div class="title-main">
-                        <div class="list-item-lable center">Idade</div>
-                      </div>
-                      <div class="tabela-list">
-						<div th:each="i, stat : ${#numbers.sequence(0, faixasEtarias.size() - 1)}" class="div-block-454">
-						    <div class="div-block-455">
-						        <div class="list-item-lable" th:text="${faixasEtarias[i]}">Faixa Etária</div>
-						    </div>
-						    <div class="div-block-455">
-						        <div class="list-item _2" th:text="${graficoFaixaEtaria[i]}">0</div>
-						    </div>
-						</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="div-block-404">
-                  <div class="div-block-405">
-                    <div class="w-embed w-script">
-                      <!DOCTYPE html>
-                      <html lang="pt-br">
-                      <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Distribuição Geográfica</title>
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <style>
-        .chart-container {
-            width: 100%;
-            max-width: 700px;  /* Aumentado para melhor visualização */
-            margin: 0 auto;
-            position: relative;
-            height: 75vh;      /* Aumentado para caber todas as categorias */
-        }
-        @media (max-width: 600px) {
-            .chart-container {
-                height: 85vh;
-            }
-        }
-    </style>
-                      </head>
-                      <body>
-                        <h2 style="margin-bottom: 50px; font-weight: 400;">Distribuição Geográfica</h2>
-                        <div class="chart-container">
-                          <canvas id="locationChart"></canvas>
-                        </div>
-                        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dados do gráfico (valores de exemplo - substitua pelos seus dados)
-            const data = {
-                labels: [
-                    'Zona Central da Cidade de Luanda',
-                    'Zona Oeste da Cidade de Luanda',
-                    'Zona Norte da Cidade de Luanda',
-                    'Zona Sul da Cidade de Luanda',
-                    'Moro noutra província',
-                    'Moro noutro país'
-                ],
-                datasets: [{
-                    label: 'Número de Residentes',
-                    //data: [450, 380, 420, 350, 200, 150], // Valores de exemplo
-					data: [[${graficoResidencia}]],
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(75, 192, 192, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(75, 192, 192, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            };
-            // Configurações do gráfico
-            const config = {
-                type: 'bar',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y', // Barras horizontais
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Número de Residentes'
-                            }
-                        },
-                        y: {
-                            ticks: {
-                                autoSkip: false
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                afterLabel: function(context) {
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const value = context.raw;
-                                    const percentage = ((value / total) * 100).toFixed(1);
-                                    return `Representa ${percentage}% do total`;
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-            // Criar o gráfico
-            const ctx = document.getElementById('locationChart').getContext('2d');
-            new Chart(ctx, config);
-        });
-    </script>
-                      </body>
-                      </html>
-                    </div>
-                  </div>
-                  <div class="div-block-406 _1">
-                    <div class="tabela">
-                      <div class="title-main">
-                        <div class="list-item-lable center">Residência</div>
-                      </div>
-                      <div class="tabela-list">
-						<div th:each="i, stat : ${#numbers.sequence(0, listaResidencia.size() - 1)}"class="div-block-454">
-						  <div class="div-block-455">
-						    <div class="list-item-lable" th:text="${listaResidencia[i]}">Z. Oeste Luanda</div>
-						  </div>
-						  <div class="div-block-455">
-						    <div class="list-item _2" th:text="${graficoResidencia[i]}">25-29</div>
-						  </div>
-						</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="div-block-404">
-                  <div class="div-block-405">
-                    <div class="w-embed w-script">
-                      <!DOCTYPE html>
-                      <html lang="pt-br">
-                      <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Nível de Escolaridade</title>
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <style>
-        .chart-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            height: 70vh;
-        }
-        @media (max-width: 600px) {
-            .chart-container {
-                height: 90vh;
-            }
-        }
-    </style>
-                      </head>
-                      <body>
-                        <h2 margin-bottom:="" 50px;="" font-weight:="" 400;="">Nível de Escolaridade</h2>
-                        <div class="chart-container">
-                          <canvas id="educationChart"></canvas>
-                        </div>
-                        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dados do gráfico (valores de exemplo)
-            const data = {
-                labels: [
-                    'Sem instrução escolar',
-                    'Ensino Fundamental incompleto',
-                    'Ensino Fundamental completo',
-                    'Ensino Médio incompleto',
-                    'Ensino Médio completo',
-                    'Ensino Superior incompleto',
-                    'Ensino Superior completo',
-                    'Pós-graduação'
-                ],
-                datasets: [{
-                    label: 'Quantidade de Pessoas',
-                    //data: [50, 120, 90, 150, 200, 180, 130, 80], // Valores de exemplo
-					data: [[${graficoEscolaridade}]],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 99, 132, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            };
-            // Configurações do gráfico
-            const config = {
-                type: 'bar',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'x', // Barras verticais
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Quantidade de Pessoas'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Nível de Escolaridade'
-                            },
-                            ticks: {
-                                autoSkip: false,
-                                maxRotation: 45,
-                                minRotation: 45
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                afterLabel: function(context) {
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const value = context.raw;
-                                    const percentage = ((value / total) * 100).toFixed(1);
-                                    return `Representa ${percentage}% do total`;
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-            // Criar o gráfico
-            const ctx = document.getElementById('educationChart').getContext('2d');
-            new Chart(ctx, config);
-        });
-    </script>
-                      </body>
-                      </html>
-                    </div>
-                  </div>
-                  <div class="div-block-406 _1">
-                    <div class="tabela">
-                      <div class="title-main">
-                        <div class="list-item-lable center">Nível de Escolaridade</div>
-                      </div>
-                      <div class="tabela-list">
-						<div th:each="i, stat : ${#numbers.sequence(0, listaEscolaridade.size() - 1)}" class="div-block-454">
-						  <div class="div-block-455">
-						    <div class="list-item-lable" th:text="${listaEscolaridade[i]}" >E. Fndmtl Cmplt</div>
-						  </div>
-						  <div class="div-block-455">
-						    <div class="list-item _2" th:text="${graficoEscolaridade[i]}" >25-29</div>
-						  </div>
-						</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="div-block-404">
-                  <div class="div-block-405">
-                    <div class="w-embed w-script">
-                      <!DOCTYPE html>
-                      <html lang="pt-br">
-                      <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Distribuição de Tipos de Deficiência</title>
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <style>
-        .chart-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            position: relative;
-            height: 70vh;
-        }
-        @media (max-width: 600px) {
-            .chart-container {
-                height: 80vh;
-            }
-        }
-    </style>
-                      </head>
-                      <body>
-                        <h2 style="margin-bottom: 50px; font-weight: 400;">Distribuição de Tipos de Deficiência</h2>
-                        <div class="chart-container">
-                          <canvas id="disabilityChart"></canvas>
-                        </div>
-                        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dados do gráfico (valores de exemplo)
-            const data = {
-                labels: [
-                    'Deficiência Física',
-                    'Deficiência Visual',
-                    'Espectro Autista',
-                    'Deficiência Auditiva',
-                    'Deficiência Intelectual',
-                    'Não sou portador de deficiência'
-                ],
-                datasets: [{
-                    data: [15, 10, 8, 12, 7, 48], // Valores em porcentagem (somar 100)
-					//data: [[${graficoEscolaridade}]],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(201, 203, 207, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(201, 203, 207, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            };
-            // Configurações do gráfico
-            const config = {
-                type: 'pie',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                padding: 20,
-                                usePointStyle: true,
-                                pointStyle: 'circle'
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const label = context.label || '';
-                                    const value = context.raw;
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = Math.round((value / total) * 100);
-                                    return `${label}: ${percentage}% (${value})`;
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-            // Criar o gráfico
-            const ctx = document.getElementById('disabilityChart').getContext('2d');
-            new Chart(ctx, config);
-        });
-    </script>
-                      </body>
-                      </html>
-                    </div>
-                  </div>
-                  <div class="div-block-406 _1">
-                    <div class="tabela">
-                      <div class="title-main">
-                        <div class="list-item-lable center">Dificiência</div>
-                      </div>
-                      <div class="tabela-list">
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Nenhuma</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Visual</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Física</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Auditiva</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Autista</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Intelectual</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="div-block-404">
-                  <div class="div-block-405">
-                    <div class="w-embed w-script">
-                      <!DOCTYPE html>
-                      <html lang="pt-br">
-                      <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <style>
-        .chart-container {
-            width: 100%;
-            max-width: 700px;  /* Aumentado para melhor visualização */
-            margin: 0 auto;
-            position: relative;
-            height: 75vh;      /* Aumentado para caber todas as categorias */
-        }
-        @media (max-width: 600px) {
-            .chart-container {
-                height: 85vh;
-            }
-        }
-    </style>
-                      </head>
-                      <body>
-                        <h2 style="margin-bottom: 50px; font-weight: 400;">Distribuição por Situação Profissional</h2>
-                        <div class="chart-container">
-                          <canvas id="professionalChart"></canvas>
-                        </div>
-                        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dados do gráfico (valores de exemplo)
-            const data = {
-                labels: [
-                    'Sector Privado',
-                    'Sector Público',
-                    'Profissional Liberal',
-                    'Autónomo',
-                    'Empresário',
-                    'Estagiário',
-                    'Desempregado',
-                    'Estudante'
-                ],
-                datasets: [{
-                    data: [25, 20, 15, 12, 8, 5, 10, 5], // Valores de exemplo
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.7)',  // Azul - Privado
-                        'rgba(255, 99, 132, 0.7)',   // Vermelho - Público
-                        'rgba(75, 192, 192, 0.7)',   // Verde-água - Liberal
-                        'rgba(255, 206, 86, 0.7)',    // Amarelo - Autónomo
-                        'rgba(153, 102, 255, 0.7)',  // Roxo - Empresário
-                        'rgba(255, 159, 64, 0.7)',    // Laranja - Estagiário
-                        'rgba(201, 203, 207, 0.7)',   // Cinza - Desempregado
-                        'rgba(255, 119, 181, 0.7)'    // Rosa - Estudante
-                    ],
-                    borderColor: [
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(201, 203, 207, 1)',
-                        'rgba(255, 119, 181, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            };
-            // Configurações do gráfico
-            const config = {
-                type: 'pie',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                padding: 15,
-                                usePointStyle: true,
-                                pointStyle: 'circle',
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const label = context.label || '';
-                                    const value = context.raw;
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = ((value / total) * 100).toFixed(1);
-                                    return `${label}: ${percentage}% (${value})`;
-                                }
-                            }
-                        },
-                        title: {
-                            padding: {
-                                top: 10,
-                                bottom: 20
-                            }
-                        }
-                    }
-                }
-            };
-            // Criar o gráfico
-            const ctx = document.getElementById('professionalChart').getContext('2d');
-            new Chart(ctx, config);
-        });
-    </script>
-                      </body>
-                      </html>
-                    </div>
-                  </div>
-                  <div class="div-block-406 _1">
-                    <div class="tabela">
-                      <div class="title-main">
-                        <div class="list-item-lable center">Ocupação</div>
-                      </div>
-                      <div class="tabela-list">
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Sector Privado</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Sector Publico</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Profissional Liberal</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Autónomo</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Empresário</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Estagiário</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Desempregado</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                        <div class="div-block-454">
-                          <div class="div-block-455">
-                            <div class="list-item-lable">Estudante</div>
-                          </div>
-                          <div class="div-block-455">
-                            <div class="list-item _2">25-29</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-  <div class="close-flyout"></div>
-  <div class="not-valid">
-    <div class="text-block-116">Dimensão de ecrã não suportada...</div>
-  </div>
-  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6800aeb4641ae1fdf1aec8ae" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="../../js/ccl-backoffice.js" type="text/javascript"></script>
-</body>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="div-block-404">
+	                  <div class="div-block-405">
+	                    <div class="w-embed w-script">
+	                      <!DOCTYPE html>
+	                      <html lang="pt-br">
+	                      <head>
+	                        <meta charset="UTF-8">
+	                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	                        <title>Distribuição Geográfica</title>
+	                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	                        <style>
+	        .chart-container {
+	            width: 100%;
+	            max-width: 800px;  /* Aumentado para melhor visualização */
+	            margin: 0 auto;
+	            position: relative;
+	            height: 500px;      /* Aumentado para caber todas as categorias */
+	        }
+	        @media (max-width: 600px) {
+	            .chart-container {
+	                height: 85vh;
+	            }
+	        }
+	    </style>
+	                      </head>
+	                      <body>
+	                        <h2 style="margin-bottom: 20px; font-weight: 400; font-size: 1.4em; font-family: Barlow;">Distribuição Geográfica</h2>
+	                        <div class="chart-container">
+	                          <canvas id="locationChart"></canvas>
+	                        </div>
+	                        <script>
+	        document.addEventListener('DOMContentLoaded', function() {
+	            // Dados do gráfico (valores de exemplo - substitua pelos seus dados)
+	            const data = {
+	                labels: [
+	                    'Zona Central da Cidade de Luanda',
+	                    'Zona Oeste da Cidade de Luanda',
+	                    'Zona Norte da Cidade de Luanda',
+	                    'Zona Sul da Cidade de Luanda',
+	                    'Moro noutra província',
+	                    'Moro noutro país'
+	                ],
+	                datasets: [{
+	                    label: 'Número de Residentes',
+	                   // data: [450, 380, 420, 350, 200, 150], // Valores de exemplo
+						data: [[${graficoResidencia}]],
+	                    backgroundColor: [
+	                        'rgba(75, 192, 192, 0.7)',
+	                        'rgba(75, 192, 192, 0.7)',
+	                        'rgba(75, 192, 192, 0.7)',
+	                        'rgba(75, 192, 192, 0.7)',
+	                        'rgba(75, 192, 192, 0.7)',
+	                        'rgba(75, 192, 192, 0.7)'
+	                    ],
+	                    borderColor: [
+	                        'rgba(75, 192, 192, 1)',
+	                        'rgba(75, 192, 192, 1)',
+	                        'rgba(75, 192, 192, 1)',
+	                        'rgba(75, 192, 192, 1)',
+	                        'rgba(75, 192, 192, 1)',
+	                        'rgba(75, 192, 192, 1)'
+	                    ],
+	                    borderWidth: 1
+	                }]
+	            };
+	            // Configurações do gráfico
+	            const config = {
+	                type: 'bar',
+	                data: data,
+	                options: {
+	                    responsive: true,
+	                    maintainAspectRatio: false,
+	                    indexAxis: 'y', // Barras horizontais
+	                    scales: {
+	                        x: {
+	                            beginAtZero: true,
+	                            title: {
+	                                display: true,
+	                                text: 'Número de Residentes',
+	                                font: { family: 'Barlow' }
+	                            }
+	                        },
+	                        y: {
+	                            ticks: {
+	                                autoSkip: false,
+	                                font: { family: 'Barlow', sinze: 14 }
+	                            }
+	                        }
+	                    },
+	                    plugins: {
+	                        legend: {
+	                            display: true,
+	                            position: 'top',
+	                        },
+	                        tooltip: {
+	                            callbacks: {
+	                                afterLabel: function(context) {
+	                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+	                                    const value = context.raw;
+	                                    const percentage = ((value / total) * 100).toFixed(1);
+	                                    return `Representa ${percentage}% do total`;
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            };
+	            // Criar o gráfico
+	            const ctx = document.getElementById('locationChart').getContext('2d');
+	            new Chart(ctx, config);
+	        });
+	    </script>
+	                      </body>
+	                      </html>
+	                    </div>
+	                  </div>
+	                  <div class="div-block-406 _1">
+	                    <div class="tabela">
+	                      <div class="title-main">
+	                        <div class="list-item-lable center">Residência</div>
+	                      </div>
+	                     <div class="tabela-list">
+							<div th:each="i, stat : ${#numbers.sequence(0, listaResidencia.size() - 1)}"class="div-block-454">
+							  <div class="div-block-455">
+							    <div class="list-item-lable" th:text="${listaResidencia[i]}">Z. Oeste Luanda</div>
+							  </div>
+							  <div class="div-block-455">
+							    <div class="list-item _2" th:text="${graficoResidencia[i]}">25-29</div>
+							  </div>
+							</div>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="div-block-404">
+	                  <div class="div-block-405">
+	                    <div class="w-embed w-script">
+	                      <!DOCTYPE html>
+	                      <html lang="pt-br">
+	                      <head>
+	                        <meta charset="UTF-8">
+	                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	                        <title>Nível de Escolaridade</title>
+	                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	                        <style>
+	        .chart-container-ne {
+	            width: 100%;
+	            max-width: 800px;
+	            margin: 0 auto;
+	            position: relative;
+	            height: 500px;
+	        }
+	        @media (max-width: 600px) {
+	            .chart-container-ne {
+	                height: 90vh;
+	            }
+	        }
+	    </style>
+	                      </head>
+	                      <body>
+	                        <h2 style="margin-bottom: 20px; font-weight: 400; font-size: 1.4em;">Nível de Escolaridade</h2>
+	                        <div class="chart-container-ne">
+	                          <canvas id="educationChart"></canvas>
+	                        </div>
+	                        <script>
+	        document.addEventListener('DOMContentLoaded', function() {
+	            // Dados do gráfico (valores de exemplo)
+	            const data = {
+	                labels: [
+	                    'Sem instrução escolar',
+	                    'Ensino Fundamental incompleto',
+	                    'Ensino Fundamental completo',
+	                    'Ensino Médio incompleto',
+	                    'Ensino Médio completo',
+	                    'Ensino Superior incompleto',
+	                    'Ensino Superior completo',
+	                    'Pós-graduação'
+	                ],
+	                datasets: [{
+	                    label: 'Quantidade de Pessoas',
+	                   // data: [50, 120, 90, 150, 200, 180, 130, 80], // Valores de exemplo
+						data: [[${graficoEscolaridade}]],
+	                    backgroundColor: [
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(255, 99, 132, 0.7)'
+	                    ],
+	                    borderColor: [
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(255, 99, 132, 1)'
+	                    ],
+	                    borderWidth: 1
+	                }]
+	            };
+	            // Configurações do gráfico
+	            const config = {
+	                type: 'bar',
+	                data: data,
+	                options: {
+	                    responsive: true,
+	                    maintainAspectRatio: false,
+	                    indexAxis: 'x', // Barras verticais
+	                    scales: {
+	                        y: {
+	                            beginAtZero: true,
+	                            title: {
+	                                display: true,
+	                                text: 'Quantidade de Pessoas',
+	                                font: { family: 'Barlow' }
+	                            }
+	                        },
+	                        x: {
+	                            title: {
+	                                display: true,
+	                                text: 'Nível de Escolaridade',
+	                                font: { family: 'Barlow' }
+	                            },
+	                            ticks: {
+	                                autoSkip: false,
+	                                maxRotation: 45,
+	                                minRotation: 45
+	                            }
+	                        }
+	                    },
+	                    plugins: {
+	                        legend: {
+	                            display: true,
+	                            position: 'top',
+	                        },
+	                        tooltip: {
+	                            callbacks: {
+	                                afterLabel: function(context) {
+	                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+	                                    const value = context.raw;
+	                                    const percentage = ((value / total) * 100).toFixed(1);
+	                                    return `Representa ${percentage}% do total`;
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            };
+	            // Criar o gráfico
+	            const ctx = document.getElementById('educationChart').getContext('2d');
+	            new Chart(ctx, config);
+	        });
+	    </script>
+	                      </body>
+	                      </html>
+	                    </div>
+	                  </div>
+	                  <div class="div-block-406 _1">
+	                    <div class="tabela">
+	                      <div class="title-main">
+	                        <div class="list-item-lable center">Nível de Escolaridade</div>
+	                      </div>
+	                      <div class="tabela-list">
+							<div th:each="i, stat : ${#numbers.sequence(0, listaEscolaridade.size() - 1)}" class="div-block-454">
+							  <div class="div-block-455">
+							    <div class="list-item-lable" th:text="${listaEscolaridade[i]}" >E. Fndmtl Cmplt</div>
+							  </div>
+							  <div class="div-block-455">
+							    <div class="list-item _2" th:text="${graficoEscolaridade[i]}" >25-29</div>
+							  </div>
+							</div>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="div-block-404">
+	                  <div class="div-block-405">
+	                    <div class="w-embed w-script">
+	                      <!DOCTYPE html>
+	                      <html lang="pt-br">
+	                      <head>
+	                        <meta charset="UTF-8">
+	                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	                        <title>Distribuição de Tipos de Deficiência</title>
+	                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	                        <style>
+	        .chart-container-dd {
+	            width: 100%;
+	            max-width: 600px;
+	            margin: 0 auto;
+	            position: relative;
+	            height: 400px;
+	        }
+	        @media (max-width: 600px) {
+	            .chart-container {
+	                height: 80vh;
+	            }
+	        }
+	    </style>
+	                      </head>
+	                      <body>
+	                        <h2 style="margin-bottom: 50px; font-weight: 400; font-size: 1.4em;">Distribuição de Tipos de Deficiência</h2>
+	                        <div class="chart-container-dd">
+	                          <canvas id="disabilityChart"></canvas>
+	                        </div>
+	                        <script>
+	        document.addEventListener('DOMContentLoaded', function() {
+	            // Dados do gráfico (valores de exemplo)
+	            const data = {
+	                labels: [
+	                    'Deficiência Física',
+	                    'Deficiência Visual',
+	                    'Espectro Autista',
+	                    'Deficiência Auditiva',
+	                    'Deficiência Intelectual',
+	                    'Não sou portador de deficiência'
+	                ],
+	                datasets: [{
+	                    //data: [15, 10, 8, 12, 7, 48], // Valores em porcentagem (somar 100)
+						data:[[${graficoDeficiencia}]],
+	                    backgroundColor: [
+	                        'rgba(255, 99, 132, 0.7)',
+	                        'rgba(54, 162, 235, 0.7)',
+	                        'rgba(255, 206, 86, 0.7)',
+	                        'rgba(75, 192, 192, 0.7)',
+	                        'rgba(153, 102, 255, 0.7)',
+	                        'rgba(201, 203, 207, 0.7)'
+	                    ],
+	                    borderColor: [
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(54, 162, 235, 1)',
+	                        'rgba(255, 206, 86, 1)',
+	                        'rgba(75, 192, 192, 1)',
+	                        'rgba(153, 102, 255, 1)',
+	                        'rgba(201, 203, 207, 1)'
+	                    ],
+	                    borderWidth: 1
+	                }]
+	            };
+	            // Configurações do gráfico
+	            const config = {
+	                type: 'pie',
+	                data: data,
+	                options: {
+	                    responsive: true,
+	                    maintainAspectRatio: false,
+	                    plugins: {
+	                        legend: {
+	                            position: 'right',
+	                            labels: {
+	                                padding: 20,
+	                                usePointStyle: true,
+	                                pointStyle: 'rect',
+	                                font: { family: 'Barlow'}
+	                            }
+	                        },
+	                        tooltip: {
+	                            callbacks: {
+	                                label: function(context) {
+	                                    const label = context.label || '';
+	                                    const value = context.raw;
+	                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+	                                    const percentage = Math.round((value / total) * 100);
+	                                    return `${label}: ${percentage}% (${value})`;
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            };
+	            // Criar o gráfico
+	            const ctx = document.getElementById('disabilityChart').getContext('2d');
+	            new Chart(ctx, config);
+	        });
+	    </script>
+	                      </body>
+	                      </html>
+	                    </div>
+	                  </div>
+	                  <div class="div-block-406 _1">
+	                    <div class="tabela">
+	                      <div class="title-main">
+	                        <div class="list-item-lable center">Dificiência</div>
+	                      </div>
+	                     <div class="tabela-list">
+							<div th:each="i, stat : ${#numbers.sequence(0, listaDeficianecia.size() - 1)}" class="div-block-454">
+							  <div class="div-block-455">
+							    <div class="list-item-lable" th:text="${listaDeficianecia[i]}" >E. Fndmtl Cmplt</div>
+							  </div>
+							  <div class="div-block-455">
+							    <div class="list-item _2" th:text="${graficoDeficiencia[i]}" >25-29</div>
+							  </div>
+							</div>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="div-block-404">
+	                  <div class="div-block-405">
+	                    <div class="w-embed w-script">
+	                      <!DOCTYPE html>
+	                      <html lang="pt-br">
+	                      <head>
+	                        <meta charset="UTF-8">
+	                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	                        <style>
+	        .chart-container-dp {
+	            width: 100%;
+	            max-width: 600px;  /* Aumentado para melhor visualização */
+	            margin: 0 auto;
+	            position: relative;
+	            height: 400px;      /* Aumentado para caber todas as categorias */
+	        }
+	        @media (max-width: 600px) {
+	            .chart-container {
+	                height: 85vh;
+	            }
+	        }
+	    </style>
+	                      </head>
+	                      <body>
+	                        <h2 style="margin-bottom: 50px; font-weight: 400; font-size: 1.4em; font-family: Barlow;">Distribuição por Situação Profissional</h2>
+	                        <div class="chart-container-dp">
+	                          <canvas id="professionalChart"></canvas>
+	                        </div>
+	                        <script>
+	        document.addEventListener('DOMContentLoaded', function() {
+	            // Dados do gráfico (valores de exemplo)
+	            const data = {
+	                labels: [
+	                    'Sector Privado',
+	                    'Sector Público',
+	                    'Profissional Liberal',
+	                    'Autónomo',
+	                    'Empresário',
+	                    'Estagiário',
+	                    'Desempregado',
+	                    'Estudante'
+	                ],
+	                datasets: [{
+	                    //data: [25, 20, 15, 12, 8, 5, 10, 5], // Valores de exemplo
+						data:[[${graficoOcupacao}]],
+	                    backgroundColor: [
+	                        'rgba(54, 162, 235, 0.7)',  // Azul - Privado
+	                        'rgba(255, 99, 132, 0.7)',   // Vermelho - Público
+	                        'rgba(75, 192, 192, 0.7)',   // Verde-água - Liberal
+	                        'rgba(255, 206, 86, 0.7)',    // Amarelo - Autónomo
+	                        'rgba(153, 102, 255, 0.7)',  // Roxo - Empresário
+	                        'rgba(255, 159, 64, 0.7)',    // Laranja - Estagiário
+	                        'rgba(201, 203, 207, 0.7)',   // Cinza - Desempregado
+	                        'rgba(255, 119, 181, 0.7)'    // Rosa - Estudante
+	                    ],
+	                    borderColor: [
+	                        'rgba(54, 162, 235, 1)',
+	                        'rgba(255, 99, 132, 1)',
+	                        'rgba(75, 192, 192, 1)',
+	                        'rgba(255, 206, 86, 1)',
+	                        'rgba(153, 102, 255, 1)',
+	                        'rgba(255, 159, 64, 1)',
+	                        'rgba(201, 203, 207, 1)',
+	                        'rgba(255, 119, 181, 1)'
+	                    ],
+	                    borderWidth: 1
+	                }]
+	            };
+	            // Configurações do gráfico
+	            const config = {
+	                type: 'pie',
+	                data: data,
+	                options: {
+	                    responsive: true,
+	                    maintainAspectRatio: false,
+	                    plugins: {
+	                        legend: {
+	                            position: 'right',
+	                            labels: {
+	                                padding: 20,
+	                                usePointStyle: true,
+	                                pointStyle: 'circle',
+	                                font: {
+	                                    family: 'Barlow'
+	                                }
+	                            }
+	                        },
+	                        tooltip: {
+	                            callbacks: {
+	                                label: function(context) {
+	                                    const label = context.label || '';
+	                                    const value = context.raw;
+	                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+	                                    const percentage = ((value / total) * 100).toFixed(1);
+	                                    return `${label}: ${percentage}% (${value})`;
+	                                }
+	                            }
+	                        },
+	                        title: {
+	                            padding: {
+	                                top: 10,
+	                                bottom: 20
+	                            }
+	                        }
+	                    }
+	                }
+	            };
+	            // Criar o gráfico
+	            const ctx = document.getElementById('professionalChart').getContext('2d');
+	            new Chart(ctx, config);
+	        });
+	    </script>
+	                      </body>
+	                      </html>
+	                    </div>
+	                  </div>
+	                  <div class="div-block-406 _1">
+	                    <div class="tabela">
+	                      <div class="title-main">
+	                        <div class="list-item-lable center">Ocupação</div>
+	                      </div>
+	                     <div class="tabela-list">
+							<div th:each="i, stat : ${#numbers.sequence(0, listaOcupacao.size() - 1)}" class="div-block-454">
+							  <div class="div-block-455">
+							    <div class="list-item-lable" th:text="${listaOcupacao[i]}" >E. Fndmtl Cmplt</div>
+							  </div>
+							  <div class="div-block-455">
+							    <div class="list-item _2" th:text="${graficoOcupacao[i]}" >25-29</div>
+							  </div>
+							</div>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </section>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="close-flyout"></div>
+	  <div class="not-valid">
+	    <div class="text-block-116">Dimensão de ecrã não suportada...</div>
+	  </div>
+	  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6800aeb4641ae1fdf1aec8ae" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	  <script src="/js/ccl-backoffice.js" type="text/javascript"></script>
+	</body>
 </html>

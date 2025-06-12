@@ -3384,8 +3384,9 @@ a {
 }
 
 .kpi-2._1 {
-  border-right-style: solid;
-  border-radius: 0;
+  border-style: solid;
+  border-radius: 5px;
+  height: auto;
 }
 
 .radio-button-4 {
@@ -7643,7 +7644,7 @@ a {
   border-radius: 4px;
   flex-flow: column;
   padding: 20px;
-  display: flex;
+  display: none;
 }
 
 .div-block-403._2 {
@@ -8381,7 +8382,7 @@ a {
 .date-filter {
   border: 1px solid var(--light-steel-blue);
   border-radius: 4px;
-  padding: 20px 12px;
+  padding: 12px;
 }
 
 .seccao_item {
@@ -8457,6 +8458,25 @@ a {
 
 .div-block-455 {
   width: 50%;
+}
+
+.div-block-456 {
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.grid-44 {
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.info {
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.div-block-457 {
+  display: flex;
 }
 
 @media screen and (max-width: 991px) {

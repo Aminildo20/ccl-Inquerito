@@ -23,12 +23,14 @@ public class InqueritoModel {
     private String percepcao;
     private String origemInfo;
     private String proposito;
+    private String propositoField;
     private String experiencia;
     private int grauSatisfacaoDeQualidade;
     private int grauSatisfacaoDeAtendimento;
     private int grauSatisfacaoInteracao;
     private int satisfacaoPrecoDoBilhete;
     private String servicoAdicional;
+    private String servicoAdicionalField;
     private int grauSatisfacaoCafetaria;
     private int grauSatisfacaoMenuCafetaria;
     private int grauSatisfacaoAtendimentoLoja;
@@ -265,6 +267,22 @@ public class InqueritoModel {
 
 	public void setAreaDeResidenciaField(String areaDeResidenciaField) {
 		this.areaDeResidenciaField = areaDeResidenciaField;
+	}
+
+	public String getServicoAdicionalField() {
+		return servicoAdicionalField;
+	}
+
+	public void setServicoAdicionalField(String servicoAdicionalField) {
+		this.servicoAdicionalField = servicoAdicionalField;
+	}
+
+	public String getPropositoField() {
+		return propositoField;
+	}
+
+	public void setPropositoField(String propositoField) {
+		this.propositoField = propositoField;
 	}
     
 }
