@@ -164,13 +164,13 @@ public class RelatorioController {
 		//----------------------------
 		//--------### GRAFICO PROPOSITO DA VISITA--------------------
 		model.addAttribute("graficoProposito", inqueritoImpl.totalProposito());
-		model.addAttribute("listaProposito", inqueritoImpl.listaProposito());
-		model.addAttribute("listaPropositoTotal", inqueritoImpl.listaTotalPercepcao());		
+		model.addAttribute("listaProposito", inqueritoImpl.listaProposito());	
 		
 		//----------------------------
 		//--------### GRAFICO COMO AS PESSOAS DESCREVEM A CCL--------------------
 		model.addAttribute("graficoPercepcoes", inqueritoImpl.totalPercepcoes());
-		model.addAttribute("listaPercepcoes", inqueritoImpl.listaPercepcoes());	
+		model.addAttribute("listaPercepcoes", inqueritoImpl.listaPercepcoes());
+		model.addAttribute("listaPercepcaoTotal", inqueritoImpl.ListaPercepcaoOrdenada());	
 		
 		//------------------------------------------------------------------------
 		//--------### GRAFICO EXPERIENCIAS CCL--------------------		

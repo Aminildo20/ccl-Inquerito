@@ -367,7 +367,7 @@
 	                data: {
 	                    datasets: [{
 	                        label: 'Descrições do CCL',
-	                        data: bubbleData.map(item => ({
+	                        data: bubbleData.slice(0, 3).map(item => ({
 	                            x: item.x,
 	                            y: item.y,
 	                            r: item.r
@@ -449,12 +449,12 @@
 	                        <div class="list-item-lable center">Palavras a Descrever o CCL</div>
 	                      </div>
 	                      <div class="tabela-list">
-							<div th:each="i, stat : ${#numbers.sequence(0, listaPercepcoes.size() - 1)}" class="div-block-454">
+							<div th:each="item : ${listaPercepcaoTotal}" class="div-block-454">
 							  <div class="div-block-455">
-							    <div class="list-item-lable" th:text="${listaPercepcoes[i]}" >E. Fndmtl Cmplt</div>
+							    <div class="list-item-lable" th:text="${item.percepcao}">E. Fndmtl Cmplt</div>
 							  </div>
 							  <div class="div-block-455">
-							    <div class="list-item _2" th:text="${listaPropositoTotal[i]}" >25-29</div>
+							    <div class="list-item _2" th:text="${item.total}">25-29</div>
 							  </div>
 							</div>
 	                      </div>

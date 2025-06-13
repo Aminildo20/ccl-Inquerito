@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -309,6 +310,23 @@ public class InqueritoServiceImpl implements InqueritoService{
 
 	//-------------------------------------------------------------------
 	//-------------------------------------------------------------------
+	class PercepcaoTotal {
+	    String percepcao;
+	    Integer total;
+
+	    public PercepcaoTotal(String percepcao, Integer total) {
+	        this.percepcao = percepcao;
+	        this.total = total;
+	    }
+	    public String getPercepcao() {
+	        return percepcao;
+	    }
+
+	    public Integer getTotal() {
+	        return total;
+	    }
+	}
+
 	public List<String> listaPercepcoes(){		
 		List<String> percepcoes = List.of("Educativo","Criativo","Divertido","Acolhedor","Acessível","Complexo","Elitista");		
 		return percepcoes;
@@ -325,23 +343,37 @@ public class InqueritoServiceImpl implements InqueritoService{
 		);
 		return percepcaoTotal;
 	}
+	public List<PercepcaoTotal> ListaPercepcaoOrdenada(){		
+		
+		List<String> percepcoes = listaPercepcoes();
+		List<Integer> totais = listaTotalPercepcao();
+		 
+		 //Lista combinada percepcao e valor
+		 List<PercepcaoTotal> combinados = new ArrayList<>();
+		 for (int i = 0; i < percepcoes.size(); i++) {
+		     combinados.add(new PercepcaoTotal(percepcoes.get(i), totais.get(i)));
+		 }
+		// Ordena pela contagem total em ordem decrescente
+		 combinados.sort((a, b) -> b.total.compareTo(a.total));
+		 
+		return combinados;
+	}
+	
 
 	@Override
 	public List<BubbleChartDTO> totalPercepcoes(){
 		
-		 List<String> percepcoes = listaPercepcoes();
-		 List<Integer> totais = listaTotalPercepcao();
-		 List<BubbleChartDTO> bubbleData = new ArrayList<>();
 
+		 List<PercepcaoTotal> combinados = ListaPercepcaoOrdenada();
+		 
+		List<BubbleChartDTO> bubbleData = new ArrayList<>();
 		// Inicializa o valor de x
 		    double x = 1.2;
-		    for (int i = 0; i < percepcoes.size(); i++) {
-		    	double percentual = totais.get(i) * 100.0 / TotalQuestionariosEnviados();
-		    	
-		        bubbleData.add(new BubbleChartDTO(percepcoes.get(i), x, Math.round(percentual * 100.0) / 100.0, 25));
+		    for (PercepcaoTotal pt : combinados) {
+		    	double percentual = pt.total * 100.0 / TotalQuestionariosEnviados();		    	
+		        bubbleData.add(new BubbleChartDTO(pt.percepcao, x, Math.round(percentual * 100.0) / 100.0, 25));
 		        x += 0.5; // Incremento do eixo X
-		    }	 
-		 
+		    }
 		return bubbleData;
 	}
 	
